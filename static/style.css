@@ -1,0 +1,633 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: auto;   
+} 
+body{
+    /* overflow: hidden; */
+    /* background-color: black; */
+}
+
+.first-container{
+    background-image: url("code.png");
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+.navbar{
+    display: flex;
+    position:fixed;
+    background-color: black;
+    top:0;
+    transition: top 0.3s;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px;
+    z-index: 1;
+}
+.logo{
+    flex: 1;
+    font-family: 'Poppins';
+    font-size: 31px;
+    
+}
+.logo a{    
+    text-decoration: none;
+    letter-spacing: 3px;
+    padding:8px;
+    color: #9eb8cf;
+    margin-left: 35px;
+    font-weight:600;
+}
+.search{
+    /* font-family: 'Poppins', sans-serif; */
+    position: absolute;
+    margin-left: 34%;
+    height: 37px;
+}
+#search-box{
+    font-family: "Poppins";
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(184, 214, 224);
+    width: 400px;
+    height: 100%;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+}
+input[type="search"]::placeholder{
+    text-align: center;
+    color: rgb(56, 59, 59);
+    font-size: 13px;
+    font-weight: 900;
+    opacity:80%;
+}
+input[type="search"]{
+    text-align:center;
+}
+#searchBtn{
+    background-color:rgb(123, 206, 206);
+    position: absolute;
+    margin-left:-35px;
+    border: 1px;
+    border-radius: 20px;
+    font-size: 17px;
+    padding:10px;
+    transition: 0.2s;   
+    cursor: pointer;
+}
+#searchBtn:hover{
+    background-color: rgb(1, 55, 70);
+}
+ul{
+    
+    display: flex;
+    justify-content: space-around;
+    width: 23%;
+    margin-top: 4px;
+    list-style: none;
+    margin-right: 50px;
+}
+ul li{
+    position: relative;
+}
+ul li::after{
+    content: '';
+    height: 2px;
+    width: 0%;
+    background:rgb(28, 223, 230);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: 0.4s;
+}
+ul li:hover::after{
+    width: 100%;
+}
+li a{
+    text-decoration: none;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    color:rgb(240, 255, 255);
+}
+li a:hover{
+    color: rgb(28, 223, 230);
+}
+#loginBtn{
+    background-color:rgb(28, 223, 230);
+    padding: 5px;
+    cursor: pointer;
+    width: 100px;
+    border-radius: 17px;
+    border-color: black;
+    font-family: 'Poppins', sans-serif;
+    color: black;
+    font-weight:bolder;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-right:60px;
+}
+#loginBtn:hover{
+    background-color:rgb(1, 55, 70);
+    color:rgb(240, 255, 255);
+    font-weight: 500;
+    transition:ease-out 0.2s;
+}
+/* .title{
+    color: rgb(238, 251, 253);
+    font-size: 35px;
+    letter-spacing: 2px;
+    font-family: 'Poppins', sans-serif;
+    font-weight:600;
+    position: absolute;
+    margin-top: 12%;
+    margin-left: 50%;
+    transform: translate(-50%);
+    animation: FadeIn linear 4s;
+    -webkit-animation: FadeIn linear 4s;
+}
+@keyframes FadeIn{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+.join-community{
+    position: absolute;
+    color: white;
+    margin-top: 37%;
+    margin-left: 50%;
+    transform: translate(-50%);
+    animation: Fade2 linear 9s;
+    -webkit-animation: Fade2 linear 9s;
+}
+@keyframes Fade2{
+    0%{opacity: 0;}
+    50%{opacity: 0;}
+    100%{opacity: 1;}
+}
+.join-community button{
+    border-radius: 27px;
+    background-color:rgb(1, 55, 70);
+    color:rgb(240, 255, 255);
+    padding: 13px;
+    cursor: pointer;
+    width: 300px;
+    font-size: 14px;
+    /* border-color: rgb(5, 104, 117); */
+    /* border: none;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 2px;
+    font-weight: 500;
+    box-shadow: 0px 0px 8px 0px rgba(28, 223, 230);   
+}
+.join-community button:hover{
+    background-color:rgb(28, 223, 230);
+    color:black;
+    font-weight: 800;
+    transition: ease-in-out 0.2s;
+} */ 
+/* .content{
+    position: absolute;
+    color: rgb(240,255,255);
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-top: 32%;
+    margin-left: 50%;
+    transform: translate(-50%);
+    font-family: 'Montserrat'; 
+    text-align: justify;
+    text-align-last: center;
+    letter-spacing: 2px;
+    animation: Third 8s;
+    -webkit-animation: Third linear 8s;
+} */
+@keyframes Third{
+    0%{opacity: 0;}
+    50%{opacity: 0;}
+    100%{opacity: 1;}
+}
+#main-container{
+    display: flex;
+    height: 70vh;
+    justify-content:space-between;
+    margin-top: 15%;
+    position: absolute;
+    width: 91%;
+    margin-left: 65px;
+    opacity: 1;
+    transition: 0.5s ease-in-out;
+}
+.left-content{
+    display: flex;
+    flex-direction: column;
+    
+}
+.title{
+    color: rgb(238, 251, 253);
+    font-size: 40px;
+    letter-spacing: 3px;
+    font-family: 'Poppins', sans-serif;
+    font-weight:600;
+}
+
+
+.content{
+    color: rgb(240,255,255);
+    font-size: 13px;
+    /* text-transform: uppercase; */
+    font-family: 'Montserrat'; 
+    letter-spacing: 2px;
+    margin-top: 8px;
+}
+.join-community button{
+    border-radius: 27px;
+    margin-top: 35px;
+    background-color:rgb(1, 55, 70);
+    color:rgb(240, 255, 255);
+    padding: 13px;
+    cursor: pointer;
+    width: 300px;
+    font-size: 14px;
+    border-color: rgb(5, 104, 117);
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 2px;
+    font-weight: 500;
+    box-shadow: 0px 0px 8px 0px rgba(28, 223, 230);   
+    outline: none;
+}
+.join-community button:hover{
+    background-color:rgb(28, 223, 230);
+    color:black;
+    font-weight: 800;
+    transition: ease-in-out 0.2s;
+}
+.right-container{
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 35%;
+}
+.login-form{
+    background-color: rgb(14, 13, 13);
+    /* margin: 0 auto; */
+    width: 80%;   
+    margin-left: 60px;
+    padding: 10px 10px;
+    text-align: center; 
+}
+.login-form  p{
+    color: azure;
+    font-family: "montserrat";
+    font-size: 26px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    
+}
+.login-form input{
+    background-color: rgb(56, 54, 54);
+    border: none;
+    width: 90%;
+    height: 35px;
+    padding: 5px;
+    margin-top: 20px;
+    border-radius: 18px;
+    outline: none;
+    color: rgb(243, 243, 243);
+    letter-spacing: 1px;
+}
+input::placeholder{
+    text-align: center;
+    letter-spacing: 1px;
+    color: rgb(218, 219, 219);
+    opacity: 70%; 
+}
+#submit{
+    margin-top:20px ;
+    padding: 5px 5px;
+    border-radius: 18px;
+    width: 85px;
+    height: 30px;
+    border: none;
+    margin-bottom:10px ;
+    font-family: "Poppins";
+    letter-spacing: 1px;
+    background-color:rgb(28, 223, 230);
+    padding: 5px;
+    cursor: pointer;
+    border-color: black;
+    font-family: 'Poppins', sans-serif;
+    color: black;
+    font-weight:bolder;
+    font-size: 13px;
+}
+#submit:hover{
+    background-color:rgb(1, 55, 70);
+    color:rgb(240, 255, 255);
+    font-weight: 500;
+    transition:ease-out 0.2s;
+}
+span{
+    display: flex;
+    justify-content: center;
+    color:rgb(207, 207, 207);
+    letter-spacing: 1px;
+    font-family: "Poppins";
+    font-size: 15px;
+    font-weight: 600;
+}
+span:before,span:after{
+    content:"";
+    flex: 1 1;
+    border-bottom:1px solid rgb(78, 78, 78);
+    margin-right:14px;
+    margin-left: 14px;
+    height: 12px;
+    max-width: 130px;
+}
+.oauth-login{
+    display: flex;
+    justify-content:space-evenly;
+    width: 80%;
+    padding: 10px;
+    margin:0 auto;
+}
+.oauth-login button{
+    background-color: black;
+    height: 44px;
+    width: 110px;
+    border: none;
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 12px;
+    padding:6px;
+    font-weight: 500;
+    cursor: pointer;   
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+}
+.oauth-login button:hover{
+    box-shadow:0px 0px 8px 0px rgb(28, 223, 230);
+}
+#login-with {
+    color: rgb(238, 251, 253);
+    margin-top: 15px;
+    font-family: "Poppins";
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+.oauth-login img{
+    width: 30px;
+    height: 30px;
+}
+#forget-password a{
+    color: rgb(238, 251, 253);
+    /* margin-left: 36%; */
+    text-decoration: none;
+    font-family: "Poppins";
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: 0.1s ease-in;
+}
+#forget-password a:hover {
+    color:rgb(28, 223, 230) ;
+}
+
+#sign-up-form{
+    position:absolute;
+    background-color: rgb(20, 20, 20);
+    margin-top: 15%;
+    margin-left: 50%;
+    transform: translate(-50%,-15%);
+    z-index: -1;
+    opacity: 0;
+    transition: 0.8s ease-in-out;
+    width: 350px;
+    text-align: center;
+    padding: 20px;
+    height: 450px;
+    border-radius: 5px;
+}
+#sign-up-form  p{
+    color: azure;
+    font-family: "montserrat";
+    font-size: 26px;
+    letter-spacing: 1px;
+    
+}
+#sign-up-form input{
+    background-color: rgb(56, 54, 54);
+    border: none;
+    width: 90%;
+    height: 35px;
+    padding: 5px;
+    margin-top: 15px;
+    border-radius: 18px;
+    outline: none;
+    color: rgb(243, 243, 243);
+    letter-spacing: 1px;
+}
+#sign-up-form input::placeholder{
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 12px;
+    color: rgb(218, 219, 219);
+    opacity: 50%; 
+}
+#sign-up{
+    margin-top:20px ;
+    padding: 5px 5px;
+    border-radius: 18px;
+    width: 100px;
+    height: 35px;
+    border: none;
+    margin-bottom:10px ;
+    font-family: "Poppins";
+    letter-spacing: 2px;
+    background-color:rgb(28, 223, 230);
+    cursor: pointer;
+    border-color: black;
+    font-family: 'Poppins', sans-serif;
+    color: black;
+    font-weight:bolder;
+    font-size: 13px;
+}
+#sign-up:hover{
+    background-color:rgb(1, 55, 70);
+    color:rgb(240, 255, 255);
+    font-weight: 500;
+    transition:ease-out 0.2s;
+}
+#sign-up-division{
+    margin-top: 10px;
+    color: grey;
+    size: 0px;
+}
+.oauth-sign-up button{
+    background-color: black;
+    height: 44px;
+    width: 300px;
+    border: none;
+    margin-top: 10px;
+    padding:6px;
+    cursor: pointer;   
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+    color: honeydew;
+    display: flex;
+    justify-content:space-evenly;
+    
+    
+}
+.oauth-sign-up button:hover{
+    box-shadow:0px 0px 8px 0px rgb(28, 223, 230);
+}
+.oauth-sign-up img{
+    width: 30px;
+    height: 30px;
+}
+.oauth-sign-up div{
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 70%;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+.explore{
+    color: azure;
+    font-size: 20px;
+    align-items: center;
+    margin-top: 30px;
+    text-align: center;
+}
+.explore button{
+    border-radius: 27px;
+    background-color:rgb(28, 223, 230);
+    color:rgb(26, 26, 26);
+    padding: 13px;
+    cursor: pointer;
+    width: 300px;
+    margin-left: -30px;
+    font-size: 14px;
+    border-color: rgb(5, 104, 117);
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 2px;
+    font-weight: 500;
+    box-shadow: 0px 0px 8px 0px rgba(28, 223, 230);   
+    outline: none;
+    font-weight: 600;
+}
+.explore h1{
+    margin-left:-25px;
+    font-size:25px;
+    font-family: "monserrat";
+}
+.about-container{
+    height: 100vh;
+    /* position: relative; */
+    align-items: center;
+    background-color: rgb(10, 10, 10);
+    color: rgb(236, 236, 236);
+    text-align: center;
+}
+.about{
+    /* margin-left: 55px; */
+    width:90%;
+    margin:0 auto;
+    /* position: relative; */
+    /* margin-top: 30px; */
+    font-size:40px;
+    
+}
+.about h1{
+    font-size: 40px;
+    padding:20px;
+    color:rgb(21, 209, 216);
+}
+.about h2{
+    margin-top: 6%;
+    font-size: 30px;
+    color: whitesmoke;
+    letter-spacing: 2px;
+}
+.about p{
+    margin-top: 40px;
+    font-size: 25px;
+    font-family: "poppins";
+    color: whitesmoke;
+    letter-spacing: 1px;
+}
+.definition-container{
+    width: 90%;
+    margin:0 auto;
+    padding: 10px;
+    /* background-color: blue; */
+    text-align: center;
+}
+.categories-container{
+    height: 100vh;
+    color: whitesmoke;
+    background-color: black;
+    text-align: center;
+    padding: 50px;
+}
+.categories-heading h2{
+    font-size: 30px;
+    letter-spacing: 2px;
+    color:rgb(21, 209, 216);
+}
+.categories-content p{
+    margin-top: 10px;
+    letter-spacing: 2px;
+}
+.social {
+    height: 100vh;
+    color: whitesmoke;
+    text-align: center;
+    background-color: rgb(10,10,10);
+    padding: 50px;
+}
+.social h2{
+    font-size: 30px;
+    letter-spacing: 2px;
+    color:rgb(21, 209, 216);
+}
+.social p{
+    margin-top: 200px;
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+.social button{
+    margin-top: 80px;
+}
+.connect{
+    height: 100vh;
+    background-color: black;
+    color: whitesmoke;
+    text-align: center;
+    padding: 30px;
+}
+.connect h2{
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: rgb(21,209,216);
+}
+.connect p{
+    margin-top: 40px;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+.footer{
+    margin-top: 25%;
+    height: 25vh;
+    border: solid 1px white;
+}
