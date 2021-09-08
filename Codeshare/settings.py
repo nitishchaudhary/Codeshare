@@ -149,6 +149,7 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }   
-SITE_ID = 3
-LOGIN_REDIRECT_URL = '/explore'
+SITE_ID = 4
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_DIRECT_URL = '/'
+LOGIN_URL = '/accounts/login'

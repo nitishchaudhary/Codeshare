@@ -16,7 +16,7 @@ def login(request):
         else:
             return HttpResponse("wrong credentials")
     else:
-        return HttpResponse("done get")
+        return render(request, 'login.html')
 def sign_up(request):
     if request.method == "POST":
         firstname = request.POST['firstname']

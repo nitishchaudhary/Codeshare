@@ -1,0 +1,43 @@
+{%load static %}
+{%load socialaccount %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+    <title>Login</title>
+</head>
+<body>
+    <div class="login-form">
+        <p>Login</p>
+        <form action="accounts/login" method="post">
+          {% csrf_token %}
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Username"
+          /><br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+          /><br />
+          <button type="submit" id="submit">Login</button>
+        </form>
+        <span>OR</span>
+        <p id="login-with">Login with</p>
+        <div class="oauth-login">
+          <a href="{% provider_login_url 'google' %}"><button>
+            <img src="{% static 'google-logo.png'  %}" alt="Google" />
+          </button></a>
+          <button>
+            <img src="{% static 'github-logo.png'  %}" alt="Github" />
+          </button>
+        </div>
+        <p id="forget-password"><a href="#">Forget password ?</a></p>
+      </div>
+</body>
+</html>
