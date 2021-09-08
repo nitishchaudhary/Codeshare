@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('Main.urls')),
     path('accounts/', include('accounts.urls')),
+    path('user-<str:username>/',include('User.urls')),
 ]

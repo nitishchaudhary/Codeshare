@@ -27,7 +27,8 @@ def sign_up(request):
         user = User.objects.create_user(first_name = firstname , username = username , email = email , password = password)
         user.save()
         auth_login(request , user)
-        return redirect('/profile')
+        username = request.user.username
+        return redirect('/user/{}'.format(username))
     else:
         return HttpResponse("get done")
 

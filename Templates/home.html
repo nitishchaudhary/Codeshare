@@ -1,4 +1,5 @@
 {%load static%}
+{%load socialaccount %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -80,9 +81,9 @@
             <span>OR</span>
             <p id="login-with">Login with</p>
             <div class="oauth-login">
-              <button>
+              <a href="{% provider_login_url 'google' %}"><button>
                 <img src="{% static 'google-logo.png'  %}" alt="Google" />
-              </button>
+              </button></a>
               <button>
                 <img src="{% static 'github-logo.png'  %}" alt="Github" />
               </button>
@@ -123,10 +124,10 @@
         </form>
         <hr id="sign-up-division" />
         <div class="oauth-sign-up">
-          <button>
+          <a href="{% provider_login_url 'google' %}"><button>
             <img src="{% static 'google-logo.png'  %}" alt="Google" />
             <div class="sign-up-with-google">Sign up with google</div>
-          </button>
+          </button></a>
           <button>
             <img src="{% static 'github-logo.png'  %}" alt="Github" />
             <div class="sign-up-with-github">Sign up with github</div>

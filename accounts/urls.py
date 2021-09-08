@@ -5,4 +5,5 @@ urlpatterns=[
     path('login',views.login , name="login"),
     path('sign-up', views.sign_up, name="sign-up"),
     path('logout',views.Logout , name = "logout"),
+    path('',include('allauth.urls')),
 ]

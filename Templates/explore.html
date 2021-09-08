@@ -9,6 +9,8 @@
     <h1>this is the explore page of codeshare</h1>
     {%if user.is_authenticated%}
         <a href ="accounts/logout"><button class="logout">Logout</button></a>
+        <h1>Welcome {{user.username}}</h1>
+        <a href = "user-{{user.username}}"><button>Profile</button>
     {%endif%}
 </body>
 </html>
