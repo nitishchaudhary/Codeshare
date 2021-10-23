@@ -7,8 +7,8 @@
     scroll-behavior: auto;   
 } 
 body{
-    /* overflow: hidden; */
-    /* background-color: black; */
+    overflow: hidden;
+    background-color: whitesmoke;
 }
 
 .first-container{
@@ -26,7 +26,7 @@ body{
     transition: top 0.3s;
     justify-content: space-between;
     width: 100%;
-    padding: 14px;
+    padding: 10px;
     z-index: 1;
 }
 .logo{
@@ -48,6 +48,7 @@ body{
     position: absolute;
     margin-left: 34%;
     height: 37px;
+    margin-top: 5px;
 }
 #search-box{
     font-family: "Poppins";
@@ -132,7 +133,8 @@ li a:hover{
     font-weight:bolder;
     font-size: 13px;
     letter-spacing: 2px;
-    margin-right:60px;
+    margin: 0 auto;
+    margin-top: 5px;
 }
 #loginBtn:hover{
     background-color:rgb(1, 55, 70);
@@ -501,133 +503,36 @@ span:before,span:after{
     margin-top: 5px;
     letter-spacing: 1px;
 }
-.explore{
-    color: azure;
-    font-size: 20px;
-    align-items: center;
-    margin-top: 30px;
+
+/* Home page end */
+/* Explore page begins */
+
+.main-container{
+    position: relative;
+    margin: 0 auto;
+    border: 1px solid black;
+    color: black;
     text-align: center;
-}
-.explore button{
-    border-radius: 27px;
-    background-color:rgb(28, 223, 230);
-    color:rgb(26, 26, 26);
-    padding: 13px;
-    cursor: pointer;
-    width: 300px;
-    margin-left: -30px;
-    font-size: 14px;
-    border-color: rgb(5, 104, 117);
-    border: none;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 2px;
-    font-weight: 500;
-    box-shadow: 0px 0px 8px 0px rgba(28, 223, 230);   
-    outline: none;
-    font-weight: 600;
-}
-.explore h1{
-    margin-left:-25px;
-    font-size:25px;
-    font-family: "monserrat";
-}
-.about-container{
-    height: 100vh;
-    /* position: relative; */
-    align-items: center;
-    background-color: rgb(10, 10, 10);
-    color: rgb(236, 236, 236);
-    text-align: center;
-}
-.about{
-    /* margin-left: 55px; */
-    width:90%;
-    margin:0 auto;
-    /* position: relative; */
-    /* margin-top: 30px; */
-    font-size:40px;
+    width: 80%;
+    margin-top: 20%;
+    padding: 20px;
     
 }
-.about h1{
-    font-size: 40px;
-    padding:20px;
-    color:rgb(21, 209, 216);
-}
-.about h2{
-    margin-top: 6%;
-    font-size: 30px;
+.navbar h2{
     color: whitesmoke;
-    letter-spacing: 2px;
-}
-.about p{
-    margin-top: 40px;
-    font-size: 25px;
+    margin-top: 6px;
     font-family: "poppins";
-    color: whitesmoke;
     letter-spacing: 1px;
 }
-.definition-container{
-    width: 90%;
-    margin:0 auto;
-    padding: 10px;
-    /* background-color: blue; */
-    text-align: center;
+.head1{
+    margin-top: 10%;
 }
-.categories-container{
-    height: 100vh;
-    color: whitesmoke;
-    background-color: black;
-    text-align: center;
-    padding: 50px;
+.edit-profile-content{
+    margin-top: 10%;
 }
-.categories-heading h2{
-    font-size: 30px;
-    letter-spacing: 2px;
-    color:rgb(21, 209, 216);
-}
-.categories-content p{
-    margin-top: 10px;
-    letter-spacing: 2px;
-}
-.social {
-    height: 100vh;
-    color: whitesmoke;
-    text-align: center;
-    background-color: rgb(10,10,10);
-    padding: 50px;
-}
-.social h2{
-    font-size: 30px;
-    letter-spacing: 2px;
-    color:rgb(21, 209, 216);
-}
-.social p{
-    margin-top: 200px;
-    font-size: 25px;
-    letter-spacing: 2px;
-}
-.social button{
-    margin-top: 80px;
-}
-.connect{
-    height: 100vh;
-    background-color: black;
-    color: whitesmoke;
-    text-align: center;
-    padding: 30px;
-}
-.connect h2{
-    font-size: 30px;
-    letter-spacing: 2px;
-    color: rgb(21,209,216);
-}
-.connect p{
-    margin-top: 40px;
-    font-size: 20px;
-    letter-spacing: 2px;
-}
-.footer{
-    margin-top: 25%;
-    height: 25vh;
-    border: solid 1px white;
+.profile{
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }

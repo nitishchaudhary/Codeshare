@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
+from Main.models import Profile
 
 # Create your views here.
 def login(request):
@@ -25,6 +26,8 @@ def sign_up(request):
         password = request.POST['password']
 
         user = User.objects.create_user(first_name = firstname , username = username , email = email , password = password)
+        profile = Profile.objects.create(user = user)
+        profile.save()
         user.save()
         auth_login(request , user)
         username = request.user.username
@@ -32,6 +35,16 @@ def sign_up(request):
     else:
         return HttpResponse("get done")
 
+def update(request):
+        id = request.user.id
+        bio = request.POST['About']
+        user = User.objects.get(pk=id)
+        user.profile.about = bio
+        user.save()
+        return redirect('/')
+
 def Logout(request):
     logout(request)
     return redirect('/')
+
+

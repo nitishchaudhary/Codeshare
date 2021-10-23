@@ -134,6 +134,8 @@ STATICFILES_DIRS =[
     os.path.join(BASE_DIR,'static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR,'assests')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
 AUTHENTICATION_BACKEND = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
@@ -143,12 +145,14 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE':[
             'profile',
             'email',
+            
         ],
         'AUTH_PARAMS':{
             'access_type':'online',
         }
     }
 }   
+
 SITE_ID = 4
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_DIRECT_URL = '/'
