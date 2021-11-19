@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 urlpatterns = [
     path('', views.home , name='Home'),
     path('explore', views.explore, name='explore'),
+    path('search', views.search , name = 'search'),
 ]
 
 

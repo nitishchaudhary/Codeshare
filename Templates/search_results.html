@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+    <title>{% block title %}Results{% endblock title %}</title>
+{% block content %}  
+    <div class="container"style = "margin-top:6%;">
+        {% if users %}
+        {{users|length}} User found <br><br> 
+            {% for i in users %}
+                <a href = "{% url 'user' i.username %}"><img src = "{{i.profile.pic.url}}" style="width: 100px; height:100px; border-radius:50%">
+                <b>{{i.username}}</b>
+                {{i.profile.about}}<br>
+            {% endfor %}
+        {% else %}
+            User not found
+        {% endif %}
+    </div>
+{% endblock content %}

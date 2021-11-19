@@ -1,51 +1,28 @@
+{% extends 'base.html' %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>    
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css'%}" />
-    <title>Update Profile</title>
-</head>
-<body>
-    <div class="navbar" id="nav">
-        <div class="logo">
-          <a href="/">codespace</a>
-        </div>
-        <div class="search">
-          <input
-            type="search"
-            placeholder="Enter text to search"
-            name="search"
-            id="search-box"
-          />
-          <button type="submit" id="searchBtn">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-        <!-- <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="about">Connect</a></li>
-          <li><a href="about">Home</a></li>
-        </ul> -->
-        {% if user.is_authenticated %}
-        <a href = "{% url 'user' user.username %}" style="text-decoration: none;">
-          <!-- <h2 style="font-size: 15px; margin-top:8px; padding:3px;">{{user.username}}</h2> -->
-          <img src="{{user.profile.pic.url}}" alt="" class="profile">
-        </a>
-        <a href="/accounts/logout"><button id="loginBtn">Logout</button></a>
-        {% endif %}
+    <title>{% block title %}Results{% endblock title %}</title>
+    {% block css %}<link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}" />{% endblock css %}
+    {% block content %}  
+  <div class="edit-profile">
+    <form action="/accounts/update" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="username">
+        <label for="Username">Username</label><br>
+        <input type="text" name="username" id="username"  value="{{user.username}}">
+      </div><br>
+      <div class="about">
+        <label for="about">About</label><br>
+        <textarea name="About" id="about" rows="5">{{user.profile.about}}</textarea>
       </div>
-    <div class="edit-profile-content">
-      <form action="/accounts/update" method="post">
-        {% csrf_token %}
-        <textarea name="About" id="about" cols="30" rows="10">Enter your bio</textarea>
-        <input type="submit">
-      </form>
-      <h2>This is the profile edit section of codespace</h2>
-    </div>
-</body>
-</html>
+      <div class="profile-image">
+        <label for="Image">Profile Image</label><br>
+        <img src="{{user.profile.pic.url}}" alt=""><br>
+        <input type="file" name="image" id="profile-image">
+      </div>
+      <div class="submit">
+        <button type="submit">Update</button>
+      </div>
+    </form>
+    <!-- <h2>This is the profile edit section of codespace</h2> -->
+  </div>
+{% endblock content %}

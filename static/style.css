@@ -87,6 +87,14 @@ input[type="search"]{
 #searchBtn:hover{
     background-color: rgb(1, 55, 70);
 }
+.user-profile{
+    display: flex;
+    /* border: solid 1px white; */
+    margin-right: 5px;
+    max-width: 200px;
+    justify-content: space-between;
+}
+
 ul{
     
     display: flex;
@@ -121,7 +129,7 @@ li a{
 li a:hover{
     color: rgb(28, 223, 230);
 }
-#loginBtn{
+#logoutBtn{
     background-color:rgb(28, 223, 230);
     padding: 5px;
     cursor: pointer;
@@ -134,9 +142,10 @@ li a:hover{
     font-size: 13px;
     letter-spacing: 2px;
     margin: 0 auto;
-    margin-top: 5px;
+    margin-top: 7px;
+    margin-left: 4px;
 }
-#loginBtn:hover{
+#logoutBtn:hover{
     background-color:rgb(1, 55, 70);
     color:rgb(240, 255, 255);
     font-weight: 500;

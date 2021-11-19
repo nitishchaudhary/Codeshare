@@ -26,19 +26,24 @@ def sign_up(request):
         password = request.POST['password']
 
         user = User.objects.create_user(first_name = firstname , username = username , email = email , password = password)
-        profile = Profile.objects.create(user = user)
-        profile.save()
+        # profile = Profile.objects.create(user = user)
+        # profile.save()
         user.save()
         auth_login(request , user)
         username = request.user.username
-        return redirect('/user/{}'.format(username))
+        return redirect('/user_{}'.format(username))
     else:
         return HttpResponse("get done")
 
 def update(request):
         id = request.user.id
-        bio = request.POST['About']
         user = User.objects.get(pk=id)
+        username = request.POST['username']
+        bio = request.POST['About']
+        if 'image' in request.FILES:
+            image = request.FILES['image']
+            user.profile.pic = image
+        user.username = username
         user.profile.about = bio
         user.save()
         return redirect('/')
