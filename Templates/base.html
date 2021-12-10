@@ -12,6 +12,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+        
     {% block css %}<link rel="stylesheet" type="text/css" href="{% static 'style.css'%}" />{% endblock css %}
 </head>
 <body>
@@ -36,16 +37,34 @@
             </div>
             <div class="user-profile">
             {% if user.is_authenticated %}
-            <a href="{% url 'user' user.username %}" style="text-decoration: none">
-                <!-- <h2 style="font-size: 15px; margin-top:8px; padding:3px; color:white">{{user.username}}</h2>   -->
-                <img src="{{user.profile.pic.url}}" alt="" class="profile" />
-            </a>
-            <a href="/accounts/logout"><button id="logoutBtn">Logout</button></a>
-            {% endif %}
+            <!-- <a href="{% url 'user' user.username %}" style="text-decoration: none"> -->
+                <img src="{{user.profile.pic.url}}" alt="" class="profile"  onclick=Menu() />
+            <!-- </a> -->
+            <span>{{user.username}}</span>
+            <!-- <a href="/accounts/logout"><img src={% static 'logout-icon.png' %} id=logout-icon></a> -->
+            
+                {% endif %}
             </div>
+            <ul class="nav-menu  ">
+                <li class="nav-item">
+                    <a href="{% url 'user' user.username %}"  class='nav-link' onclick=closeMenu() >Profile </a>
+                </li>
+                <li class="nav-item">
+                    <a href='#' class='nav-link'  onclick=closeMenu()>Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href='#' class='nav-link'  onclick=closeMenu()> Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a href='/accounts/logout' class='nav-link'  onclick=closeMenu()><img src={% static 'logout-icon.png' %} id=logout-icon></a>
+                </li>
+            </ul>
+            
         </div><br>
+        
     {% endblock navbar %}
     {% block content %}
     {% endblock %}
+    <script src="{% static 'script.js' %}"></script>
 </body>
 </html>

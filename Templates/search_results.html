@@ -2,13 +2,20 @@
 {% load static %}
     <title>{% block title %}Results{% endblock title %}</title>
 {% block content %}  
-    <div class="container"style = "margin-top:6%;">
+    <div class="search-results-container"style = "margin-top:6%;">
         {% if users %}
-        {{users|length}} User found <br><br> 
+        {{users|length}} Users found <br><br> 
             {% for i in users %}
-                <a href = "{% url 'user' i.username %}"><img src = "{{i.profile.pic.url}}" style="width: 100px; height:100px; border-radius:50%">
-                <b>{{i.username}}</b>
-                {{i.profile.about}}<br>
+                <div class="users-found">
+                    <a href = "{% url 'user' i.username %}"><img src = "{{i.profile.pic.url}}">
+                    <div class="user-details">
+                        <b>{{i.username}}</b></a><br>
+                        {{i.profile.about}}<br>
+                    </div>  
+                    <div class="ping">
+                        <button><p>Message</p> <img src="{% static 'chaticon.png'%}"></button>
+                    </div>
+                </div>
             {% endfor %}
         {% else %}
             User not found

@@ -93,10 +93,27 @@ input[type="search"]{
     margin-right: 5px;
     max-width: 200px;
     justify-content: space-between;
+    color: whitesmoke;
+}
+.profile{
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.user-profile span{
+    margin: auto;
+    /* border: white solid 1px; */
+    width: 100px;
+    font-family: 'poppins', sans-serif;
+    color: rgb(216, 216, 216);
+    font-weight:600;
+    font-size: 13px;
+    letter-spacing: 1px;
 }
 
 ul{
-    
     display: flex;
     justify-content: space-around;
     width: 23%;
@@ -109,16 +126,17 @@ ul li{
 }
 ul li::after{
     content: '';
-    height: 2px;
+    height: 1px;
     width: 0%;
     background:rgb(28, 223, 230);
     position: absolute;
-    left: 0;
-    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -4;
     transition: 0.4s;
 }
 ul li:hover::after{
-    width: 100%;
+    width: 40%;
 }
 li a{
     text-decoration: none;
@@ -130,27 +148,70 @@ li a:hover{
     color: rgb(28, 223, 230);
 }
 #logoutBtn{
-    background-color:rgb(28, 223, 230);
+    background-color:black;
     padding: 5px;
     cursor: pointer;
     width: 100px;
     border-radius: 17px;
     border-color: black;
     font-family: 'Poppins', sans-serif;
-    color: black;
+    color: white;
     font-weight:bolder;
     font-size: 13px;
     letter-spacing: 2px;
     margin: 0 auto;
-    margin-top: 7px;
-    margin-left: 4px;
+    /* margin-top: 7px;
+    margin-left: 4px; */
+    margin: auto;
 }
+#logout-icon{
+    height: 30px;
+    width: 30px;
+    /* margin: auto; */
+    margin-top: auto;
+    /* padding: 4px; */
+}
+.hamburger{
+    display: block;
+    color: white;
+    cursor: pointer;
+}
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    background-color: #101010;
+}
+.nav-menu {
+    position: fixed;
+    top: -50%;
+    right: 20px;
+    flex-direction: column;
+    background-color: rgb(12, 12, 12);
+    width: 10%;
+    height: 300px;
+    border-radius: 10px;
+    opacity: 95%;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow:
+        0 10px 27px rgba(0, 0, 0, 0.05);
+}
+.nav-menu.active{
+    top: 75px;
+}
+
+
 #logoutBtn:hover{
     background-color:rgb(1, 55, 70);
     color:rgb(240, 255, 255);
     font-weight: 500;
     transition:ease-out 0.2s;
 }
+
 /* .title{
     color: rgb(238, 251, 253);
     font-size: 35px;
@@ -533,15 +594,73 @@ span:before,span:after{
     font-family: "poppins";
     letter-spacing: 1px;
 }
-.head1{
+.profile-container{
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid black;
+    width: 90%;
     margin-top: 10%;
+    padding: 20px;
+    
 }
 .edit-profile-content{
     margin-top: 10%;
 }
-.profile{
-    vertical-align: middle;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+
+.search-results-container{
+    margin: 0 auto;
+    border: 1px solid grey;
+    width: 90%;
+    margin-top: 10%;
+    padding: 15px;
+}
+.users-found{
+    display: flex;
+    /* border: 1px solid black; */
+    padding: 4px;
+    border-bottom: 1px solid grey;
+    
+}
+.search-results-container img{
+    width: 60px; 
+    height:60px; 
+    border-radius:50%;
+}
+.user-details{
+    margin-top:5px;
+    padding: 7px;
+    /* border: solid 1px; */
+}
+.users-found a{
+    text-decoration: none;
+    color: #2c4f6e;
+}
+.ping {
+    margin:auto;
+    position: relative;
+    margin-right: 1px;
+}
+.ping button{
+    /* background-color:rgb(123, 206, 206);    */
+    border: 1px solid rgb(53, 53, 53);
+    border-radius: 5px;
+    font-size: 17px;
+    transition: 0.2s;   
+    cursor: pointer;
+    width: 100px;
+    padding: 2px;
+    letter-spacing: 1px;
+    font-size: 14px;
+    font-family: "poppins";
+    font-weight: 600;
+}
+.ping button:hover{
+    background-color: rgb(1, 55, 70);
+    color: white;
+    
+}
+.ping button img{
+    height: 20px;
+    width: 20px;
+    margin:auto;
 }

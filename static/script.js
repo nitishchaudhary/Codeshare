@@ -20,3 +20,14 @@ join.addEventListener("click" , ()=>{
     form.style.opacity = "1";
     document.getElementById("main-container").style.filter = "blur(8px)";
 })
+
+function Menu(){
+    const navMenu = document.querySelector(".nav-menu");
+    navMenu.classList.toggle("active");   
+}
+const navLinks = document.querySelectorAll(".nav-link");
+navLinks.forEach(n => n.addEventListener("click" , closeMenu));
+function closeMenu(){
+    const navMenu = document.querySelector(".nav-menu");
+    navMenu.classList.remove("active");
+}
