@@ -3,8 +3,50 @@
     <title>{% block title %}Explore{% endblock title %}</title>
 {% block content %}  
   <div class="main-container">
-    <h1>this is the explore page of codeshare</h1>
+    <div class="share-post">
+      <form action="/post" method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="share-heading">Whats on your mind</label><br>
+        <br>
+        <input type="text" name="des" id="post" placeholder="Share something...">
+        <button type="submit">Post</button><br><br>
+        <input type="file" alt="" name="post_image">
+        
+      </form>
+    </div>
+    <br>
+    <h1>Recent posts </h1>
+    {% for i in post %}
+      <div class="recent-posts">
+        <div class="recent-post-usr">
+          <div class="recent-post-usr-img">
+            <a href = "{% url 'user' i.user_name %}"><img src="{{i.user_name.profile.pic.url}}" alt=""></a>
+          </div>
+          <div class="recent-post-usr-details">
+            <h4><a href = "{% url 'user' i.user_name %}">{{i.user_name}}</a></h4>
+            <h6>{{i.date_posted}}</h6>
+          </div>
+        </div>
+        <div class="recent-post-content">
+          {% if i.img %}  
+            <img src="{{i.img.url}}" alt="" id="post-image"><br>
+          {% endif %}
+          <h5>{{i.description}}</h5>
+          <br>
+        </div>
+        <div class="recent-post-reactions">
+          {% if i.details.all %}
+            {% for detail in i.details.all %}  
+              {{detail.comment}}
+            {% endfor %}
+          {% else %}
+              No comments
+          {% endif %}
+      </div>
+      </div>
+    {% endfor %}
   </div>  
+
 {% endblock content %}
 
 

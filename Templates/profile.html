@@ -4,8 +4,8 @@
 {% block content %}  
   <div class="profile-container">
       <img src="{{user0.profile.pic.url}}" alt="" style="width: 100px;height:100px; border-radius:50%">
-      <h1>{{user0.username}}</h1>
-      <h3>{{user0.profile.about}}</h3><br>
+      <h2>{{user0.username}}</h2>
+      <h4>{{user0.profile.about}}</h4><br>
       {%if user0.username == user.username %}
         <a href="edit-profile"><button>Edit profile</button></a><br><br>
     {% endif %}

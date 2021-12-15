@@ -1,31 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: auto; 
+    scroll-behavior: auto;   
+} 
+body{
+    /* overflow: hidden; */
+    background-color: whitesmoke;
 }
 
-body {
-    background: #eee;
+.first-container{
+    background-image: url("code.png");
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
 }
-
 .navbar{
     display: flex;
-    flex-direction: row;
-    border: 1px solid black;
-    justify-content: space-between;
+    position:fixed;
     background-color: black;
-    padding: 9px;
+    top:0;
     transition: top 0.3s;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
     z-index: 1;
 }
 .logo{
+    flex: 1;
     font-family: 'Poppins';
     font-size: 31px;
-    /* border: 1px solid white; */
-    margin-left: 35px;
     
 }
 .logo a{    
@@ -33,7 +41,7 @@ body {
     letter-spacing: 3px;
     padding:8px;
     color: #9eb8cf;
-    /* margin-left: 35px; */
+    margin-left: 35px;
     font-weight:600;
 }
 .search{
@@ -42,7 +50,6 @@ body {
     margin-left: 34%;
     height: 37px;
     margin-top: 5px;
-    /* border: 1px solid white; */
 }
 #search-box{
     font-family: "Poppins";
@@ -81,58 +88,151 @@ input[type="search"]{
 #searchBtn:hover{
     background-color: rgb(1, 55, 70);
 }
-.profile{
-    vertical-align: middle;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    
-}
 .user-profile{
     display: flex;
-    /* border: solid 1px white; */
-    margin-right: 5px;
-    max-width: 200px;
-    justify-content: space-between;
-}
-/* .navbar h2{
+    border: solid 1px rgb(107, 107, 107);
+    margin-right: 20px;
+    width: auto;
+    justify-content:space-around;
     color: whitesmoke;
-    margin-top: 6px;
-    font-family: "poppins";
-    letter-spacing: 1px;   
-} */
+    border-radius: 15px;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    /* background-color: rgb(12, 12, 12); */
+    /* opacity: 100%; */
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.user-profile:hover{
+    background-color: rgb(31, 31, 31);
+    border-color: black;
+}
+.profile{
+    vertical-align: middle;
+    /* position: absolute; */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* cursor: pointer; */
+    /* margin:0 auto; */
+    /* margin-right: 5%; */
+    /* border: white solid 1px; */
+}
+.user-profile h5{
+    margin: auto;
+    /* border: white solid 1px; */
+    width: auto ;
+    z-index: 1;
+    /* position: absolute; */
+    font-family: 'lato', sans-serif;
+    color: rgb(235, 235, 235);
+    font-weight:300;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding-left: 10px;
+}
+
+ul{
+    display: flex;
+    justify-content: space-around;
+    width: 23%;
+    margin-top: 4px;
+    list-style: none;
+    margin-right: 50px;
+}
+ul li{
+    position: relative;
+}
+ul li::after{
+    content: '';
+    height: 1px;
+    width: 0%;
+    background:rgb(28, 223, 230);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -4;
+    transition: 0.4s;
+}
+ul li:hover::after{
+    width: 40%;
+}
+li a{
+    text-decoration: none;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    color:rgb(240, 255, 255);
+}
+li a:hover{
+    color: rgb(28, 223, 230);
+}
 #logoutBtn{
-    background-color:rgb(28, 223, 230);
+    background-color:black;
     padding: 5px;
     cursor: pointer;
     width: 100px;
     border-radius: 17px;
     border-color: black;
     font-family: 'Poppins', sans-serif;
-    color: black;
+    color: white;
     font-weight:bolder;
     font-size: 13px;
     letter-spacing: 2px;
-    margin: 0 auto;
-    margin-top: 7px;
-    margin-left: 4px;
+    margin: auto;
 }
-#logoutBtn:hover{
-    background-color:rgb(1, 55, 70);
-    color:rgb(240, 255, 255);
-    font-weight: 500;
-    transition:ease-out 0.2s;
+#logout-icon{
+    height: 30px;
+    width: 30px;
+    /* margin: auto; */
+    margin-top: auto;
+    /* padding: 4px; */
 }
+.hamburger{
+    display: block;
+    color: white;
+    cursor: pointer;
+}
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    background-color: #101010;
+}
+.nav-menu {
+    position: fixed;
+    top: -50%;
+    right: 0px;
+    flex-direction: column;
+    background-color: rgb(12, 12, 12);
+    width: 10%;
+    height: 300px;
+    border-radius: 10px;
+    opacity: 95%;
+    text-align: center;
+    transition: 0.3s;
+    z-index: -1 ;
+    box-shadow:
+        0 10px 27px rgba(0, 0, 0, 0.05);
+}
+.nav-menu.active{
+    top: 75px;
+}
+
 .edit-profile{
     border: 1px solid rgb(201, 201, 201);
     margin: 0 auto;
     text-align: center;
-    margin-top: 10%;
+    margin-top: 150px;
     transform: translate(0,-20%);
     padding: 30px;
     max-width: 70%;
     background-color: rgb(244, 244, 244); 
-    border-radius: 2px;
+    border-radius: 10px;
 }
 .edit-profile label{
     letter-spacing: 1px;    
@@ -142,16 +242,17 @@ input[type="search"]{
     padding: 5px;
 }
 .username input{
-    margin-top: 5px;
+    margin: 0 auto;
+    margin-top: 10px;
     background-color: rgb(248, 248, 248);
-    border: 1px solid rgb(200,200,200);
+    border: 1px solid rgb(194, 194, 194);
     border-radius: 2px;
-    height: 25px;
+    height: 28px;
     padding:10px;
     width: 200px;
     color: rgb(87, 87, 87);
     letter-spacing: 1px;
-    font-size: 1rem;
+    font-size: 13px;
     line-height: 1.5;
     display: block;
 }
@@ -159,7 +260,7 @@ input[type="search"]{
     padding: 5px;
 }
 .about textarea{
-    margin-top: 5px;
+    margin-top: 10px;
     background: rgb(248,248,248);
     border-radius: 2px;
     border: 1px solid rgb(200,200,200);
@@ -167,6 +268,7 @@ input[type="search"]{
     width: 200px;
     font-size: 13px;
     color: rgb(87, 87, 87);
+    margin-bottom: 10px;
 }
 .profile-image img{
     width: 50px;
@@ -182,11 +284,20 @@ input[type="search"]{
 }
 .submit button{
     width: 200px;
-    /* border-radius: 2px; */
+    height: 35px;
     padding: 5px;
     margin-top: 10px;
     letter-spacing: 1px;
     border: solid 1px grey;
     border-radius: 5px;
+    cursor: pointer;
     background-color: rgb(248,248,248);
+    transition: 0.2s ease;
+    font-weight: 600;
+    font-family: 'lato',sans-serif;
+    font-size: 15px;
+}
+.submit button:hover{
+    background-color:rgb(123, 206, 206);
+    border-color: rgb(123, 206, 206);
 }
