@@ -31,3 +31,7 @@ function closeMenu(){
     const navMenu = document.querySelector(".nav-menu");
     navMenu.classList.remove("active");
 }
+function selectImage(){
+    let s = document.querySelector(".selectimage");
+    s.click();
+}

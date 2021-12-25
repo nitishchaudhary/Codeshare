@@ -12,14 +12,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-        
+    <script src="{% static 'script.js' %}"></script>
     {% block css %}<link rel="stylesheet" type="text/css" href="{% static 'style.css'%}" />{% endblock css %}
 </head>
 <body>
     {% block navbar %}
         <div class="navbar" id="nav">
             <div class="logo">
-            <a href="/">codespace</a>
+            <a href="/">codescape</a>
             </div>
             <div class="search">
                 <form action="/search" method = 'GET'>
@@ -61,6 +61,6 @@
     {% endblock navbar %}
     {% block content %}
     {% endblock %}
-    <script src="{% static 'script.js' %}"></script>
+    
 </body>
 </html>

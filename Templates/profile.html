@@ -9,6 +9,8 @@
       {%if user0.username == user.username %}
         <a href="edit-profile"><button>Edit profile</button></a><br><br>
     {% endif %}
+    {{user.followers.count}} Followers
+    {{user.following.count}} Following
   </div>
 {% endblock content %}
 

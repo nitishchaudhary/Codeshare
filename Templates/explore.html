@@ -1,21 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
-    <title>{% block title %}Explore{% endblock title %}</title>
+    <title>{% block title %}Codescape{% endblock title %}</title>
 {% block content %}  
+<div class="container">
+  <div class="left-bar">
+    <div class="left-bar-nav">
+      <a href="/"><h3><img src="{% static 'home-icon.png' %}">Home</h3></a>
+      <hr>
+      <a href="/"><h3><img src="{% static 'home-icon.png' %}">Explore</h3></a>
+      <hr>
+      <a href="/"><h3><img src="{% static 'trending-icon.png' %}">Trending</h3></a>
+      <hr>
+      <a href="/"><h3><img src="{% static 'home-icon.png' %}">Projects</h3></a>
+    </div>
+  </div>
   <div class="main-container">
     <div class="share-post">
-      <form action="/post" method = "post" enctype="multipart/form-data">
+      <form action="{% url 'post' %}" method = "post" enctype="multipart/form-data">
         {% csrf_token %}
-        <label for="share-heading">Whats on your mind</label><br>
+        <!-- <label for="share-heading">Whats on your mind</label><br> -->
         <br>
-        <input type="text" name="des" id="post" placeholder="Share something...">
+        <input type="text" name="des" id="post" placeholder="Whats on your mind ...">
+        <img src="{% static 'image-icon.png' %}" alt="" onclick="selectImage()">
         <button type="submit">Post</button><br><br>
-        <input type="file" alt="" name="post_image">
-        
+        <input type="file" alt="" name="post_image" class = "selectimage">
       </form>
     </div>
+
+    <!-- <h1>Recent posts </h1> -->
+    
     <br>
-    <h1>Recent posts </h1>
+    <div class="explore-container">
     {% for i in post %}
       <div class="recent-posts">
         <div class="recent-post-usr">
@@ -26,6 +41,19 @@
             <h4><a href = "{% url 'user' i.user_name %}">{{i.user_name}}</a></h4>
             <h6>{{i.date_posted}}</h6>
           </div>
+          <div class="recent-post-usr-follow">
+            {% if i.user_name in user.following.all.following_user_id %}
+              unfollow
+            {% else %}
+              <a href="{% url 'follow' i.user_name %}"><button>Follow</button></a>
+            {% endif %}
+              <div class="hamburger">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+              
+            </div>
+          </div>
         </div>
         <div class="recent-post-content">
           {% if i.img %}  
@@ -35,19 +63,48 @@
           <br>
         </div>
         <div class="recent-post-reactions">
-          {% if i.details.all %}
+          <!-- {% if i.details.all %}
             {% for detail in i.details.all %}  
               {{detail.comment}}
             {% endfor %}
           {% else %}
               No comments
-          {% endif %}
+          {% endif %} -->
+          <div class="recent-post-likes">
+            <a href="{% url 'like' i.id %}"><img src="{% static 'like-icon.png' %}" alt=""></a>
+            {{i.likes.count}}
+          </div>
+          <div class="recent-post-comments">
+            <img src="{% static 'comment-icon.png' %}" alt="">
+          </div>
+          
+      </div>
+      <div class="post-comment">
+        <form action="{% url 'comment' i.id %}" method="POST">
+          {% csrf_token %}
+          <div class="comment">
+            <input type="text" name="comment" placeholder="Write your comment here ..."/>
+            <button type="submit">Post</button>
+          </div>
+          <div class="comment-post-button">
+            
+          </div>
+        </form>
       </div>
       </div>
     {% endfor %}
+    </div>
+  </div>
+  <div class="right-bar">
+    <div class="right-bar-chats">
+      <h3>Chats</h3>
+      <hr>
+    </div>
   </div>  
-
+</div>  
+<script src="{% static 'script.js' %}"></script>
 {% endblock content %}
+
 
 
 
