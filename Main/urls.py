@@ -13,6 +13,7 @@ urlpatterns = [
     path('post-comment/id:<int:pk>',views.comment , name='comment'),
     path('like-post/id:<int:pk>',views.like , name="like"),
     path('follow/user:<str:username>',views.follow_user , name="follow"),
+    path('chats/user:<str:username>',views.chats,name="chats"),
     path('message/user:<str:username>',views.message,name='message')
 ]
 

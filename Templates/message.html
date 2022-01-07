@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+     <script src="{% static 'script.js' %}"></script>
+     <title>{% block title %}Messaging{% endblock title %}</title>
+{% block content %}
+<div class="message-container">
+<div class="message-reciever-profile">
+          <div class="reciever-profile-img">
+               <a href="{% url 'user' user0.username %}"><img src="{{user0.profile.pic.url}}" id="reciever-img"></a>
+          </div>
+          <div class="reciever-username">
+               <a href="{% url 'user' user0.username %}"><b>{{user0.username}}</b></a>
+          </div>
+          
+     </div>
+     <div id="message-text" onclick="message()">
+          this is text
+     </div>
+
+     <form method="POST" id="message-form">
+          {% csrf_token %}
+          <img src="{{user.profile.pic.url}}" id="sender-img">
+          <input type="text" name="message" id="message" >
+          <input type="image" src="{% static 'send-icon.png' %}" alt="" />
+     </form>
+     <script>
+          $('#message-form').on('submit', function(e){
+               e.preventDefault();
+               $.ajax({ 
+                   type: "POST",   
+                   url: "{% url 'message' user0.username %}", 
+                   data: {
+                       message:$('#message').val(),
+                       csrfmiddlewaretoken:'{{csrf_token}}',
+                       dataType:"json",
+                       action:"post",
+                   },
+                   success: function(data) {
+                         $('#message-text').html(data);
+                   }
+                   });
+                   return false;
+               });
+           
+           
+     </script>
+</div>
+{% endblock content%}

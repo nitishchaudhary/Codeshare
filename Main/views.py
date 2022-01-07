@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from .models import Profile , Post , Comment , Like , UserFollowing,Message
-
+import json
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
@@ -59,15 +59,19 @@ def like(request,pk):
     id = request.user.id
     usr = User.objects.get(id=id)
     post = Post.objects.get(pk=pk)
+    liked = False
     try:
         like = Like.objects.get(user=usr , post=post).delete()
-        print("done")
+
     except:
+        liked = True
         like = Like.objects.create(user=usr , post=post)
-        print("notdone")
         like.save()
-    
-    return redirect('/')
+    res = {
+        'liked':liked
+    }
+    response = json.dumps(res)
+    return HttpResponse(response,content_type="application/json")
 
 def follow_user(request,username):
     id = request.user.id
@@ -80,11 +84,19 @@ def follow_user(request,username):
         obj.save()
     
     return redirect('/')
+def chats(request,username):
+    user0 = User.objects.get(username=username)
+    return render(request,'message.html',{'user0':user0})
 def message(request,username):
-    id= request.user.id
-    usr=User.objects.get(id=id)
-    usr2=User.objects.get(username=username)
-    message = 'another testing'
-    message = Message.objects.create(sender_id=usr,reciever_id=usr2,message=message)
-    message.save()
-    return redirect('/')
+    user0 = User.objects.get(username=username)
+    if request.method == "POST":
+        id= request.user.id
+        usr=User.objects.get(id=id)
+        usr2=User.objects.get(username=username)
+        message =request.POST['message']
+        message1 = Message.objects.create(sender_id=usr,reciever_id=usr2,message=message)
+        message1.save()
+        return HttpResponse(message)
+    else:
+        return render(request,'message.html',{'user0':user0})
+        

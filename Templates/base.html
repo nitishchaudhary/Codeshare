@@ -13,6 +13,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <script src="{% static 'script.js' %}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     {% block css %}<link rel="stylesheet" type="text/css" href="{% static 'style.css'%}" />{% endblock css %}
 </head>
 <body>
@@ -39,6 +40,7 @@
             {% if user.is_authenticated %}
                 <img src="{{user.profile.pic.url}}" alt="" class="profile"  onclick=Menu() />
                 <h5>{{user.username}}</h5>
+                <img src="{% static 'down-arrow.png' %}" alt="" id="down-arrow">
             {% endif %}
             </div>
             <ul class="nav-menu  ">

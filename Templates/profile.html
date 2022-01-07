@@ -2,16 +2,28 @@
 {% load static %}
     <title>{% block title %}Profile{% endblock title %}</title>
 {% block content %}  
+<div class="main-container-profile">
   <div class="profile-container">
-      <img src="{{user0.profile.pic.url}}" alt="" style="width: 100px;height:100px; border-radius:50%">
-      <h2>{{user0.username}}</h2>
-      <h4>{{user0.profile.about}}</h4><br>
-      {%if user0.username == user.username %}
-        <a href="edit-profile"><button>Edit profile</button></a><br><br>
+    <img src="{{user0.profile.pic.url}}" alt="" style="width: 100px;height:100px; border-radius:50%">
+    <h2>{{user0.username}}</h2>
+    <h5>{{user0.profile.about}}</h5><br>
+    {%if user0.username == user.username %}
+      <a href="edit-profile"><button>Edit profile</button></a><br><br>
     {% endif %}
     {{user.followers.count}} Followers
     {{user.following.count}} Following
+    <br>
+    <br>
+    {% if user0 != user %}
+      <a href="{% url 'follow' user0.username %}"><button onclick="follow('user0.username')">Follow</button></a>
+      <a href="{% url 'message' user0.username%}"><button>Message</button></a>
+    {% endif %}
   </div>
+  <div class="user-posts">
+    <h1>All user posts</h1>
+  </div>
+</div>
+  
 {% endblock content %}
 
 
