@@ -7,11 +7,11 @@
   <div class="left-bar">
     <div class="left-bar-nav">
       <a href="/"><h3><img src="{% static 'home-icon.png' %}">Home</h3></a>
-      <hr>
+      
       <a href="/"><h3><img src="{% static 'home-icon.png' %}">Explore</h3></a>
-      <hr>
+      
       <a href="/"><h3><img src="{% static 'trending-icon.png' %}">Trending</h3></a>
-      <hr>
+      
       <a href="/"><h3><img src="{% static 'home-icon.png' %}">Projects</h3></a>
     </div>
   </div>
@@ -43,7 +43,7 @@
             <h6>{{i.date_posted}}</h6>
           </div>
           <div class="recent-post-usr-follow">
-              <a href="{% url 'chats' i.user_name %}"><button>Message</button></a>
+              <a href="{% url 'user-chat' i.user_name %}"><button>Message</button></a>
             <div class="hamburger">
               <div class="bar1"></div>
               <div class="bar2"></div>
@@ -64,13 +64,7 @@
           <br>
         </div>
         <div class="recent-post-reactions">
-          <!-- {% if i.details.all %}
-            {% for detail in i.details.all %}  
-              {{detail.comment}}
-            {% endfor %}
-          {% else %}
-              No comments
-          {% endif %} -->
+        
           <div class="recent-post-likes" id="{{i.id}}" onclick="like('{{i.id}}')" data-url="{% url 'like' i.id %}">
             {% for user.i.likes in i.likes.all %}  
                 <img src="{% static 'dislike-icon.png' %}" id="like-dislike{{i.id}}" alt="">
@@ -78,25 +72,52 @@
                 <img src="{% static 'like-icon.png' %}"  id="like-dislike{{i.id}}"alt="">
             {% endfor %}
             <p id="likes-count{{i.id}}">{{i.likes.count}}</p>
+            
 
           </div>
           
           <div class="recent-post-comments">
-            <img src="{% static 'comment-icon.png' %}" alt="">
-          </div>
+            <img src="{% static 'comment-icon.png' %}" alt="" onclick="opencomments('{{i.id}}')">
+          </div>    
           
       </div>
-      <div class="post-comment">
-        <form action="{% url 'comment' i.id %}" method="POST">
+      <div class="post-comment" id="post-comment{{i.id}}">
+          {% if i.details.all %}
+            {% for detail in i.details.all %}  
+              {{detail.comment}}<br>
+            {% endfor %}
+          {% else %}
+              No comments
+          {% endif %}
+
+        <form method="POST" id="comment-post">
           {% csrf_token %}
           <div class="comment">
-            <input type="text" name="comment" placeholder="Leave your comment here ..."/>
-            <button type="submit">Post</button>
-          </div>
-          <div class="comment-post-button">
-            
+            <!-- <img src="{{user.profile.pic.url}}" alt="/> -->
+            <img src="{{user.profile.pic.url}}">
+            <input type="text" name="comment" id="comment" placeholder="Leave your comment here ...">
+            <input type="image" src="{% static 'comment-post.png' %}">
           </div>
         </form>
+        <!-- <script>
+        $("#comment-post").on("submit", function (e) {
+          e.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: "post-comment/id:23",
+            data: {
+              message: $("#comment").val(),
+              csrfmiddlewaretoken: "{{csrf_token}}",
+              dataType:"json",
+            },
+            success: function (data) {
+              console.log('done');
+            },
+          });
+          return false;
+        });
+
+      </script> -->
       </div>
       </div>
     {% endfor %}

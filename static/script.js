@@ -1,19 +1,10 @@
-//animatinng the navbar to hide when scroling down and
-//to show when scroling up
-// var prevScrollpos = window.pageYOffset;
-// //var navbar = document.getElementById("navbar");
-// window.onscroll = function(){
-//     var currentScrollpos = window.pageYOffset;
-//     if(prevScrollpos > currentScrollpos){
-//         document.getElementById("nav").style.top = "0";
-//     }
-//     else{
-//         document.getElementById("nav").style.top = "-50px";
-//     }
-//     prevScrollpos = currentScrollpos;
-// }
 
-           
+
+const opencomments = (id) =>{
+    const comments = document.querySelector("#post-comment"+id);
+    comments.classList.toggle("open");
+}
+
 const like =(id) => {
     $.ajax(
         {

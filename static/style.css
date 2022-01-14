@@ -10,7 +10,7 @@
 } 
 body{
     overflow: hidden;
-    background-color: whitesmoke;
+    background-color: rgb(20, 20, 20);
 }
 
 .first-container{
@@ -53,34 +53,37 @@ body{
     margin-top: 5px;
 }
 #search-box{
-    font-family: "lato";
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: rgb(22, 22, 22);
+    font-family: "roboto";
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0px;
+    color: rgb(30, 30, 30);
     background-color: rgb(184, 214, 224);
+    /* opacity: 80%; */
     width: 400px;
     height: 100%;
     border: none;
     outline: none;
     border-radius: 20px;
+    text-indent: 40px;
 }
 input[type="search"]::placeholder{
-    text-align: center;
-    color: rgb(56, 59, 59);
+    text-align: left;
+    color: rgb(65, 65, 65);
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     opacity:80%;
 }
 input[type="search"]{
-    text-align:center;
+    text-align:left;
 }
 #searchBtn{
-    background-color:rgb(123, 206, 206);
+    background-color: rgb(184, 214, 224);    
+    /* opacity: 80%; */
     position: absolute;
-    margin-left:-35px;
+    /* margin-left:-35px; */
     border: 1px;
-    border-radius: 20px;
+    border-radius: 50%;
     font-size: 17px;
     padding:10px;
     transition: 0.2s;   
@@ -625,7 +628,7 @@ span:before,span:after{
     height: 80vh;
     border-radius: 15px; 
     /* transform: translate(0,-50%); */
-    background-color: rgb(213,213,213);
+    background-color: rgb(25, 28, 31);
     overflow: hidden;
 }
 .left-bar-nav{
@@ -633,7 +636,7 @@ span:before,span:after{
     margin-top: 50%;
     /* border: solid 1px black; */
     height:auto;
-    font-family: "roboto";
+    font-family: "lato";
     text-align: center;
     width: 70%;
     color: rgb(15, 15, 15);
@@ -648,7 +651,7 @@ span:before,span:after{
 }
 .left-bar-nav  a{
     text-decoration:none;
-    color: #083e46;
+    color: #aaaaaa;
 }
 .left-bar-nav h3:hover{
     background-color:rgb(13, 114, 117);
@@ -668,7 +671,12 @@ span:before,span:after{
     height: 80vh;
     margin-top: 1%;
     border-radius: 15px;
-    background-color: rgb(213,213,213);
+    background-color: rgb(25, 28, 31);
+    color: rgb(206, 206, 206);
+    box-shadow: tomato;
+}
+.right-bar hr{
+    background-color: blue;
 }
 .right-bar-chats{
     margin:0 auto;
@@ -709,7 +717,7 @@ span:before,span:after{
     border-radius: 100px;
 } */
 .explore-container{
-    background-color: rgb(213,213,213);
+    background-color: rgb(25, 28, 31);
     border-radius: 15px;
 }
 .navbar h2{
@@ -729,15 +737,16 @@ span:before,span:after{
 .user-posts{
     /* border: solid black 1px; */
     width: 60%;
-    background-color: rgb(235,235,235);
+    background-color: rgb(32,32,32);
     text-align: center;
     border-radius: 20px;
+    color: rgb(209, 209, 209);
 }
 .profile-container{
     /* margin: 0 auto; */
     text-align: center;
     /* border: 1px solid blue; */
-    background-color: rgb(235,235,235);
+    background-color: rgb(32,32,32);
     width: 35%;
     /* margin-top: 10%; */
     padding: 20px;
@@ -833,7 +842,7 @@ span:before,span:after{
     width: 80%;
     margin: 0 auto;
     margin-top:30px;
-    background-color: white;
+    background-color: rgb(40, 43, 46);
 }
 .share-post{
     position: relative;
@@ -843,7 +852,7 @@ span:before,span:after{
     margin:auto 0;
     padding:10px;
     border-radius: 15px;
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(26, 29, 32);
     /* background-image:linear-gradient( to right ,rgb(0, 0, 0) , rgb(11, 71, 73) ); */
 }
 #post {
@@ -856,15 +865,16 @@ span:before,span:after{
     text-indent: 15px;
     font-family: 'lato';
     font-size: 15px;
-    color: rgb(151, 151, 151);
-    background-color: rgb(61, 61, 61);
-    
+    color: rgb(49, 49, 49);
+    background-color: rgb(44, 57, 61);
+    opacity: 50%;    
 }
 #post::placeholder{
-    color:rgb(145, 145, 145);
+    color:rgb(216, 216, 216);
     text-align: left;
     font-size: 14px;
     font-family: 'lato';
+    font-weight: 400;
 }
 .share-post button{
     height: 40px;
@@ -878,12 +888,12 @@ span:before,span:after{
     font-weight: 600;
     font-size: 14px;
     letter-spacing: 1px;
-    transition: 0.5s ease-in-out;
+    transition: 0.2s ease-in-out;
     color:whitesmoke;
 }
 .share-post button:hover{
-    background-color:black;
-    background-image: linear-gradient( to right ,rgb(30, 147, 151) , rgb(6, 53, 54) );
+    background-color:rgb(0, 97, 100);
+    /* background-image: linear-gradient( to right ,rgb(30, 147, 151) , rgb(6, 53, 54) ); */
 
 }
 .share-post input[type="file"]{
@@ -910,8 +920,12 @@ span:before,span:after{
 .recent-post-usr{
     text-align: left;
     display: flex;
-    justify-content:;
-    margin: 5px;
+    /* justify-content; */
+    margin:5 5 10 5;
+    border-radius: 10px;
+    
+    
+    /* background-color:rgb(11, 83, 87); */
     /* border: solid 1px black; */
 }
 .recent-post-usr-details{
@@ -923,10 +937,11 @@ span:before,span:after{
     font-family: 'montserrat';
     font-size: 10px;
     font-weight: 600;
+    color: rgb(218, 218, 218);
 }
 .recent-post-usr-details a{
     text-decoration: none;
-    color: black;
+    color: rgb(221, 221, 221);
     font-weight:600;
     font-size: 15px;
     font-family: 'lato';
@@ -947,9 +962,10 @@ span:before,span:after{
     width: 100px;
     height: 38px;
     border-radius: 18px;
-    border: solid 1px  rgb(5, 97, 97);;
-    background-color: white;
-    color: rgb(5, 97, 97);;
+    /* border: solid 1px  rgb(5, 97, 97);; */
+    border:none;
+    background-color: rgb(0, 140, 150);;;
+    color: whitesmoke;
     font-family: 'lato';
     font-size: 14;
     font-weight: 600;
@@ -958,8 +974,8 @@ span:before,span:after{
     transition: 0.1s ease-in-out;
 }
 .recent-post-usr-follow button:hover{
-    background-color: rgb(11,71,73);
-    background-image: linear-gradient( to right ,rgb(35, 171, 175) , rgb(11, 71, 73) );
+    background-color: rgb(16, 104, 107);
+    /* background-image: linear-gradient( to right ,rgb(35, 171, 175) , rgb(11, 71, 73) ); */
     border:none;
     color: white;
 }
@@ -972,7 +988,7 @@ span:before,span:after{
 .bar1 , .bar2 , .bar3{
     height: 2px;
     width: 15px;
-    background-color: rgb(175, 175, 175);
+    background-color: rgb(139, 139, 139);
     margin: 5px ;
 }
 .post-options{
@@ -986,11 +1002,12 @@ span:before,span:after{
     
 }
 .recent-post-content{
-    background-color: rgb(223, 223, 223);
+    background-color: rgb(32,32,32);
     width: 100%;
     border-radius: 10px;
     /* padding: 10px; */
     text-align: center;
+    color: white;
 }
 #post-image{
     height: auto;
@@ -1009,7 +1026,7 @@ span:before,span:after{
     font-size: 15px;
     font-family: 'lato',sans-serif;
     font-weight: 600;
-    color: rgb(33, 33, 33);
+    color: rgb(182, 182, 182);
 }
 .recent-post-reactions{
     display: flex;
@@ -1023,36 +1040,60 @@ span:before,span:after{
     font-family: 'roboto';
     font-size: 13px;
     font-weight: 100;
-    color: rgb(75, 75, 75);
+    color: rgb(173, 173, 173);
+    /* cursor: pointer; */
+    display: flex;
+}
+.recent-post-likes p{
+    margin:7 7;
 }
 
 .recent-post-reactions img{
-    height: 20px;
-    width: 20px;
+    height: 23px;
+    width: 23px;
+    opacity: 70%;
+    cursor: pointer;
+    
     /* margin: 5px; */
     /* margin-left: 10px; */
 }
 .post-comment{
-    display: flex;
+    display:none;
+    /* display: flex; */
     flex-direction: column;
     width: 100%;
-    background-color: rgb(223, 223, 223);
-    padding: 10px;
-    border-radius: 10px;
+    /* background-color: rgb(37, 90, 94); */
+    padding:15 0 5 0;
+    /* border-radius: 10px; */
+    transition: 1s ease-in-out;
     /* border: solid 1px black; */
+    border-top: solid 1px rgb(65, 65, 65);
+}
+.post-comment.open{
+    display: flex;
+    transition: 1s ease-in-out;
+}
+.comment img{
+    height: 35px;
+    width:35px;
+    border-radius: 50%;
+    margin-bottom: -14px;
 }
 .comment input{
-    width: 80%;
+    width: 90%;
     height: 35px;
     border-radius: 20px;
     border: none;
     outline:none;
     text-indent: 15px;
-    color: rgb(65, 65, 65);
-    border: solid 1px rgb(156, 156, 156);
+    color: rgb(17, 17, 17);
+    background-color: rgb(158, 222, 226);
+    /* border: solid 1px rgb(156, 156, 156); */
 }
 .comment input::placeholder{
-    color: rgb(46, 46, 46);
+    font-family: 'roboto';
+    font-weight: 700;
+    color: rgb(44, 44, 44);
     text-align: left;
 
 }
@@ -1076,17 +1117,143 @@ span:before,span:after{
     background-image: linear-gradient( to right ,rgb(30, 147, 151) , rgb(6, 53, 54) );
 
 }
+.comment input[type='image']{
+    height: 38px;
+    width: 38px;
+    background-color:rgb(26, 142, 146);
+    margin-bottom: -15px;
+    margin-left: -41px;
+    padding: 2px;
+}
+.chats-container{
+    display: flex;
+    /* border: solid 1px black; */
+    width: 60%;
+    margin:80 auto;
+    justify-content: space-around;
+}
+.recent-chats{
+    background-color: rgb(25, 28, 31);
+    /* background-image: linear-gradient(to bottom right,rgb(219, 219, 219), rgb(0,172,157)); */
+    height: 80vh;
+    width:25%;
+    border-radius: 20px;
+    text-align: left;
+    padding:20px
+    /* margin:auto 100;  */
+}
+.recent-chats h3{
+    /* border: solid 1px grey; */
+    text-align:center;
+    width: 100%;
+    font-family: 'lato';
+    font-size: 16px;
+    color: rgb(29, 29, 29);
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    background-color: rgb(0, 172, 157);
+}
+.chat-users-list{
+    /* margin:20 auto; */
+    display: flex;
+    /* margin-top: 10px; */
+    padding: 6 5;
+    /* border: solid 1px black; */
+    transition: 0.2s ease-in-out;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%;
+}
+.chat-users-list:hover{
+    background-color: rgb(0, 129, 119);
+    /* opacity: 50%; */
+    
+}
+
+.recent-chat-user-profile img{
+    height: 45px;
+    width:45px;
+    border-radius: 50%;
+}
+.recent-chat-user-name{
+    margin: auto 8;
+    font-family: 'lato';
+    font-size: 14px;
+    font-weight: 600;
+}
+.recent-chat-user-name a{
+    text-decoration: none;
+    color: rgb(192, 192, 192);
+}
 .message-container{
     display: flex;
     /* border: 1px solid black; */
-    width:50%;
+    width:70%;
     padding:10px;
     flex-direction: column;
     height:80vh;
-    background-color: rgb(235,235,235);
+    background-color: rgb(25, 28, 31);
+    /* background-image: linear-gradient(to bottom right,rgb(210, 226, 225), rgb(0,172,157)); */
     border-radius: 20px;
     justify-content: space-between;
-    margin: 80 auto;
+    color: rgb(202, 202, 202);
+    font-family: 'lato';
+    font-size: 15px;
+    /* margin: 80 auto; */
+}
+.messages-wrapper{
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    /* border: solid 1px white; */
+    padding: 10px;
+    
+}
+.messages-wrapper::-webkit-scrollbar{
+    width: 10px;
+}
+.show-sent-message{
+    /* border: solid 1px white; */
+    /* width:min-content; */
+    margin: 10px;
+    /* width: 30%; */
+    align-self: right;
+    
+}
+.show-received-message{
+    /* width:fit-content; */
+    align-self: left;
+    margin: 10px;
+}
+
+.show-sent-message h4{
+    margin-left:auto;
+    position: relative;
+    padding:10px;
+    width: fit-content;
+    min-width: 60px;
+    text-align: center;
+    border-radius: 20px;
+    /* border: solid 1px blue; */
+    background-color: rgb(122, 180, 174);
+    color: black;
+}
+.show-received-message h4{
+    margin-right:auto;
+    position: relative;
+    padding:10px;
+    width: fit-content;
+    min-width: 60px;
+    text-align: center;
+    border-radius: 20px;
+    /* border: solid 1px blue; */
+    background-color: turquoise;
+    color: black;
+}
+#sent-message , #recieved-message{
+    background-color: green;
+    width:auto;
+    padding: 10px;
 }
 #message-form{
     width: 100%;
@@ -1100,10 +1267,19 @@ span:before,span:after{
     min-width: auto;
     height:40px;
     border-radius: 20px;
-    border:solid 1px grey;
+    border:none;
     text-indent: 15px;
+    background-color: rgb(139, 222, 224);
     outline: none;
     margin: 0;
+}
+#message-form input::placeholder{
+    color:rgb(51, 51, 51);
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'lato';
+    text-align: left;
+    letter-spacing: 0px;
 }
 #message-form input[type="image"]{
     /* margin-top: 30px; */
@@ -1131,16 +1307,16 @@ span:before,span:after{
     text-align: center;
     margin: auto 10;
     font-family: 'lato';
-    
+    font-size: 17px;
+    font-weight: 700;
+    color: rgb(212, 212, 212);
 }
 .reciever-username a{
     text-decoration: none;
-    color: rgb(26, 26, 26);
+    color: rgb(212, 212, 212);
 }
 #reciever-img{
     height:45px;
     width:45px;
     border-radius: 50%;
 }
-
-

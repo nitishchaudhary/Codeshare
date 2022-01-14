@@ -26,7 +26,10 @@ SECRET_KEY = 'n&@t3_(te+%ct#timl#oingcijh(2k6wc2miy!#ns-acq2c)%-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '326e-2405-204-30af-a836-79ff-e0e3-b06b-2c5d.ngrok.io',
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -42,6 +45,8 @@ INSTALLED_APPS = [
     'Main.apps.MainConfig',
     'django.contrib.sites',
     'accounts.apps.AccountsConfig',
+    'chat',
+    'channels',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -77,6 +82,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Codeshare.wsgi.application'
+ASGI_APPLICATION = 'chat.asgi.application'
 
 
 # Database
@@ -157,3 +163,9 @@ SITE_ID = 4
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_DIRECT_URL = '/'
 LOGIN_URL = '/accounts/login'
+
+CHANNEL_LAYERS = {
+    'default':{
+        'BACKEND':'channels.layers.InMemoryChannelLayer',
+    }
+}   

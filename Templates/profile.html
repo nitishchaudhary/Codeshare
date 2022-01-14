@@ -16,7 +16,7 @@
     <br>
     {% if user0 != user %}
       <a href="{% url 'follow' user0.username %}"><button onclick="follow('user0.username')">Follow</button></a>
-      <a href="{% url 'message' user0.username%}"><button>Message</button></a>
+      <a href="{% url 'user-chat' user0.username %}"><button>Message</button></a>
     {% endif %}
   </div>
   <div class="user-posts">

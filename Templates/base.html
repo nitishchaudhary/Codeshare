@@ -12,8 +12,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script src="{% static 'script.js' %}"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    
+    
     {% block css %}<link rel="stylesheet" type="text/css" href="{% static 'style.css'%}" />{% endblock css %}
 </head>
 <body>
@@ -25,15 +25,18 @@
             <div class="search">
                 <form action="/search" method = 'GET'>
                     <!-- {% csrf_token %} -->
+                    <button type="submit" id="searchBtn">
+                        <i class="fa fa-search"></i>
+                      </button>
                     <input
                     type="search"
-                    placeholder="Enter text to search"
+                    placeholder="Search Codescape"
                     name="search"
                     id="search-box"
                   />
-                  <button type="submit" id="searchBtn">
+                  <!-- <button type="submit" id="searchBtn">
                     <i class="fa fa-search"></i>
-                  </button>
+                  </button> -->
                 </form>
             </div>
             <div class="user-profile" onclick="Menu()">
@@ -48,10 +51,10 @@
                     <a href="{% url 'user' user.username %}"  class='nav-link' onclick=closeMenu() >Profile </a>
                 </li>
                 <li class="nav-item">
-                    <a href='#' class='nav-link'  onclick=closeMenu()>Home</a>
+                    <a href="{% url 'chats' %}" class='nav-link'  onclick=closeMenu()>Chats</a>
                 </li>
                 <li class="nav-item">
-                    <a href='#' class='nav-link'  onclick=closeMenu()> Profile</a>
+                    <a href='#' class='nav-link'  onclick=closeMenu()>Settings</a>
                 </li>
                 <li class="nav-item">
                     <a href='/accounts/logout' class='nav-link'  onclick=closeMenu()><img src={% static 'logout-icon.png' %} id=logout-icon></a>
@@ -63,6 +66,8 @@
     {% endblock navbar %}
     {% block content %}
     {% endblock %}
+    {% block script %}<script src="{% static 'script.js' %}"></script>{% endblock script %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     
 </body>
 </html>

@@ -1,48 +1,89 @@
-{% extends 'base.html' %}
-{% load static %}
-     <script src="{% static 'script.js' %}"></script>
-     <title>{% block title %}Messaging{% endblock title %}</title>
+{% extends 'base.html' %} {% load static %}
+<title>{% block title %}Messaging{% endblock title %}</title>
 {% block content %}
-<div class="message-container">
-<div class="message-reciever-profile">
-          <div class="reciever-profile-img">
-               <a href="{% url 'user' user0.username %}"><img src="{{user0.profile.pic.url}}" id="reciever-img"></a>
-          </div>
-          <div class="reciever-username">
-               <a href="{% url 'user' user0.username %}"><b>{{user0.username}}</b></a>
-          </div>
-          
-     </div>
-     <div id="message-text" onclick="message()">
-          this is text
+<div class="chats-container">
+
+  {% if user.is_authenticated %}
+    <input type="hidden" id="logged-in-user" value="{{user.username}}">
+  {% endif %}   
+
+      <div class="recent-chats">
+          <h3>Recent Chats</h3>
+          {% for usr in user_list %}
+               <div class="chat-users-list">
+                    <div class="recent-chat-user-profile">
+                         <a href="{% url 'user-chat' usr.username %}"><img src="{{usr.profile.pic.url}}" alt=""></a>
+                    </div>
+                    <div class="recent-chat-user-name">
+                         <a href="{% url 'user-chat' usr.username %}">{{usr.first_name}}<br></a>
+                    </div>
+               </div>
+          {% endfor %}
      </div>
 
-     <form method="POST" id="message-form">
-          {% csrf_token %}
-          <img src="{{user.profile.pic.url}}" id="sender-img">
-          <input type="text" name="message" id="message" >
-          <input type="image" src="{% static 'send-icon.png' %}" alt="" />
-     </form>
-     <script>
-          $('#message-form').on('submit', function(e){
-               e.preventDefault();
-               $.ajax({ 
-                   type: "POST",   
-                   url: "{% url 'message' user0.username %}", 
-                   data: {
-                       message:$('#message').val(),
-                       csrfmiddlewaretoken:'{{csrf_token}}',
-                       dataType:"json",
-                       action:"post",
-                   },
-                   success: function(data) {
-                         $('#message-text').html(data);
-                   }
-                   });
-                   return false;
-               });
-           
-           
-     </script>
+     <div class="message-container">
+          <div class="message-reciever-profile">
+            {% if user0 %}
+              <div class="reciever-profile-img">
+                  <img src="{{user0.profile.pic.url}}" id="reciever-img">
+              </div>
+              <div class="reciever-username">
+                <input type="hidden" id="receiver-user" value="{{user0.username}}">
+                <a href="{% url 'user' user0.username %}"><b>{{user0.username}}</b></a>
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="messages-wrapper">
+            {% for chat in chats %}
+              {% for key,value in chat.items %}
+                {% if key == 'recieved' %}  
+                  <div class="show-received-message">
+                    <h4>{{value}}</h4>
+                  </div>
+                {% else %}
+                  <div class="show-sent-message">
+                    <h4>{{value}}</h4>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% empty %}
+              <h3></h3>
+            {% endfor %}
+          </div>
+
+          <form method="POST" id="message-form">
+            {% csrf_token %}
+            <img src="{{user.profile.pic.url}}" id="sender-img" />
+            <input type="text" name="message" id="message" placeholder="Type you message here"/>
+            <input type="image" src="{% static 'send-icon.png' %}" alt="" />
+          </form>
+
+          <!-- {% if user0 %}
+            <script>
+              $("#message-form").on("submit", function (e) {
+                e.preventDefault();
+                $.ajax({
+                  type: "POST",
+                  url: "{% url 'message' user0.username %}",
+                  data: {
+                    message: $("#message").val(),
+                    csrfmiddlewaretoken: "{{csrf_token}}",
+                    dataType: "json",
+                    action: "post",
+                  },
+                  success: function (data) {
+                    $("#message-text").html(data);
+                    $("#message").val("");
+                  },
+                });
+                return false;
+              });
+            </script>
+          {% endif %} -->
+   
+     </div>
+        
 </div>
 {% endblock content%}
+{% block script %}<script src="{% static 'messages.js' %}"></script>{% endblock script %}

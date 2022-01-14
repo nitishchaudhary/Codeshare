@@ -13,7 +13,7 @@
                         {{i.profile.about}}<br>
                     </div>  
                     <div class="ping">
-                        <a href="{% url 'message' i.username %}"><button><p>Message</p> <img src="{% static 'chaticon.png'%}"></button>
+                        <a href="{% url 'user-chat' i.username %}"><button><p>Message</p> <img src="{% static 'chaticon.png'%}"></button>
                     </div>
                 </div>
             {% endfor %}
