@@ -46,14 +46,19 @@
           </div>
           <div class="recent-post-usr-follow">
               <a href="{% url 'user-chat' i.user_name %}"><button>Message</button></a>
-            <div class="hamburger">
+            <div class="hamburger" onclick="hamburger('{{i.id}}')">
               <div class="bar1"></div>
               <div class="bar2"></div>
               <div class="bar3"></div>  
             </div>
-            <div class="post-options">
-              <div class="delete">
-                Delete post
+            <div class="post-options" id='options{{i.id}}'>
+              {% if user == i.user_name %}
+                <div class="option">
+                  <a href="{% url 'delete' i.id %}">Delete post</a>
+                </div>
+              {% endif %}
+              <div class="option">
+                <a href="{% url 'follow' i.user_name %}">Unfollow</a>
               </div>
             </div>
           </div>
@@ -83,7 +88,7 @@
           
       </div>
       <div class="show-comment" id="post-comment{{i.id}}">
-        <div class="comments">
+        <div class="comments{{i.id}}">
           {% if i.details.all %}
             {% for detail in i.details.all %}  
             <div class="comment-user-details">
@@ -93,44 +98,64 @@
               <div class="comment-username">
                 {{detail.username}}
               </div>
+              <div class="comment-time">
+                {{detail.comment_date}}
+              </div>
             </div>
             <div class="comment-details">
               {{detail.comment}}<br>
             </div>
             {% endfor %}
           {% else %}
-              No comments
+              
           {% endif %}         
         </div> 
 
-        <form method="POST" id="comment-post">
+        <form method="POST" id="comment-post{{i.id}}">
           {% csrf_token %}
           <div class="post-comment">
             <!-- <img src="{{user.profile.pic.url}}" alt="/> -->
             <img src="{{user.profile.pic.url}}">
-            <input type="text" name="comment" id="comment" placeholder="Leave your comment here ...">
-            <input type="image" src="{% static 'comment-post.png' %}">
+            <input type="text" name="comment" id="comment{{i.id}}" placeholder="Leave your comment here ...">
+            <input type="image" src="{% static 'comment-post.png' %}" id="submit-button">
           </div>
         </form>
-        <!-- <script>
-        $("#comment-post").on("submit", function (e) {
-          e.preventDefault();
-          $.ajax({
-            type: "POST",
-            url: "post-comment/id:23",
-            data: {
-              message: $("#comment").val(),
-              csrfmiddlewaretoken: "{{csrf_token}}",
-              dataType:"json",
-            },
-            success: function (data) {
-              console.log('done');
-            },
+        <script>
+          $("#comment-post{{i.id}}").on("submit", function (e) {
+            e.preventDefault();
+            let form = $("#comment-post{{i.id}}");
+            let comment = $("#comment{{i.id}}").val();
+            $.ajax({
+              type: "POST",
+              url: "{% url 'comment' i.id %}",
+              data: form.serialize(),
+              success: function (data) {
+                comment_element = `
+                  <div class="comment-user-details">
+                    <div class="comment-user-profile">
+                      <img src="{{user.profile.pic.url}}">
+                    </div>
+                    <div class="comment-username">
+                      {{user.username}}
+                    </div>
+                    <div class="comment-time">
+                      Now
+                    </div>
+                  </div>
+                  <div class="comment-details">
+                    ${comment}<br>
+                  </div>                  
+                `
+                
+                $('.comments{{i.id}}').append(comment_element);
+                form[0].reset();
+               
+              },
+            });
+            return false;
           });
-          return false;
-        });
+        </script>
 
-      </script> -->
       </div>
       </div>
     {% endfor %}

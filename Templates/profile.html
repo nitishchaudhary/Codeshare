@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-<script src="{% static 'script.js' %}"></script>
     <title>{% block title %}Profile{% endblock title %}</title>
+    {% block style %}<link href="{% static 'style.css' %}">{% endblock style %}
 {% block content %}  
 <div class="main-container-profile">
   <div class="profile-container">
@@ -34,19 +34,24 @@
             </div>
             <div class="recent-post-usr-follow">
                 <a href="{% url 'user-chat' i.user_name %}"><button>Message</button></a>
-              <div class="hamburger">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>  
-              </div>
-              <div class="post-options">
-                <div class="delete">
-                  Delete post
+                <div class="hamburger" onclick="hamburger('{{i.id}}')">
+                  <div class="bar1"></div>
+                  <div class="bar2"></div>
+                  <div class="bar3"></div>  
+                </div>
+                <div class="post-options" id='options{{i.id}}'>
+                  {% if user == i.user_name %}
+                    <div class="option">
+                      <a href="{% url 'delete' i.id %}">Delete post</a>
+                    </div>
+                  {% endif %}
+                  <div class="option">
+                    <a href="{% url 'follow' i.user_name %}">Unfollow</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="recent-post-content">
+              <div class="recent-post-content">
             {% if i.img %}  
               <img src="{{i.img.url}}" alt="" id="post-image"><br>
             {% endif %}
@@ -68,46 +73,76 @@
             <div class="recent-post-comments">
               <img src="{% static 'comment-icon.png' %}" alt="" onclick="opencomments('{{i.id}}')">
             </div>    
-            
         </div>
-        <div class="post-comment" id="post-comment{{i.id}}">
+        <div class="show-comment" id="post-comment{{i.id}}">
+          <div class="comments{{i.id}}">
             {% if i.details.all %}
               {% for detail in i.details.all %}  
+              <div class="comment-user-details">
+                <div class="comment-user-profile">
+                  <img src="{{detail.username.profile.pic.url}}">
+                </div>
+                <div class="comment-username">
+                  {{detail.username}}
+                </div>
+                <div class="comment-time">
+                  {{detail.comment_date}}
+                </div>
+              </div>
+              <div class="comment-details">
                 {{detail.comment}}<br>
+              </div>
               {% endfor %}
             {% else %}
-                No comments
-            {% endif %}
-  
-          <form method="POST" id="comment-post">
+                
+            {% endif %}         
+          </div> 
+          
+          <form method="POST" id="comment-post{{i.id}}">
             {% csrf_token %}
-            <div class="comment">
+            <div class="post-comment">
               <!-- <img src="{{user.profile.pic.url}}" alt="/> -->
               <img src="{{user.profile.pic.url}}">
-              <input type="text" name="comment" id="comment" placeholder="Leave your comment here ...">
-              <input type="image" src="{% static 'comment-post.png' %}">
+              <input type="text" name="comment" id="comment{{i.id}}" placeholder="Leave your comment here ...">
+              <input type="image" src="{% static 'comment-post.png' %}" id="submit-button">
             </div>
-          </form>
-          <!-- <script>
-          $("#comment-post").on("submit", function (e) {
-            e.preventDefault();
-            $.ajax({
-              type: "POST",
-              url: "post-comment/id:23",
-              data: {
-                message: $("#comment").val(),
-                csrfmiddlewaretoken: "{{csrf_token}}",
-                dataType:"json",
-              },
-              success: function (data) {
-                console.log('done');
-              },
+          </form>          
+          <script>
+            $("#comment-post{{i.id}}").on("submit", function (e) {
+              e.preventDefault();
+              let form = $("#comment-post{{i.id}}");
+              let comment = $("#comment{{i.id}}").val();
+              $.ajax({
+                type: "POST",
+                url: "{% url 'comment' i.id %}",
+                data: form.serialize(),
+                success: function (data) {
+                  comment_element = `
+                    <div class="comment-user-details">
+                      <div class="comment-user-profile">
+                        <img src="{{user.profile.pic.url}}">
+                      </div>
+                      <div class="comment-username">
+                        {{user.username}}
+                      </div>
+                      <div class="comment-time">
+                        Now
+                      </div>
+                    </div>
+                    <div class="comment-details">
+                      ${comment}<br>
+                    </div>                  
+                  `
+                  
+                  $('.comments{{i.id}}').append(comment_element);
+                  form[0].reset();
+                 
+                },
+              });
+              return false;
             });
-            return false;
-          });
-  
-        </script> -->
-        </div>
+          </script>
+          </div>
         </div>
       {% endfor %}
       </div>
@@ -116,6 +151,7 @@
 </div>
   
 {% endblock content %}
+{% block script %}<script src="{% static 'script.js' %}"></script>{% endblock script %}
 
 
 

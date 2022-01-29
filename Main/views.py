@@ -19,7 +19,7 @@ def home(request):
         for x in user_following:
             users.append(x.following_user_id) 
         dc ={}
-        post = Post.objects.filter(user_name__in = users).order_by('-date_posted')
+        post = Post.objects.filter(Q(user_name__in = users) | Q(user_name=user)).order_by('-date_posted')
         # post = Post.objects.all().order_by('-date_posted')
         for x in post:
             try:
@@ -114,6 +114,17 @@ def like(request,pk):
     }
     response = json.dumps(res)
     return HttpResponse(response,content_type="application/json")
+
+def delete(request,pk):
+    id = request.user.id
+    user = User.objects.get(id=id)
+    post = Post.objects.get(pk=pk)
+    if(post.user_name == user):
+        post.delete()
+        return redirect('/')
+    else:
+        return HttpResponse("Invalid url")
+
 
 def follow_user(request,username):
     id = request.user.id

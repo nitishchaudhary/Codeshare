@@ -4,6 +4,7 @@ const opencomments = (id) =>{
     comments.classList.toggle("open");
 }
 
+
 const like =(id) => {
     $.ajax(
         {
@@ -26,8 +27,10 @@ const like =(id) => {
         }
     );
 }
-const hightlight = () =>{
-    console.log("success")
+
+const hamburger=(id)=>{
+    let options = document.getElementById('options'+id);
+    options.classList.toggle("visible");
 }
 
 

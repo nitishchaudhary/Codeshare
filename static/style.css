@@ -1102,13 +1102,45 @@ span:before,span:after{
 .post-options{
     /* border: 1px solid black; */
     position: absolute;
-    margin-top: 40px;
-    margin-left: 50px;
+    margin-top: 60px;
+    /* margin-left: 0px; */
     /* padding: 5px; */
     display: none;
-    background: grey;
+    border-radius: 10px;
+    background-color: rgb(32,32,32);
+    border: solid 1px rgb(73, 73, 73);
+    height: 200px;
+    width: 130px;
+    color:thistle;
+    padding: 5 10;
+    text-align: center;
+    flex-direction: column;
+    z-index: 1;
+    opacity: 90%;
     
 }
+.option{
+    border-bottom:solid 1px rgb(65,65,65);
+    width: 100%;
+    font-family: 'segoe UI';
+    margin-top: 5px;
+    padding: 10 0;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+.option a{
+    text-decoration: none;
+    color:rgb(205, 221, 236);
+}
+.option:hover{
+    background: rgb(41, 42, 44);
+    border-radius: 10px;
+    
+}
+.post-options.visible{
+    display: flex;
+}
+
 .recent-post-content{
     background-color: rgb(32,32,32);
     width: 100%;
@@ -1159,7 +1191,7 @@ span:before,span:after{
 .recent-post-reactions img{
     height: 23px;
     width: 23px;
-    opacity: 70%;
+    opacity: 80%;
     cursor: pointer;
     
     /* margin: 5px; */
@@ -1199,6 +1231,13 @@ span:before,span:after{
     color: rgb(218, 218, 218);
     font-family: 'lato';
     font-size: 13px;
+    font-weight: 700;
+}
+.comment-time{
+    color: rgb(199, 199, 199);
+    font-size: 12px;
+    font-family: 'lato';
+    margin: 5;
 }
 .comment-details{
     /* border: solid white 1px; */
@@ -1227,14 +1266,16 @@ span:before,span:after{
     border: none;
     outline:none;
     text-indent: 15px;
-    color: rgb(17, 17, 17);
+    color: rgb(31, 31, 31);
     background-color: rgb(158, 222, 226);
+    font-family: 'segoe UI';
+    font-weight: 600;
     /* border: solid 1px rgb(156, 156, 156); */
 }
 .post-comment input::placeholder{
-    font-family: 'roboto';
+    font-family: 'segoe UI';
     font-weight: 700;
-    color: rgb(44, 44, 44);
+    color: rgb(35,35,35);
     text-align: left;
 
 }

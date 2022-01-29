@@ -11,7 +11,7 @@ def user_profile(request, username):
     user = User.objects.get(id=id)
     user0 = User.objects.get(username = username)
 
-    posts = Post.objects.filter(user_name=user0)
+    posts = Post.objects.filter(user_name=user0).order_by('-date_posted')
     dc ={}
     for x in posts:
         try:
