@@ -87,11 +87,11 @@ input[type="search"]{
     font-size: 17px;
     padding:10px;
     transition: 0.2s;   
-    cursor: pointer;
+    
 }
-#searchBtn:hover{
+/* #searchBtn:hover{
     background-color: rgb(1, 55, 70);
-}
+} */
 .user-profile{
     display: flex;
     /* border: solid 1px rgb(107, 107, 107); */
@@ -619,7 +619,9 @@ span:before,span:after{
 
 }
 .left-bar{
-    /* display: none; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border: none;
     width: 20%;
     text-align: center;
@@ -632,36 +634,63 @@ span:before,span:after{
     overflow: hidden;
 }
 .left-bar-nav{
-    margin: 0 auto;
-    margin-top: 50%;
+    /* margin: 0 auto; */
+
+    margin-top: 10%;
     /* border: solid 1px black; */
     height:auto;
     font-family: "lato";
-    text-align: center;
-    width: 70%;
+    text-align: left;
+    width: 100%;
     color: rgb(15, 15, 15);
 }
 .left-bar-nav h3{
-    padding: 10px;
-    margin: 10px;
+    padding: 10 15;
+    margin: 10 0;
     transition: 0.2s ease-in-out;
-    border-radius: 20px;
+    /* border-radius: 20px; */
     letter-spacing: 1px;
-    width: 80%;
+    width: 100%;
 }
 .left-bar-nav  a{
     text-decoration:none;
     color: #aaaaaa;
+    font-size: 14px;
+    
+}
+/* .left-bar-nav a.active{
+    background-color: rgb(32, 33, 37);
+    color: white;
+} */
+.active {
+    background-color: rgb(32, 33, 37);
+    color: white;
 }
 .left-bar-nav h3:hover{
-    background-color:rgb(13, 114, 117);
+    background-color: rgb(32, 33, 37);
     color: white;
-    box-shadow: 8px 4px 4px rgb(12, 98, 109);
+    /* box-shadow: 8px 4px 4px rgb(12, 98, 109); */
 }
 .left-bar-nav h3 img{
     height: 20px;
     width: 20px;
     margin-right: 8px;
+}
+.left-bar-user-profile{
+    /* text-align: left; */
+    border: 1px solid rgb(54, 54, 54);
+    color: rgb(197, 197, 197);
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: 'lato';
+    font-size: 11px;
+    font-weight: 100;
+}
+.left-bar-user-profile img{
+    height: 50px;
+    width: 50px;
+    border-radius: 59%;
 }
 .right-bar{
     /* display: none; */
@@ -685,7 +714,45 @@ span:before,span:after{
     height: auto;
     font-family: 'lato';
     width: 80%;
-    
+}
+.content{
+    margin-top: 10px;
+    border-top: solid 1px rgb(67, 73, 78);
+    padding: 15 0;
+}
+.to-follow img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.to-follow{
+    /* border: solid 1px rgb(70, 70, 70); */
+    border:none;
+    border-radius: 10px;
+    background: rgb(40, 46, 49);
+    display: flex;
+    text-align: left;
+    padding: 5px;
+    margin: 10 0;
+}
+.to-follow-username{
+    margin: 5 10;
+    font-family: 'lato';
+    font-size: 15px;
+}
+.to-follow-username a{
+    text-decoration: none;
+    color: rgb(194, 211, 223);
+}
+.to-follow-icon{
+    /* border:solid 1px black; */
+    text-align: right;
+    width: 100%;
+}
+.to-follow-icon img{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
 }
 .main-container{
     display: flex ;
@@ -700,6 +767,7 @@ span:before,span:after{
     /* margin-top: 60px; */
     padding: 15px;
     padding-top: 10px;
+    /* padding-bottom: 100px; */
     overflow-y: scroll;
     scroll-behavior: smooth;
     
@@ -719,6 +787,7 @@ span:before,span:after{
 .explore-container{
     background-color: rgb(25, 28, 31);
     border-radius: 15px;
+    padding-bottom: 100px;
 }
 .navbar h2{
     color: whitesmoke;
@@ -736,26 +805,50 @@ span:before,span:after{
 }
 .user-posts{
     /* border: solid black 1px; */
+    display: flex ;
+    /* position: relative; */
+    flex-direction: column;
+    margin: 0 auto;
+    /* border: 1px solid grey; */
+    color: black;
+    text-align: center;
     width: 60%;
-    background-color: rgb(32,32,32);
+    height: 90vh;
+    /* margin-top: 60px; */
+    padding-bottom: 50px;
+    /* padding-top: 10px; */
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    width:65%;
+    background-color: rgb(25, 28, 31);
     text-align: center;
     border-radius: 20px;
     color: rgb(209, 209, 209);
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
+.user-posts::-webkit-scrollbar{
+    width: 10px;
+}
+
 .profile-container{
     /* margin: 0 auto; */
     text-align: center;
     /* border: 1px solid blue; */
-    background-color: rgb(32,32,32);
-    width: 35%;
+    background-color: rgb(25, 28, 31);
+    width: 30%;
     /* margin-top: 10%; */
     padding: 20px;
+    height:fit-content;
     border-radius: 20px;
+    color:whitesmoke;
     font-family: 'Lato', sans-serif;   
 }
 .profile-container h2{
+    margin: 5;
     font-weight: 700;
     font-size: 18px;
+    
 }
 .profile-container button{
     height: 40px;
@@ -767,9 +860,10 @@ span:before,span:after{
     color:rgb(14, 99, 99);
     transition: 0.2s ease-in-out;
     font-family: 'lato',sans-serif;
+    background: transparent;
 }
 .profile-container button:hover{
-    background-color: rgb(212, 212, 212);
+    background-color: rgb(29, 29, 29);
     /* border: none; */
     
 }
@@ -779,27 +873,37 @@ span:before,span:after{
 
 .search-results-container{
     margin: 0 auto;
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
+    border: none;
     width: 90%;
+    color: grey;
+    font-family: 'lato';
+    font-weight: 400;
     margin-top: 10%;
     padding: 15px;
+    border-radius: 15px;
+    background-color: rgb(28, 30, 34);
 }
 .users-found{
     display: flex;
     /* border: 1px solid black; */
-    padding: 4px;
-    border-bottom: 1px solid grey;
+    padding: 10px;
+    border-bottom: 1px solid rgb(70, 70, 70);
     
 }
 .search-results-container img{
-    width: 60px; 
-    height:60px; 
+    width: 50px; 
+    height:50px; 
     border-radius:50%;
 }
 .user-details{
     margin-top:5px;
     padding: 7px;
     /* border: solid 1px; */
+}
+.user-details i{
+    font-size: 12px;
+    font-style: normal;
 }
 .users-found a{
     text-decoration: none;
@@ -813,6 +917,7 @@ span:before,span:after{
 .ping button{
     /* background-color:rgb(123, 206, 206);    */
     border: 1px solid rgb(53, 53, 53);
+    background: transparent;
     border-radius: 5px;
     font-size: 17px;
     transition: 0.2s;   
@@ -821,11 +926,13 @@ span:before,span:after{
     padding: 2px;
     letter-spacing: 1px;
     font-size: 14px;
-    font-family: "poppins";
-    font-weight: 600;
+    font-family: "roboto";
+    font-weight: 100;
+    color: rgb(189, 189, 189);
 }
 .ping button:hover{
     background-color: rgb(1, 55, 70);
+    border: none;
     color: white;
     
 }
@@ -842,6 +949,7 @@ span:before,span:after{
     width: 80%;
     margin: 0 auto;
     margin-top:30px;
+
     background-color: rgb(40, 43, 46);
 }
 .share-post{
@@ -865,7 +973,7 @@ span:before,span:after{
     text-indent: 15px;
     font-family: 'lato';
     font-size: 15px;
-    color: rgb(49, 49, 49);
+    color:rgb(216, 216, 216);
     background-color: rgb(44, 57, 61);
     opacity: 50%;    
 }
@@ -1057,7 +1165,7 @@ span:before,span:after{
     /* margin: 5px; */
     /* margin-left: 10px; */
 }
-.post-comment{
+.show-comment{
     display:none;
     /* display: flex; */
     flex-direction: column;
@@ -1069,17 +1177,50 @@ span:before,span:after{
     /* border: solid 1px black; */
     border-top: solid 1px rgb(65, 65, 65);
 }
-.post-comment.open{
+.show-comment.open{
     display: flex;
     transition: 1s ease-in-out;
 }
-.comment img{
+.comments{
+    width: 98%;
+    margin:0 auto;
+}
+.comment-user-details{
+    text-align: left;
+    display: flex;
+}
+.comment-user-profile img{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+}
+.comment-username{
+    margin:5;
+    color: rgb(218, 218, 218);
+    font-family: 'lato';
+    font-size: 13px;
+}
+.comment-details{
+    /* border: solid white 1px; */
+    border-radius: 10px;
+    background-color: rgb(55, 57, 58);
+    padding:10px;
+    width: 90%;
+    margin:0 auto;
+    margin-bottom: 10px;
+    color: rgb(230, 230, 230);
+    text-align: left;
+    text-indent: 10px;
+    font-family: 'segoe ui';
+    font-size: 14px;
+}
+.post-comment img{
     height: 35px;
     width:35px;
     border-radius: 50%;
     margin-bottom: -14px;
 }
-.comment input{
+.post-comment input{
     width: 90%;
     height: 35px;
     border-radius: 20px;
@@ -1090,14 +1231,14 @@ span:before,span:after{
     background-color: rgb(158, 222, 226);
     /* border: solid 1px rgb(156, 156, 156); */
 }
-.comment input::placeholder{
+.post-comment input::placeholder{
     font-family: 'roboto';
     font-weight: 700;
     color: rgb(44, 44, 44);
     text-align: left;
 
 }
-.comment button{
+.post-comment button{
     width: 80px;
     height: 35px;
     border-radius: 20px;
@@ -1112,12 +1253,12 @@ span:before,span:after{
     transition: 0.5s ease-in-out;
     color:rgb(6, 44, 63);
 }
-.comment button:hover{
+.post-comment button:hover{
     background-color:black;
     background-image: linear-gradient( to right ,rgb(30, 147, 151) , rgb(6, 53, 54) );
 
 }
-.comment input[type='image']{
+.post-comment input[type='image']{
     height: 38px;
     width: 38px;
     background-color:rgb(26, 142, 146);

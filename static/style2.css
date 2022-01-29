@@ -1,6 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Roboto:wght@500;700&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -8,8 +10,8 @@
     scroll-behavior: auto;   
 } 
 body{
-    /* overflow: hidden; */
-    background-color: whitesmoke;
+    overflow: hidden;
+    background-color: rgb(20, 20, 20);
 }
 
 .first-container{
@@ -52,34 +54,37 @@ body{
     margin-top: 5px;
 }
 #search-box{
-    font-family: "Poppins";
-    font-size: 14px;
-    font-weight: 900;
+    font-family: "roboto";
+    font-size: 15px;
+    font-weight: 500;
     letter-spacing: 1px;
-    color: rgb(0, 0, 0);
+    color: rgb(30, 30, 30);
     background-color: rgb(184, 214, 224);
+    /* opacity: 80%; */
     width: 400px;
     height: 100%;
     border: none;
     outline: none;
     border-radius: 20px;
+    text-indent: 40px;
 }
 input[type="search"]::placeholder{
-    text-align: center;
-    color: rgb(56, 59, 59);
-    font-size: 13px;
-    font-weight: 900;
+    text-align: left;
+    color: rgb(65, 65, 65);
+    font-size: 14px;
+    font-weight: 500;
     opacity:80%;
 }
 input[type="search"]{
-    text-align:center;
+    text-align:left;
 }
 #searchBtn{
-    background-color:rgb(123, 206, 206);
+    background-color: rgb(184, 214, 224);    
+    /* opacity: 80%; */
     position: absolute;
-    margin-left:-35px;
+    /* margin-left:-35px; */
     border: 1px;
-    border-radius: 20px;
+    border-radius: 50%;
     font-size: 17px;
     padding:10px;
     transition: 0.2s;   
@@ -90,12 +95,12 @@ input[type="search"]{
 }
 .user-profile{
     display: flex;
-    border: solid 1px rgb(107, 107, 107);
+    /* border: solid 1px rgb(107, 107, 107); */
     margin-right: 20px;
     width: auto;
     justify-content:space-around;
     color: whitesmoke;
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 4px;
     padding-left: 8px;
     padding-right: 8px;
@@ -106,7 +111,7 @@ input[type="search"]{
     transition: 0.2s ease;
 }
 .user-profile:hover{
-    background-color: rgb(31, 31, 31);
+    background-color: rgb(8, 94, 99);
     border-color: black;
 }
 .profile{
@@ -132,6 +137,11 @@ input[type="search"]{
     font-size: 14px;
     letter-spacing: 1px;
     padding-left: 10px;
+}
+#down-arrow {
+    height: 15px;
+    width: 15px;
+    margin:auto 10;
 }
 
 ul{
@@ -180,6 +190,9 @@ li a:hover{
     font-weight:bolder;
     font-size: 13px;
     letter-spacing: 2px;
+    margin: 0 auto;
+    /* margin-top: 7px;
+    margin-left: 4px; */
     margin: auto;
 }
 #logout-icon{
@@ -223,20 +236,34 @@ li a:hover{
     top: 75px;
 }
 
+
+#logoutBtn:hover{
+    background-color:rgb(1, 55, 70);
+    color:rgb(240, 255, 255);
+    font-weight: 500;
+    transition:ease-out 0.2s;
+}
+
+
 .edit-profile{
-    border: 1px solid rgb(201, 201, 201);
+    border: 1px solid rgb(27, 27, 27);
+    /* border: none; */
     margin: 0 auto;
     text-align: center;
     margin-top: 150px;
     transform: translate(0,-20%);
     padding: 30px;
-    max-width: 70%;
-    background-color: rgb(244, 244, 244); 
+    color:whitesmoke;
+    max-width: 50%;
+    background-color: rgb(18, 20, 22);
     border-radius: 10px;
+    font-family: 'lato';
+    font-size: 15px;
+    font-weight: 400;
 }
 .edit-profile label{
     letter-spacing: 1px;    
-    color: rgb(46, 46, 46);
+    color: rgb(199, 199, 199);
 }
 .username{
     padding: 5px;
@@ -244,36 +271,43 @@ li a:hover{
 .username input{
     margin: 0 auto;
     margin-top: 10px;
-    background-color: rgb(248, 248, 248);
-    border: 1px solid rgb(194, 194, 194);
-    border-radius: 2px;
-    height: 28px;
+    /* background-color: rgb(41, 41, 41); */
+    border: solid 1px rgb(75, 75, 75);
+    background: transparent;
+    border-radius: 10px;
+    height: 35px;
+    text-indent: 5px;
     padding:10px;
-    width: 200px;
-    color: rgb(87, 87, 87);
+    width: 300px;
+    color: rgb(100,100,100);
     letter-spacing: 1px;
     font-size: 13px;
     line-height: 1.5;
     display: block;
+    font-family: 'roboto';
 }
 .about{
     padding: 5px;
 }
 .about textarea{
+    font-family: 'roboto';
     margin-top: 10px;
-    background: rgb(248,248,248);
-    border-radius: 2px;
-    border: 1px solid rgb(200,200,200);
+    /* background-color: rgb(41, 41, 41); */
+    border-radius: 10px;
+    background:transparent ;
+    border: solid 1px rgb(75, 75, 75);
     padding: 5px;
-    width: 200px;
+    width: 300px;
     font-size: 13px;
-    color: rgb(87, 87, 87);
+    /* text-indent: 5px; */
+    color: rgb(100,100,100);
     margin-bottom: 10px;
 }
 .profile-image img{
     width: 50px;
     height: 50px;
     margin-top: 10px;
+    margin-bottom: 10px;
     border-radius: 50%;
 }
 .profile-image input{
@@ -282,22 +316,42 @@ li a:hover{
     letter-spacing: 1px;
     margin-top: 6px;
 }
+.profile-image input[type='file']{
+    display: none;
+}
+.custom-file-upload{
+    /* border: solid 1px rgb(48, 48, 48); */
+    border: none;
+    background-color: rgb(18, 109, 100);
+    /* margin:10px; */
+    cursor: pointer;
+    font-size: 13px;
+    padding:3 20;
+    border-radius: 5px;
+    color: rgb(41, 41, 41);
+    transition: 0.2s ease-in-out;
+}
+.custom-file-upload:hover{
+    background-color: rgb(13, 92, 84);
+}
 .submit button{
+    color: rgb(14, 99, 99);
     width: 200px;
     height: 35px;
     padding: 5px;
-    margin-top: 10px;
+    margin-top: 20px;
     letter-spacing: 1px;
-    border: solid 1px grey;
-    border-radius: 5px;
+    border: solid 1px rgb(14, 99, 99);
+    border-radius: 20px;
     cursor: pointer;
-    background-color: rgb(248,248,248);
+    background-color:transparent;
     transition: 0.2s ease;
-    font-weight: 600;
+    font-weight: 400;
     font-family: 'lato',sans-serif;
     font-size: 15px;
 }
 .submit button:hover{
-    background-color:rgb(123, 206, 206);
-    border-color: rgb(123, 206, 206);
+    background-color: rgb(18, 109, 100);
+    border-color: rgb(18, 109, 100);
+    color: rgb(204, 204, 204);
 }

@@ -1,5 +1,4 @@
 
-
 const opencomments = (id) =>{
     const comments = document.querySelector("#post-comment"+id);
     comments.classList.toggle("open");
@@ -9,13 +8,13 @@ const like =(id) => {
     $.ajax(
         {
             type:"GET",
-            url:"like-post/id:"+id,
+            url:"/like-post/id:"+id,
             success:function(data){
                 let likescount = document.getElementById("likes-count"+id);
                 let icon = document.getElementById("like-dislike"+id);
                 if(data.liked == true){
                     likescount.innerText = Number(likescount.innerText)+1;
-                    icon.src ="/static/dislike-icon.png";
+                    icon.src ="/static/liked-icon.png";
                     console.log("liked");
                 }
                 else{
@@ -26,6 +25,9 @@ const like =(id) => {
             }
         }
     );
+}
+const hightlight = () =>{
+    console.log("success")
 }
 
 

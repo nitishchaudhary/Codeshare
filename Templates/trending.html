@@ -1,27 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
-<script src="{% static 'script.js' %}"></script>
-    <title>{% block title %}Profile{% endblock title %}</title>
-{% block content %}  
-<div class="main-container-profile">
-  <div class="profile-container">
-    <img src="{{user0.profile.pic.url}}" alt="" style="width: 100px;height:100px; border-radius:50%">
-    <h2>{{user0.username}}</h2>
-    <h5>{{user0.profile.about}}</h5><br>
-    {%if user0.username == user.username %}
-      <a href="edit-profile"><button>Edit profile</button></a><br><br>
-    {% endif %}
-    {{user0.followers.count}} Followers
-    {{user0.following.count}} Following
-    <br>
-    <br>
-    {% if user0 != user %}
-      <a href="{% url 'follow' user0.username %}"><button onclick="follow('user0.username')">Follow</button></a>
-      <a href="{% url 'user-chat' user0.username %}"><button>Message</button></a>
-    {% endif %}
-  </div>
-  <div class="user-posts">
-    <div class="explore-container">
+<title>{% block title %}Trending{% endblock title%}</title>
+{% block content %}
+<div class="container">
+    <div class="left-bar">
+      <div class="left-bar-nav">
+        <a href="/"><h3><img src="{% static 'home-icon.png' %}">Explore</h3></a>
+        <a href="{% url 'trending' %}"><h3 class='active'><img src="{% static 'trending-icon.png' %}">Trending</h3></a>        
+        <a href="/"><h3><img src="{% static 'home-icon.png' %}">Projects</h3></a>
+      </div>
+      <div class="left-bar-user-profile">
+        <img src="{{user.profile.pic.url}}" alt="" srcset="">
+        <h3>{{user.username}}</h3>
+      </div>
+    </div>
+    <div class="main-container">
+      <div class="share-post">
+        <form action="{% url 'post' %}" method = "post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <!-- <label for="share-heading">Whats on your mind</label><br> -->
+          <br>
+          <input type="text" name="des" id="post" placeholder="Whats on your mind ...">
+          <img src="{% static 'image-icon.png' %}" alt="" onclick="selectImage()">
+          <button type="submit">Post</button><br><br>
+          <input type="file" alt="" name="post_image" class = "selectimage">
+        </form>
+      </div>
+  
+      <!-- <h1>Recent posts </h1> -->
+      
+      <br>
+      <div class="explore-container">
       {% for i,value in posts.items %}
         <div class="recent-posts">
           <div class="recent-post-usr">
@@ -111,11 +120,28 @@
         </div>
       {% endfor %}
       </div>
-    </div>    
-  </div>
-</div>
+    </div>
+    <div class="right-bar">
+      <div class="right-bar-chats">
+        <h3>You May Know</h3>
+        <div class="content">
+          {% for users in user_to_follow %}
+            <div class="to-follow">
+              <div class="to-follow-pic">
+                <a href="{% url 'user' users.username %}"><img src="{{users.profile.pic.url}}" alt="" srcset=""></a>
+              </div>
+              <div class="to-follow-username">
+                <a href="{% url 'user' users.username %}">{{users.username}}</a>
+              </div>
+              <div class="to-follow-icon">
+                <a href = "{% url 'follow' users.username %}"><img src="{% static 'follow-user.png' %}" alt="" srcset="">
+              </div>
+              
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>  
+  </div>  
   
 {% endblock content %}
-
-
-

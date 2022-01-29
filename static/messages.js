@@ -1,4 +1,3 @@
-
 const user_name = document.getElementById("logged-in-user").value;
 const other_user_name = document.querySelector('#receiver-user').value;
 
@@ -50,7 +49,7 @@ socket.onmessage = async function(e){
             </div>            
         `
     }
-    else{
+    else{       
         message_element = `
             <div class="show-received-message">
                 <h4>${message}</h4>
@@ -69,5 +68,6 @@ socket.onerror = async function(e){
 socket.onclose = async function(e){
     console.log('close',e)
 }
+
 
 

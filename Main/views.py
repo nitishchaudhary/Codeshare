@@ -1,3 +1,4 @@
+from ast import Or
 from datetime import date
 from typing import Type
 from django import http
@@ -7,17 +8,56 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from .models import Profile , Post , Comment , Like , UserFollowing,Message
 import json
-from django.db.models import Q
+from django.db.models import Q,Count
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
-        post = Post.objects.all().order_by('-date_posted')
-        return render(request, 'explore.html',{'post':post})
+        id = request.user.id
+        user = User.objects.get(id=id)
+        user_following = UserFollowing.objects.filter(user_id=user)
+        users =[]
+        for x in user_following:
+            users.append(x.following_user_id) 
+        dc ={}
+        post = Post.objects.filter(user_name__in = users).order_by('-date_posted')
+        # post = Post.objects.all().order_by('-date_posted')
+        for x in post:
+            try:
+                like = Like.objects.get(user=user , post=x)
+                dc[x] = 'true'
+                    
+            except:
+                dc[x] = 'false'
+
+        user_to_follow = User.objects.exclude(username__in = users).exclude(username = user)
+
+        return render(request, 'explore.html',{'post':dc,'user_to_follow':user_to_follow})
     else:
         return render(request,'home.html')
 
 def explore(request):
     return render(request,'explore.html')
+
+def trending(request):
+    if request.user.is_authenticated:
+        id = request.user.id
+        user = User.objects.get(id=id)
+        user_following = UserFollowing.objects.filter(user_id=user)
+        users =[]
+        for x in user_following:
+            users.append(x.following_user_id) 
+        posts = Post.objects.annotate(like_count=Count('likes')).order_by('-like_count')  
+        dc ={}
+        for x in posts:
+            try:
+                like = Like.objects.get(user=user,post=x)
+                dc[x] = 'true'
+            except:
+                dc[x] = 'false'
+        user_to_follow = User.objects.exclude(username__in = users).exclude(username = user)
+
+        return render(request,'trending.html',{'posts':dc,'user_to_follow':user_to_follow})
+
 
 def search(request):
     if request.GET.get('search'):

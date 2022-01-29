@@ -4,13 +4,13 @@
 {% block content %}  
     <div class="search-results-container"style = "margin-top:6%;">
         {% if users %}
-        {{users|length}} Users found <br><br> 
+            {{users|length}} Users found <br><br> 
             {% for i in users %}
                 <div class="users-found">
                     <a href = "{% url 'user' i.username %}"><img src = "{{i.profile.pic.url}}">
                     <div class="user-details">
                         <b>{{i.username}}</b></a><br>
-                        {{i.profile.about}}<br>
+                        <i>{{i.profile.about}}</i><br>
                     </div>  
                     <div class="ping">
                         <a href="{% url 'user-chat' i.username %}"><button><p>Message</p> <img src="{% static 'chaticon.png'%}"></button>

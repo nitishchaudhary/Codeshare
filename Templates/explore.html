@@ -6,13 +6,15 @@
 <div class="container">
   <div class="left-bar">
     <div class="left-bar-nav">
-      <a href="/"><h3><img src="{% static 'home-icon.png' %}">Home</h3></a>
+      <a href="/"><h3 class='active'><img src="{% static 'home-icon.png' %}">Explore</h3></a>
       
-      <a href="/"><h3><img src="{% static 'home-icon.png' %}">Explore</h3></a>
-      
-      <a href="/"><h3><img src="{% static 'trending-icon.png' %}">Trending</h3></a>
+      <a href="{% url 'trending' %}"><h3><img src="{% static 'trending-icon.png' %}">Trending</h3></a>
       
       <a href="/"><h3><img src="{% static 'home-icon.png' %}">Projects</h3></a>
+    </div>
+    <div class="left-bar-user-profile">
+      <img src="{{user.profile.pic.url}}" alt="" srcset="">
+      <h3>{{user.username}}</h3>
     </div>
   </div>
   <div class="main-container">
@@ -32,7 +34,7 @@
     
     <br>
     <div class="explore-container">
-    {% for i in post %}
+    {% for i,value in post.items %}
       <div class="recent-posts">
         <div class="recent-post-usr">
           <div class="recent-post-usr-img">
@@ -66,13 +68,12 @@
         <div class="recent-post-reactions">
         
           <div class="recent-post-likes" id="{{i.id}}" onclick="like('{{i.id}}')" data-url="{% url 'like' i.id %}">
-            {% for user.i.likes in i.likes.all %}  
-                <img src="{% static 'dislike-icon.png' %}" id="like-dislike{{i.id}}" alt="">
-            {% empty %}
+              {% if value == 'true' %}
+                <img src="{% static 'liked-icon.png' %}" id="like-dislike{{i.id}}" alt="">
+              {% else %}
                 <img src="{% static 'like-icon.png' %}"  id="like-dislike{{i.id}}"alt="">
-            {% endfor %}
-            <p id="likes-count{{i.id}}">{{i.likes.count}}</p>
-            
+              {% endif %}
+                <p id="likes-count{{i.id}}">{{i.likes.count}}</p>
 
           </div>
           
@@ -81,18 +82,30 @@
           </div>    
           
       </div>
-      <div class="post-comment" id="post-comment{{i.id}}">
+      <div class="show-comment" id="post-comment{{i.id}}">
+        <div class="comments">
           {% if i.details.all %}
             {% for detail in i.details.all %}  
+            <div class="comment-user-details">
+              <div class="comment-user-profile">
+                <img src="{{detail.username.profile.pic.url}}">
+              </div>
+              <div class="comment-username">
+                {{detail.username}}
+              </div>
+            </div>
+            <div class="comment-details">
               {{detail.comment}}<br>
+            </div>
             {% endfor %}
           {% else %}
               No comments
-          {% endif %}
+          {% endif %}         
+        </div> 
 
         <form method="POST" id="comment-post">
           {% csrf_token %}
-          <div class="comment">
+          <div class="post-comment">
             <!-- <img src="{{user.profile.pic.url}}" alt="/> -->
             <img src="{{user.profile.pic.url}}">
             <input type="text" name="comment" id="comment" placeholder="Leave your comment here ...">
@@ -126,7 +139,22 @@
   <div class="right-bar">
     <div class="right-bar-chats">
       <h3>You May Know</h3>
-      <hr>
+      <div class="content">
+        {% for users in user_to_follow %}
+          <div class="to-follow">
+            <div class="to-follow-pic">
+              <a href="{% url 'user' users.username %}"><img src="{{users.profile.pic.url}}" alt="" srcset=""></a>
+            </div>
+            <div class="to-follow-username">
+              <a href="{% url 'user' users.username %}">{{users.username}}</a>
+            </div>
+            <div class="to-follow-icon">
+              <a href = "{% url 'follow' users.username %}"><img src="{% static 'follow-user.png' %}" alt="" srcset="">
+            </div>
+            
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>  
 </div>  

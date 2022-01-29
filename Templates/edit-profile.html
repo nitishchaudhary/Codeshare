@@ -17,7 +17,10 @@
       <div class="profile-image">
         <label for="Image">Profile Image</label><br>
         <img src="{{user.profile.pic.url}}" alt=""><br>
-        <input type="file" name="image" id="profile-image">
+        <label for="profile-image-upload" class="custom-file-upload">
+          Uplaod
+        </label>
+        <input type="file" name="image" id="profile-image-upload">
       </div>
       <div class="submit">
         <button type="submit">Update</button>
