@@ -7,6 +7,7 @@
     <form action="/accounts/update" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="username">
+      
         <label for="Username">Username</label><br>
         <input type="text" name="username" id="username"  value="{{user.username}}">
       </div><br>

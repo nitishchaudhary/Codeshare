@@ -1,7 +1,96 @@
 
+const sent_requests =() =>{
+    $.ajax(
+        {
+            type:"GET",
+            url:"/collabs",
+            data:{
+                retrieve:"sent"
+            },
+            success:function(e){
+                data = JSON.parse(e);
+                // console.log(e);
+                message = `
+                    <nav class=collab-title>
+                        <h4 onclick="received_requests()">Received</h4>
+                        <h4 onclick="sent_requests()" class="active">Sent</h4>
+                    </nav>
+                    <section class="requests">
+                        <div class="sent">
+                            <div class="requested-user-details">
+                            <img src="${data['profile-url']}" alt="">
+                                <div class="requested-user-name">
+                                    <h5>${data['requested_user']}</h5>
+                                    <i>@${data['requested_user']}</i>
+                                </div>
+                            </div>
+                            <div class="project-detail">
+                                <h3>Project :</h3>
+                                <h4>${data['project_title']}</h4>
+                            </div>
+                        </div>
+                    </section>
+                `
+                $(".collab-container").html(message);
+            }
+        }
+    )
+}
+const received_requests =() =>{
+    $.ajax(
+        {
+            type:"GET",
+            url:"/collabs",
+            data:{
+                retrieve:"received"
+            },
+            success:function(e){
+                data = JSON.parse(e);
+                // console.log(data);
+                message = `
+                <nav class=collab-title>
+                    <h4 onclick="received_requests()" class="active">Received</h4>
+                    <h4 onclick="sent_requests()">Sent</h4>
+                </nav>
+                    <section class="requests">
+                        <div class="received">
+                            <div class="requesting-user-details">
+                            <img src="${data['profile-url']}" alt="">
+                                <div class="requested-user-name">
+                                    <h5>${data['requesting_user']}</h5>
+                                    <i>@${data['requesting_user']}</i>
+                                </div>
+                            </div>
+                            <div class="project-detail">
+                                <h3>Project :</h3>
+                                <h4>${data['project_title']}</h4>
+                            </div>
+                        </div>
+                    </section>
+                `
+                $(".collab-container").html(message);
+            
+            }
+        }
+    )
+}
+
 const opencomments = (id) =>{
     const comments = document.querySelector("#post-comment"+id);
     comments.classList.toggle("open");
+}
+const share_project =() =>{
+    let section = document.getElementById("share-project-container");
+    document.getElementById("container").style.filter = "blur(8px)";
+    section.style.display = "flex";
+    section.style.zIndex = "1";
+
+}
+const close_window = () =>{
+    let section = document.getElementById("share-project-container");
+    document.getElementById("container").style.filter = "blur(0px)";
+    section.style.display = "none";
+    section.style.zIndex = "-1";
 }
 
 
@@ -41,6 +130,8 @@ join.addEventListener("click" , ()=>{
     form.style.opacity = "1";
     document.getElementById("main-container").style.filter = "blur(8px)";
 })
+
+
 
 function Menu(){
     const navMenu = document.querySelector(".nav-menu");

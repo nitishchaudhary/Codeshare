@@ -1,14 +1,16 @@
 from ast import Or
 from datetime import date
+import re
 from typing import Type
 from django import http
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from .models import Profile , Post , Comment , Like , UserFollowing,Message
+from .models import Profile , Post , Comment , Like , UserFollowing,Message,Project,collab
 import json
 from django.db.models import Q,Count
+from django.core import serializers
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
@@ -58,6 +60,9 @@ def trending(request):
 
         return render(request,'trending.html',{'posts':dc,'user_to_follow':user_to_follow})
 
+def projects(request):
+    projects = Project.objects.all().order_by('-project_date')
+    return render(request,'projects.html',{'projects':projects})
 
 def search(request):
     if request.GET.get('search'):
@@ -137,3 +142,66 @@ def follow_user(request,username):
         obj.save()
     
     return redirect('/')
+
+def share_project(request):
+    if request.method == 'POST':
+        id=request.user.id
+        usr = User.objects.get(id=id)
+        title = request.POST['project-title']
+        desc = request.POST['project-description']
+        if request.POST['project-link']:
+            link = request.POST['project-link']
+            project = Project.objects.create(author_id=usr,title=title,description=desc,link=link)
+        else:
+            project = Project.objects.create(author_id=usr,title=title,description=desc)
+        
+        project.save()
+        return redirect('/')
+
+def show_project(request,pk):
+    id = request.user.id
+    usr = User.objects.get(id=id)
+    project = Project.objects.get(pk=pk)
+    return render(request,'project.html',{'project':project})
+
+
+def collab_request(request,pk):
+    id = request.user.id
+    project = Project.objects.get(pk=pk)
+    user = project.author_id
+    usr = User.objects.get(id=id)
+    col = collab.objects.create(project_id = project,requesting_user = usr,requested_user = user)
+    col.save()
+    return HttpResponse("done")
+
+def collabs(request):
+    id = request.user.id
+    usr = User.objects.get(id=id)
+
+    try :
+        data = request.GET['retrieve']
+        if data == 'sent':
+            col = collab.objects.filter(requesting_user= usr)
+            
+        if data == 'received':
+            col = collab.objects.filter(requested_user = usr)
+        
+        data={}
+        for x in col:
+            data['project_title'] = x.project_id.title
+            data['requesting_user'] = x.requesting_user.username
+            data['requested_user'] = x.requested_user.username
+
+            if data == 'received':
+                url = usr.profile.pic.url
+            else:
+                user = User.objects.get(username = x.requested_user)
+                url = user.profile.pic.url
+            
+            data['profile-url'] = url
+        
+        x = json.dumps(data)
+        return HttpResponse(x)
+    except:
+        col = collab.objects.filter(requested_user=usr)
+        return render(request,'collabs.html',{'collabs':col})

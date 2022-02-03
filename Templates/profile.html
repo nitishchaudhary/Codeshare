@@ -6,16 +6,25 @@
 <div class="main-container-profile">
   <div class="profile-container">
     <img src="{{user0.profile.pic.url}}" alt="" style="width: 100px;height:100px; border-radius:50%">
-    <h2>{{user0.username}}</h2>
-    <h5>{{user0.profile.about}}</h5><br>
+    <div class="profile-user-name">
+      <h2>{{user0.username}}</h2>
+      <i>@{{user.username}}</i>
+    </div>
+    <div class="profile-user-about">
+      <h5>{{user0.profile.about}}</h5><br>
+    </div>
+  
     {%if user0.username == user.username %}
       <a href="edit-profile"><button>Edit profile</button></a><br><br>
     {% endif %}
-    {{user0.followers.count}} Followers
-    {{user0.following.count}} Following
-    <br>
+    <div class="user-profile-follows-details">
+      <div class="user-profile-followers-count"><b>{{user0.followers.count}}</b> Followers</div>
+      <div class="user-profile-following-count"><b>{{user0.following.count}}</b> Following</div>  
+    </div>
     <br>
     {% if user0 != user %}
+      <h4 class="user-profile-connect">Connect</h4>
+      <br>
       <a href="{% url 'follow' user0.username %}"><button onclick="follow('user0.username')">Follow</button></a>
       <a href="{% url 'user-chat' user0.username %}"><button>Message</button></a>
     {% endif %}

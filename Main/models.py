@@ -1,3 +1,5 @@
+from asyncio.windows_events import NULL
+from datetime import date
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
@@ -53,3 +55,21 @@ class Message(models.Model):
     message = models.CharField(max_length=255)
     mesage_date = models.DateTimeField(default=timezone.now)
     image = models.ImageField(upload_to = 'message_media',blank=True)
+
+class Project(models.Model):
+    author_id = models.ForeignKey(User,related_name="author",on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    description = models.CharField(max_length=500)
+    link = models.CharField(max_length=255 , blank=True)
+    project_date = models.DateField(default=timezone.now)
+    image = models.ImageField(upload_to = 'project_media',blank=True)
+    
+    def __str__(self):
+        return self.title
+    def get_absolute_url(self):
+        return reverse('project-detail' , kwargs={'pk':self.pk})
+
+class collab(models.Model):
+    project_id = models.ForeignKey(Project,related_name='collab_request',on_delete=models.CASCADE)
+    requesting_user = models.ForeignKey(User,related_name="requesting_user",on_delete=models.CASCADE)
+    requested_user = models.ForeignKey(User,related_name='requested_user',on_delete=models.CASCADE)
