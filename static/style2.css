@@ -244,19 +244,18 @@ li a:hover{
     transition:ease-out 0.2s;
 }
 
-
 .edit-profile{
     border: 1px solid rgb(27, 27, 27);
     /* border: none; */
     margin: 0 auto;
     text-align: center;
-    margin-top: 150px;
-    transform: translate(0,-20%);
+    /* margin-top: 150px; */
+    /* transform: translate(0,-20%); */
     padding: 30px;
     color:whitesmoke;
-    max-width: 50%;
-    background-color: rgb(18, 20, 22);
-    border-radius: 10px;
+    /* max-width: 50%; */
+    background-color: rgb(23, 25, 27);
+    border-radius: 15px;
     font-family: 'lato';
     font-size: 15px;
     font-weight: 400;
@@ -271,14 +270,16 @@ li a:hover{
 .username input{
     margin: 0 auto;
     margin-top: 10px;
+    /* border:none; */
     /* background-color: rgb(41, 41, 41); */
     border: solid 1px rgb(75, 75, 75);
     background: transparent;
+    /* background-color: rgb(25, 28, 31); */
     border-radius: 10px;
     height: 35px;
     text-indent: 5px;
     padding:10px;
-    width: 300px;
+    width: 100%;
     color: rgb(100,100,100);
     letter-spacing: 1px;
     font-size: 13px;
@@ -297,7 +298,7 @@ li a:hover{
     background:transparent ;
     border: solid 1px rgb(75, 75, 75);
     padding: 5px;
-    width: 300px;
+    width: 100%;
     font-size: 13px;
     /* text-indent: 5px; */
     color: rgb(100,100,100);
@@ -334,10 +335,18 @@ li a:hover{
 .custom-file-upload:hover{
     background-color: rgb(13, 92, 84);
 }
+.edit-profile-header{
+    font-size: 20px;
+    padding: 10;
+    margin-bottom: 20px;
+    /* font-family: 'segoe UI'; */
+    color: #9eb8cf;
+    border-bottom: solid 1px rgb(49, 49, 49);
+}
 .submit button{
     color: rgb(14, 99, 99);
-    width: 200px;
-    height: 35px;
+    width: 50%;
+    height: 40px;
     padding: 5px;
     margin-top: 20px;
     letter-spacing: 1px;

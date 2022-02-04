@@ -20,6 +20,8 @@ urlpatterns = [
     path('project/id:<int:pk>',views.show_project,name='show-project'),
     path('collab/id:<int:pk>',views.collab_request,name='collab_request'),
     path('collabs',views.collabs,name='collabs'),
+    path('delete-notifications',views.delete_notifications,name='delete-notifications'),
+    path('markall-read',views.mark_all_read,name='mark-all-read'),
 ]
 
 

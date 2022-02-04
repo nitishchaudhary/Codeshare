@@ -1,5 +1,6 @@
 from asyncio.windows_events import NULL
 from datetime import date
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
@@ -73,3 +74,9 @@ class collab(models.Model):
     project_id = models.ForeignKey(Project,related_name='collab_request',on_delete=models.CASCADE)
     requesting_user = models.ForeignKey(User,related_name="requesting_user",on_delete=models.CASCADE)
     requested_user = models.ForeignKey(User,related_name='requested_user',on_delete=models.CASCADE)
+
+class notification(models.Model):
+    user_id = models.ForeignKey(User,related_name="notification",on_delete=models.CASCADE)
+    notification_message = models.TextField(default=None)
+    read = models.BooleanField(default=False)
+    notification_time = models.DateTimeField(default=timezone.now())

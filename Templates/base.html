@@ -39,6 +39,37 @@
                   </button> -->
                 </form>
             </div>
+            <div class="notifications">
+                <img src="{% static 'notification.png' %}" alt="" onclick="show_notifications() "id="notification-icon">
+                <i class="notification-count">{{count}}</i>
+            </div>
+            <div class="notifications-content" id="notifications-content" style="display: none;">
+                <div class="notifications-content-nav">
+                    <b onclick="mark_as_read()">Mark all as read</b>
+                    <b onclick="delete_notifications()">Delete all</b>
+                </div>
+                <div class="notification-list">
+                    {% for notification in notifications %}
+                        {% if notification.read == False %}
+                            <div class="notification unread">
+                                <h3>{{notification.notification_message}}</h3>
+                                <i>{{notification.notification_time}}</i>
+                            </div>
+                        {% else %}
+                            <div class="notification read">
+                                <h3>{{notification.notification_message}}</h3>
+                                <i>{{notification.notification_time}}</i>
+                            </div>
+                        {% endif %}
+                    {% empty %}
+                        <div class="no-notification">
+                            <h3>No Notifications</h3>
+                        </div>    
+                    {%endfor %}
+                </div>
+
+            </div>
+
             <div class="user-profile" onclick="Menu()">
             {% if user.is_authenticated %}
                 <img src="{{user.profile.pic.url}}" alt="" class="profile"  onclick=Menu() />

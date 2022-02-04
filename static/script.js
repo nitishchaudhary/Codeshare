@@ -74,6 +74,48 @@ const received_requests =() =>{
         }
     )
 }
+const show_notifications = () =>{
+    let content = document.getElementById("notifications-content");
+    if(content.style.display == 'none'){
+        content.style.display = 'unset';
+    }
+    else{
+        content.style.display = "none";
+    }
+
+}
+const mark_as_read =()=>{
+    $.ajax(
+        {
+            type:"GET",
+            url:"/markall-read",
+            success:function(response){
+                $(".notification").removeClass("unread");
+                $(".notification").addClass("read");
+                $(".notification-count").html('0');
+                
+            }
+        }
+    )
+}
+
+const delete_notifications = () =>{
+    $.ajax(
+        {
+            type:"GET",
+            url:"/delete-notifications",
+            success:function(response){
+                text = `
+                    <div class="no-notification">
+                        <h3>No Notifications</h3>
+                    </div>   
+                `
+                $(".notification-list").html(text);
+                $(".notification-count").html('0');
+            }
+        }
+    )
+}
 
 const opencomments = (id) =>{
     const comments = document.querySelector("#post-comment"+id);

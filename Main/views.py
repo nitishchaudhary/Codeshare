@@ -1,5 +1,6 @@
-from ast import Or
+from ast import And, Or
 from datetime import date
+from itertools import count
 import re
 from typing import Type
 from django import http
@@ -7,11 +8,37 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from .models import Profile , Post , Comment , Like , UserFollowing,Message,Project,collab
+from .models import Profile , Post ,notification, Comment , Like , UserFollowing,Message,Project,collab
 import json
 from django.db.models import Q,Count
 from django.core import serializers
 # Create your views here.
+
+def get_notifications(id):
+    usr = User.objects.get(id=id)
+    all_notificaions = notification.objects.filter(user_id = usr).order_by('-notification_time')
+    unread_notifications = all_notificaions.filter(read = False)
+    count = notification.objects.filter(read = False).count()
+    return all_notificaions,count
+
+def delete_notifications(request):
+    id = request.user.id
+    usr = User.objects.get(id=id)
+    try:
+        notification.objects.filter(user_id = usr).delete()
+        return HttpResponse("No Notifications")
+    except:
+        return HttpResponse('invalid command')
+
+def mark_all_read(request):
+    id = request.user.id
+    usr = User.objects.get(id=id)
+    notifications = notification.objects.filter(user_id = usr, read = False)
+    for noti in notifications:
+        noti.read = True
+        noti.save()
+    return HttpResponse('success')
+
 def home(request):
     if request.user.is_authenticated:
         id = request.user.id
@@ -32,8 +59,9 @@ def home(request):
                 dc[x] = 'false'
 
         user_to_follow = User.objects.exclude(username__in = users).exclude(username = user)
+        notifications,count= get_notifications(id)
 
-        return render(request, 'explore.html',{'post':dc,'user_to_follow':user_to_follow})
+        return render(request, 'explore.html',{'post':dc,'user_to_follow':user_to_follow,'notifications':notifications,'count':count})
     else:
         return render(request,'home.html')
 
@@ -100,6 +128,14 @@ def comment(request,pk):
         comment_data = request.POST['comment']
         comment = Comment.objects.create(post = post , username = user , comment = comment_data)
         comment.save()
+        
+        # push notification
+        usr = post.user_name
+        print(usr)
+        mssg = f"{user.username} commented on your post"
+        notify = notification.objects.create(user_id = usr ,notification_message = mssg )
+        notify.save()
+
         return HttpResponse('done')
         
 def like(request,pk):
@@ -114,6 +150,11 @@ def like(request,pk):
         liked = True
         like = Like.objects.create(user=usr , post=post)
         like.save()
+        # push notification
+        user = post.user_name
+        mssg = f"{usr.username} liked your post"
+        notify = notification.objects.create(user_id = user, notification_message = mssg)
+        notify.save()
     res = {
         'liked':liked
     }
@@ -137,9 +178,19 @@ def follow_user(request,username):
     usr2 = User.objects.get(username = username)
     try:
         obj = UserFollowing.objects.get(user_id = usr , following_user_id = usr2).delete()
+        
+        # push notification
+        mssg = f"{usr.username} just unfollowed you"
+        notify = notification.objects.create(user_id = usr2, notification_message = mssg)
+        notify.save()
     except:
         obj = UserFollowing.objects.create(user_id = usr , following_user_id = usr2)
         obj.save()
+        
+        # push notification
+        mssg = f"{usr.username} just followed you"
+        notify = notification.objects.create(user_id = usr2, notification_message = mssg)
+        notify.save()
     
     return redirect('/')
 
@@ -172,6 +223,12 @@ def collab_request(request,pk):
     usr = User.objects.get(id=id)
     col = collab.objects.create(project_id = project,requesting_user = usr,requested_user = user)
     col.save()
+    
+    # push notification
+    mssg = f"{usr.username} just sent you a collab request"
+    notify = notification.objects.create(user_id = user, notification_message = mssg)
+    notify.save()   
+
     return HttpResponse("done")
 
 def collabs(request):

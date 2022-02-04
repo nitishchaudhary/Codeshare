@@ -92,6 +92,106 @@ input[type="search"]{
 /* #searchBtn:hover{
     background-color: rgb(1, 55, 70);
 } */
+.notifications{
+    /* border: solid 1px white; */
+    /* width: 50px; */
+    text-align: center;
+    cursor: pointer;
+}
+.notifications-content{
+    color: white;
+    padding: 10px;
+    position: absolute;
+    width: 400px;
+    margin-left:60%;
+    margin-top: 40px;
+    height: 500px;
+    text-align: center;
+    /* border: solid 1px white; */
+    border-radius: 10px;
+    background-color: rgb(32, 35, 37);
+    /* filter: blur(8px); */
+    opacity:99%;
+    display: none;
+    animation: 0.5s ease-in-out;
+}
+.notifications-content-nav{
+    font-family: 'lato';
+    text-align: left;
+    padding: 10px;
+    /* margin: 10px; */
+    border-bottom: solid 1px rgb(87, 87, 87);
+    font-size: 16px;
+}
+.no-notification{
+    /* border: solid 1px white; */
+    background-color: rgb(54, 54, 54);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 10px;
+
+}
+.notifications-content-nav b{
+    padding: 10px;
+    /* margin: 5px; */
+    cursor: pointer;
+    animation: 0.5s ease-in-out;
+}
+.notifications-content-nav b:hover{
+    background-color: rgb(43, 50, 54);
+    border-radius:10px;
+}
+.notification-list{
+    font-family: 'segoe UI';
+    font-size: 15px;
+}
+.read{
+    padding: 10;
+    /* background-color: rgb(54, 54, 54); */
+    border-radius: 10px;
+    border: solid 1px rgb(61, 61, 61);
+    margin: 10px;
+    text-align: left;
+}
+.unread{
+    background-color: rgb(54,54,54);
+    border:none;
+    padding: 10;
+    /* background-color: rgb(54, 54, 54); */
+    border-radius: 10px;
+    /* border: solid 1px grey; */
+    margin: 10px;
+    text-align: left;
+}
+.notifications-content h3,.no-notification h3{
+    font-family: 'segoe UI';
+    font-weight: 400;
+    font-size: 16px;
+}
+.notifications img{
+    height: 30px;
+    width: 30px;
+    /* margin: 0 auto; */
+    /* border: solid 1px white; */
+    margin:5 10;
+}
+.notification-count{
+    color:white;
+    position: absolute;
+    /* border: solid 1px white; */
+    background-color:red ;
+    border-radius: 50%;
+    /* padding: 5px; */
+    /* font-family: 'segoe UI'; */
+    font-weight: 500;
+    font-size: 10px;
+    font-style: normal;
+    padding: 2 4;
+    /* margin-top: -40px; */
+    margin-left: -20px;
+
+}
+
 .user-profile{
     display: flex;
     /* border: solid 1px rgb(107, 107, 107); */
@@ -1401,13 +1501,18 @@ span:before,span:after{
     padding: 0px;
     text-align: center;
     color: rgb(207, 207, 207);
+    /* text-indent: 10px; */
 }
 .recent-post-content label{
     font-family: 'Segoe UI';
     font-size: 14px;
+    text-indent: 10px;
     color: rgb(195, 202, 211);
     /* border: solid 1px white; */
-    
+}
+.change{
+    padding:10px;
+    text-align: left;
 }
 .project-title,.project-description, .project-link{
     padding: 10 15;
@@ -1415,10 +1520,11 @@ span:before,span:after{
     background-color: rgb(43, 43, 43);
     margin: 10px;
     text-align: left;
-    text-indent: 0px;
+    /* text-indent: 10px; */
     color: rgb(220, 234, 235);
     font-family: 'segoe UI';
     font-size: 15px;
+    /* border: solid 1px white; */
 }
 .project-link a{
     text-decoration: none;

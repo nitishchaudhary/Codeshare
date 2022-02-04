@@ -1,32 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
     <title>{% block title %}Edit Profile{% endblock title %}</title>
-    {% block css %}<link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}" />{% endblock css %}
-    {% block content %}  
-  <div class="edit-profile">
-    <form action="/accounts/update" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="username">
-      
-        <label for="Username">Username</label><br>
-        <input type="text" name="username" id="username"  value="{{user.username}}">
-      </div><br>
-      <div class="about">
-        <label for="about">About</label><br>
-        <textarea name="About" id="about" rows="5">{{user.profile.about}}</textarea>
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+{% endblock css %}
+{% block content %}  
+
+  <div class="main-container-profile">
+    <div class="profile-container">
+      <img src="{{user.profile.pic.url}}" alt="" style="width: 100px;height:100px; border-radius:50%">
+      <div class="profile-user-name">
+        <h2>{{user.username}}</h2>
+        <i>@{{user.username}}</i>
       </div>
-      <div class="profile-image">
-        <label for="Image">Profile Image</label><br>
-        <img src="{{user.profile.pic.url}}" alt=""><br>
-        <label for="profile-image-upload" class="custom-file-upload">
-          Uplaod
-        </label>
-        <input type="file" name="image" id="profile-image-upload">
+      <div class="profile-user-about">
+        <h5>{{user.profile.about}}</h5><br>
       </div>
-      <div class="submit">
-        <button type="submit">Update</button>
+      <!-- {%if user.username == user.username %}
+        <a href="edit-profile"><button>Edit profile</button></a><br><br>
+      {% endif %} -->
+      <div class="user-profile-follows-details">
+        <div class="user-profile-followers-count"><b>{{user.followers.count}}</b> Followers</div>
+        <div class="user-profile-following-count"><b>{{user.following.count}}</b> Following</div>  
       </div>
-    </form>
-    <!-- <h2>This is the profile edit section of codespace</h2> -->
+      <br>
+      <br>
+    </div>
+    <div class="user-posts">
+      <div class="collab-container">
+        <header class="edit-profile-header">
+          Edit Profile
+        </header>
+        <div class="edit-profile">
+          <form action="/accounts/update" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="username">
+            
+              <label for="Username">Username</label><br>
+              <input type="text" name="username" id="username"  value="{{user.username}}">
+            </div><br>
+            <div class="about">
+              <label for="about">About</label><br>
+              <textarea name="About" id="about" rows="5">{{user.profile.about}}</textarea>
+            </div>
+            <div class="profile-image">
+              <label for="Image">Profile Image</label><br>
+              <img src="{{user.profile.pic.url}}" alt=""><br>
+              <label for="profile-image-upload" class="custom-file-upload">
+                Uplaod
+              </label>
+              <input type="file" name="image" id="profile-image-upload">
+            </div>
+            <div class="submit">
+              <button type="submit">Update</button>
+            </div>
+          </form>
+          <!-- <h2>This is the profile edit section of codespace</h2> -->
+        </div>
+      </div>  
+        
+    </div>
   </div>
+  
 {% endblock content %}

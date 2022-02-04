@@ -2,36 +2,6 @@
 {% load static %}
 <title>{% block title %}Projects{% endblock title %}</title>
 {% block content %}
-<!-- <div class="container-projects">
-    <h2>this is the projects section of codescape</h2>
-    {% for project in projects %}
-        <div class="projects">
-            <div class="project-author-profile">
-                <img src="{{project.author_id.profile.pic.url}}" alt="">
-            </div>
-            <div class="project-author">
-                {{project.author_id}}
-            </div>
-            <div class="project-title">
-                {{project.title}}
-            </div>
-            <div class="project-description">
-                {{project.description}}
-            </div>
-            <div class="project-link">
-                {{project.link}}
-            </div>
-            {% if project.image %}
-                <div class="project-media">
-                    this is the image 
-                    <img src="{{project.image.url}}" alt="" srcset="">
-                </div>
-            {% endif %}
-
-        </div>
-    {% endfor %}
-</div> -->
-
 
 <div class="container">
     <div class="left-bar">
@@ -94,7 +64,7 @@
                 </div>
             </div>  
             </div>            
-          <div class="recent-post-content">
+          <div class="recent-post-content change" >
                 <label for="project-title">Title</label>
                 <div class="project-title">
                     {{project.title}}
@@ -117,6 +87,24 @@
                     </div>
                 {% endif %}    
           </div> 
+          <div class="recent-post-reactions">
+          
+            <div class="recent-post-likes" id="{{project.id}}" data-url="{% url 'like' project.id %}">
+                {% if value == 'true' %}
+                  <img src="{% static 'liked-icon.png' %}" id="like-dislike{{i.id}}" alt="">
+                {% else %}
+                  <img src="{% static 'like-icon.png' %}"  id="like-dislike{{i.id}}"alt="">
+                {% endif %}
+                  <p id="likes-count{{project.id}}">{{i.likes.count}}</p>
+  
+            </div>
+            
+            <div class="recent-post-comments">
+              <img src="{% static 'comment-icon.png' %}" alt="" onclick="opencomments('{{i.id}}')">
+            </div>    
+            
+          </div>
+
          </div>
       {% endfor %}
       </div>
