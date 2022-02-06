@@ -35,8 +35,17 @@
         <div class="edit-profile">
           <form action="/accounts/update" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+              <div class="name">
+                <div class="first-name">
+                    <label for="first-name">First Name</label>
+                    <input type="text" name="firstname" id="" value="{{user.first_name}}">
+                </div>
+                <div class="last-name">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" name="lastname" id="" value="{{user.last_name}}">
+                </div>
+            </div>  
             <div class="username">
-            
               <label for="Username">Username</label><br>
               <input type="text" name="username" id="username"  value="{{user.username}}">
             </div><br>
@@ -46,11 +55,11 @@
             </div>
             <div class="profile-image">
               <label for="Image">Profile Image</label><br>
-              <img src="{{user.profile.pic.url}}" alt=""><br>
+              <img src="{{user.profile.pic.url}}" alt="" id="img"><br>
               <label for="profile-image-upload" class="custom-file-upload">
                 Uplaod
               </label>
-              <input type="file" name="image" id="profile-image-upload">
+              <input type="file" name="image" onchange="loadFile(event)" id="profile-image-upload">
             </div>
             <div class="submit">
               <button type="submit">Update</button>

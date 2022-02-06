@@ -248,10 +248,10 @@ li a:hover{
     border: 1px solid rgb(27, 27, 27);
     /* border: none; */
     margin: 0 auto;
-    text-align: center;
+    /* text-align: left; */
     /* margin-top: 150px; */
     /* transform: translate(0,-20%); */
-    padding: 30px;
+    padding: 10 30;
     color:whitesmoke;
     /* max-width: 50%; */
     background-color: rgb(23, 25, 27);
@@ -264,6 +264,37 @@ li a:hover{
     letter-spacing: 1px;    
     color: rgb(199, 199, 199);
 }
+.name{
+    display: flex;
+    /* border:solid 1px white; */
+    justify-content: space-between;
+}
+.name .first-name , .name .last-name{
+    /* border: solid 1px white; */
+    width: 100%;
+    padding: 5px;
+}
+.name .first-name input[type="text"], .name .last-name input[type="text"]{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 10px;
+    border: solid 1px rgb(75, 75, 75);
+    background: transparent;
+    border-radius: 10px;
+    height: 35px;
+    text-indent: 5px;
+    padding:10px;
+    width: 100%;
+    color: rgb(201, 201, 201);
+    letter-spacing: 1px;
+    font-size: 14px;
+    line-height: 1.5;
+    /* display: block; */
+    font-family: 'segoe UI';
+
+}
+
 .username{
     padding: 5px;
 }
@@ -280,29 +311,30 @@ li a:hover{
     text-indent: 5px;
     padding:10px;
     width: 100%;
-    color: rgb(100,100,100);
+    color: rgb(200,200,200);
     letter-spacing: 1px;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.5;
     display: block;
-    font-family: 'roboto';
+    font-family: 'segoe UI';
 }
 .about{
     padding: 5px;
 }
 .about textarea{
-    font-family: 'roboto';
+    font-family: 'segoe UI';
     margin-top: 10px;
     /* background-color: rgb(41, 41, 41); */
     border-radius: 10px;
     background:transparent ;
     border: solid 1px rgb(75, 75, 75);
-    padding: 5px;
+    padding: 10px;
     width: 100%;
-    font-size: 13px;
+    font-size: 14px;
     /* text-indent: 5px; */
-    color: rgb(100,100,100);
+    color: rgb(200,200,200);
     margin-bottom: 10px;
+    letter-spacing: 1px;
 }
 .profile-image img{
     width: 50px;
@@ -337,7 +369,7 @@ li a:hover{
 }
 .edit-profile-header{
     font-size: 20px;
-    padding: 10;
+    padding: 5;
     margin-bottom: 20px;
     /* font-family: 'segoe UI'; */
     color: #9eb8cf;

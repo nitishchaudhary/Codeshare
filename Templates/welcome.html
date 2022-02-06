@@ -1,0 +1,82 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="{% static 'welcome.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to <b>Codescape</b></h1>
+            <h2>Lets set up your acccount quickly</h2>
+        </header>
+        <section class="content">
+            <header><h2>Personal Information</h2></header>
+            <form action="{% url 'welcome-user' %}" method="POST" id="set-up-form">
+                {% csrf_token %}
+                <div class="name">
+                    <div class="first-name">
+                        <label for="first-name">First Name</label>
+                        <input type="text" name="firstname" id="">
+                    </div>
+                    <div class="last-name">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" name="lastname" id="">
+                    </div>
+                </div>
+                <div class="about">
+                    <label for="about">About</label>
+                    <textarea name="about" id="" cols="30" rows="8"></textarea>
+                </div>
+                <div class="submit-section">
+                    <div class="profile-image">
+                        <label for="Image">Profile Image</label><br>
+                        <img src="{{user.profile.pic.url}}" alt="" id="image"><br>
+                        <!-- <label for="profile-image-upload" class="custom-file-upload">
+                          Uplaod
+                        </label> -->
+                        <input type="file" onchange="loadFile(event)" name="image" id="profile-image-upload">
+                    </div>
+                    <div class="submit">
+                        <input type="submit" value="Get Started">
+                    </div>
+                </div>
+
+
+            </form>
+            
+        </section>
+        <section class="to-follow">
+            <header><h2>Follow some user to get started</h2></header>
+            <div class="recommended-users">
+                {% for usr in users_to_follow %}
+                    <div class="recommended-user">
+                        <div class="user-profile">
+                            <img src="{{usr.profile.pic.url}}" alt="" srcset="">
+                        </div>
+                        <div class="user-detail">
+                            <div class="user-firstname">
+                                <b>{{usr.first_name}}</b>
+                            </div>
+                            <div class="user-username">
+                                <i>@{{usr.username}}</i>
+                            </div>
+                        </div>
+                        <div class="follow-user">
+                            <button is="follow-user" id="follow-user{{usr.username}}" onclick="follow_user('{{usr.username}}')">Follow</button>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>            
+        </section>
+        
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="{% static 'welcome.js' %}"></script>
+    
+</body>
+</html>

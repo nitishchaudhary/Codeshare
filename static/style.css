@@ -439,7 +439,6 @@ li a:hover{
     font-weight:600;
 }
 
-
 .content{
     color: rgb(240,255,255);
     font-size: 13px;
@@ -477,62 +476,71 @@ li a:hover{
     flex-direction: column;
     align-content: center;
     width: 35%;
+    /* border: solid 1px white; */
 }
 .login-form{
-    background-color: rgb(14, 13, 13);
+    background-color: rgb(8, 9, 10);
     /* margin: 0 auto; */
     width: 80%;   
+    /* border: solid 1px grey; */
     margin-left: 60px;
     padding: 10px 10px;
     text-align: center; 
+    border-radius: 10px;
+    /* background: transparent; */
 }
 .login-form  p{
-    color: azure;
-    font-family: "montserrat";
-    font-size: 26px;
+    color: rgb(220,220,220);
+    font-family: "segoe UI";
+    font-size: 25px;
     letter-spacing: 1px;
-    font-weight: 600;
+    font-weight: 400;
     
 }
 .login-form input{
     background-color: rgb(56, 54, 54);
     border: none;
+    background: transparent;
+    border-bottom:solid 1px rgb(70,70,70) ;
     width: 90%;
     height: 35px;
     padding: 5px;
     margin-top: 20px;
-    border-radius: 18px;
+    text-align: left;
+    font-family: 'lato';
+    font-size: 15px;
+    /* border-radius: 18px; */
     outline: none;
-    color: rgb(243, 243, 243);
+    color: rgb(219, 219, 219);
     letter-spacing: 1px;
 }
 input::placeholder{
-    text-align: center;
+    text-align: left;
     letter-spacing: 1px;
     color: rgb(218, 219, 219);
     opacity: 70%; 
+    font-family: 'segoe UI';
+    font-size: 15px;
 }
 #submit{
     margin-top:20px ;
     padding: 5px 5px;
-    border-radius: 18px;
-    width: 85px;
-    height: 30px;
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
     border: none;
     margin-bottom:10px ;
-    font-family: "Poppins";
+    font-family: 'roboto';
     letter-spacing: 1px;
     background-color:rgb(28, 223, 230);
     padding: 5px;
     cursor: pointer;
-    border-color: black;
-    font-family: 'Poppins', sans-serif;
-    color: black;
-    font-weight:bolder;
-    font-size: 13px;
+    color: rgb(19, 19, 19);
+    font-weight:700;
+    font-size: 16px;
 }
 #submit:hover{
-    background-color:rgb(1, 55, 70);
+    background-color:rgb(19, 79, 95);
     color:rgb(240, 255, 255);
     font-weight: 500;
     transition:ease-out 0.2s;
@@ -542,18 +550,18 @@ span{
     justify-content: center;
     color:rgb(207, 207, 207);
     letter-spacing: 1px;
-    font-family: "Poppins";
+    font-family: "poppins";
     font-size: 15px;
     font-weight: 600;
 }
 span:before,span:after{
     content:"";
     flex: 1 1;
-    border-bottom:1px solid rgb(78, 78, 78);
+    border-bottom:1px solid rgb(50,50,50);
     margin-right:14px;
     margin-left: 14px;
     height: 12px;
-    max-width: 130px;
+    max-width: 135px;
 }
 .oauth-login{
     display: flex;
@@ -580,10 +588,10 @@ span:before,span:after{
     box-shadow:0px 0px 8px 0px rgb(28, 223, 230);
 }
 #login-with {
-    color: rgb(238, 251, 253);
+    color: rgb(189, 206, 209);
     margin-top: 15px;
-    font-family: "Poppins";
-    font-size: 12px;
+    font-family: "segoe UI";
+    font-size: 13px;
     letter-spacing: 1px;
     margin-bottom: 5px;
 }
@@ -603,25 +611,41 @@ span:before,span:after{
 #forget-password a:hover {
     color:rgb(28, 223, 230) ;
 }
-
+#sign-up-form header{
+    display: flex;
+    justify-content: space-between;
+}
+#sign-up-form header img{
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+}
+#sign-up-form p{
+    /* border: solid 1px white; */
+    width: 100%;
+}
 #sign-up-form{
     position:absolute;
-    background-color: rgb(20, 20, 20);
-    margin-top: 15%;
+    background-color: rgb(8, 9, 10);
+    margin-top: 10%;
     margin-left: 50%;
     transform: translate(-50%,-15%);
     z-index: -1;
     opacity: 0;
     transition: 0.8s ease-in-out;
-    width: 350px;
+    width: 500px;
     text-align: center;
     padding: 20px;
-    height: 450px;
-    border-radius: 5px;
+    height: 90vh;
+    /* border-radius: 5px; */
+    /* border-bottom:solid 1px white; */
+}
+#sign-up-form form{
+    border-bottom:solid 1px rgb(68, 68, 68);
 }
 #sign-up-form  p{
     color: azure;
-    font-family: "montserrat";
+    font-family: "segoe UI";
     font-size: 26px;
     letter-spacing: 1px;
     
@@ -669,15 +693,16 @@ span:before,span:after{
     font-weight: 500;
     transition:ease-out 0.2s;
 }
-#sign-up-division{
-    margin-top: 10px;
-    color: grey;
-    size: 0px;
+.oauth-sign-up{
+    text-align: center;
+    /* border: solid 1px white; */
+    display: flex;
+    justify-content: space-around;
 }
 .oauth-sign-up button{
     background-color: black;
     height: 44px;
-    width: 300px;
+    width: 220px;
     border: none;
     margin-top: 10px;
     padding:6px;
@@ -686,6 +711,7 @@ span:before,span:after{
     transition: 0.3s ease-in-out;
     color: honeydew;
     display: flex;
+    text-align: center;
     justify-content:space-evenly;
     
     
@@ -1098,6 +1124,96 @@ span:before,span:after{
     justify-content:space-evenly;
     /* padding:10px */
 }
+.followers-list{
+    position: absolute;
+    background-color: rgb(25, 28, 31);
+    height: 85vh;
+    width: 400px;
+    z-index: 1;
+    padding: 10px;
+    display: none;
+    border-radius: 10px;
+}
+.followers-list::-webkit-scrollbar {
+    display: none;
+}
+.following-list{
+    position: absolute;
+    background-color: rgb(25, 28, 31);
+    height: 85vh;
+    width: 400px;
+    z-index: 1;
+    display: none;
+    padding: 10px;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+.following-list::-webkit-scrollbar {
+    display: none;
+}
+.list-user{
+    background-color: rgb(35, 39, 43);
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    border-radius: 10px;
+
+}
+.list-user-mssg{
+    /* border: solid 1px white; */
+    width: 100%;
+    text-align: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+.list-user-mssg button{
+    height: 30px;
+    width: 80px;
+    padding: 5px;
+    border:none;
+    border-radius: 5px;
+    background-color: #26949c;
+    color: white;
+    cursor: pointer;
+}
+.list-user-mssg button:hover{
+    background-color: #156c72;
+
+}
+
+.list-user-name{
+    /* border: solid 1px white; */
+    margin: 10px;
+    /* margin-right: 0; */
+    /* width:fit-content; */
+    width: 50%;
+}
+.list-user-name .first-name b{
+    color: rgb(243, 243, 243);
+    font-family: 'lato';
+    font-size: 15px;
+}
+.list-user-name .user-name i{
+    font-style: normal;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'lato';
+    color: grey;
+}
+.list-user-profile img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.followers-list header,.following-list header{
+    /* border: solid 1px white; */
+    text-align: center;
+}
+.followers-list header h2,.following-list header h2{
+    color: grey;
+    font-family: 'lato';
+}
+
 .user-posts{
     /* border: solid black 1px; */
     display: flex ;
@@ -1121,6 +1237,7 @@ span:before,span:after{
     color: rgb(209, 209, 209);
     overflow-y: scroll;
     scroll-behavior: smooth;
+    transition: 0.3s ease-in-out;
 }
 .user-posts::-webkit-scrollbar{
     width: 10px;
@@ -1250,6 +1367,7 @@ span:before,span:after{
     border-radius: 10px;
     /* font-weight: 700; */
     font-family: 'lato';
+    cursor: pointer;
 }
 .edit-profile-content{
     margin-top: 10%;

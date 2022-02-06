@@ -1,4 +1,57 @@
 
+
+const show_followers =()=>{
+    let x = document.querySelector(".followers-list");
+    let y = document.querySelector(".following-list");
+    if(x.style.display == "none"){
+        if(y.style.display == "none"){
+            x.style.display = "unset";
+        }
+        else{
+            y.style.display = "none";
+            x.style.display = "unset";
+        }
+        document.querySelector(".user-posts").style.filter ="blur(8px)";
+    }
+    else{
+        x.style.display = "none";
+        document.querySelector(".user-posts").style.filter ="blur(0px)";
+    }
+}
+const show_following =()=>{
+    let x = document.querySelector(".following-list");    
+    let y = document.querySelector(".followers-list");
+    if(x.style.display == "none"){
+        if(y.style.display == "none"){
+            x.style.display = "unset";
+        }
+        else{
+            y.style.display = "none";
+            x.style.display = "unset";
+        }
+        document.querySelector(".user-posts").style.filter ="blur(8px)";
+    }
+    else{
+        x.style.display = "none";
+        document.querySelector(".user-posts").style.filter ="blur(0px)";
+    }
+}
+
+
+const sign_up = () =>{
+    var form = document.getElementById("sign-up-form");
+    form.style.zIndex = "1";
+    form.style.opacity = "1";
+    document.getElementById("main-container").style.filter = "blur(8px)";
+}
+const close_signup =()=>{
+    var form = document.getElementById("sign-up-form");
+    form.style.zIndex = "-1";
+    form.style.opacity = "0";
+    document.getElementById("main-container").style.filter = "blur(0px)";
+
+}
+
 $('#add-tag').keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13'){
@@ -202,7 +255,10 @@ const like_project =(id) => {
         }
     );
 }
-
+const loadFile =()=>{
+    var image = document.getElementById("img");
+    image.src = URL.createObjectURL(event.target.files[0]);
+}
 
 const hamburger=(id)=>{
     let options = document.getElementById('options'+id);
@@ -210,13 +266,11 @@ const hamburger=(id)=>{
 }
 
 
-var join = document.getElementById("join-community");
-var form = document.getElementById("sign-up-form");
-join.addEventListener("click" , ()=>{
-    form.style.zIndex = "1";
-    form.style.opacity = "1";
-    document.getElementById("main-container").style.filter = "blur(8px)";
-})
+// var join = document.getElementById("join-community");
+
+// join.addEventListener("click" , ()=>{
+    
+// })
 
 
 
@@ -234,27 +288,3 @@ function selectImage(){
     let s = document.querySelector(".selectimage");
     s.click();
 }
-
-// var lk = document.getElementById("any");
-// lk.addEventListener("click",like);
-
-// function like(){
-//     let href = $('#any').attr('data-url');
-//     console.log(href);
-//     const xhttp = new XMLHttpRequest();
-//     xhttp.onload  = function(){
-//         let res = xhttp.response;
-//         const obj = JSON.parse(res);
-//         if(obj.liked == true){
-//             console.log("liked");
-//             $('#likes-count').html(" {{user.username}} ");
-
-//         }
-//         else{
-//             console.log("disliked");
-//         }
-//     }
-//     xhttp.open("GET",href);
-//     xhttp.send();
-// }
-

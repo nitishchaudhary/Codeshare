@@ -161,8 +161,10 @@ SOCIALACCOUNT_PROVIDERS = {
 
 SITE_ID = 4
 LOGIN_REDIRECT_URL = '/'
+# SIGNUP_REDIRECT_URL = '/welcome'
 LOGOUT_DIRECT_URL = '/'
 LOGIN_URL = '/accounts/login'
+ACCOUNT_SIGNUP_REDIRECT_URL = "/welcome"
 
 CHANNEL_LAYERS = {
     'default':{

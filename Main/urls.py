@@ -2,10 +2,12 @@ from django.urls import path , include
 from django.http import request
 from . import views
 from django.contrib.auth.models import User
+# from accounts.views import welcome
 
 
 urlpatterns = [
     path('', views.home , name='Home'),
+    path('welcome',views.welcome,name='welcome-user'),
     path('explore', views.explore, name='explore'),
     path('trending',views.trending,name='trending'),
     path('projects',views.projects,name='projects'),

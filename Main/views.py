@@ -13,6 +13,7 @@ from .models import Profile , Post, Project_tag, like_project ,notification, Com
 import json
 from django.db.models import Q,Count
 from django.core import serializers
+from accounts.views import update
 # Create your views here.
 
 def get_notifications(id):
@@ -38,6 +39,32 @@ def mark_all_read(request):
         noti.read = True
         noti.save()
     return HttpResponse('success')
+
+def welcome(request):
+    id = request.user.id
+    user = User.objects.get(id=id)
+    if request.method == 'GET':
+        try:
+            user_following = UserFollowing.objects.filter(user_id=user)
+            users =[]
+            for x in user_following:
+                users.append(x.following_user_id)
+            users_to_follow = User.objects.exclude(username__in = users).exclude(username = user)
+        except: 
+            users_to_follow = User.objects.all()
+        return render(request,'welcome.html',{'users_to_follow':users_to_follow})
+    else:
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        about = request.POST['about']
+        if 'image' in request.FILES:
+            image = request.FILES['image']
+            user.profile.pic = image
+        user.first_name= firstname
+        user.last_name = lastname
+        user.profile.about = about
+        user.save()
+        return redirect('/')
 
 def home(request):
     if request.user.is_authenticated:
@@ -306,7 +333,7 @@ def delete(request,pk):
         return HttpResponse("Invalid url")
 
 
-def follow_user(request,username):
+def follow_user(request,username):    
     id = request.user.id
     usr = User.objects.get(id = id)
     usr2 = User.objects.get(username = username)
@@ -325,8 +352,10 @@ def follow_user(request,username):
         mssg = f"{usr.username} just followed you"
         notify = notification.objects.create(user_id = usr2, notification_message = mssg)
         notify.save()
-    
-    return redirect('/')
+    if 'welcome' in request.GET:
+        return HttpResponse('done')
+    else:
+        return redirect('/')
 
 def share_project(request):
     if request.method == 'POST':

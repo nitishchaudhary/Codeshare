@@ -4,6 +4,56 @@
     {% block style %}<link href="{% static 'style.css' %}">{% endblock style %}
 {% block content %}  
 <div class="main-container-profile">
+  <div class="followers-list" style="display: none;">
+    <header>
+      <h2>Followers List</h2>
+    </header>
+    <div class="list">
+      {% for i in user0.followers.all %}
+        <div class="list-user">
+          <div class="list-user-profile">
+            <img src="{{i.user_id.profile.pic.url}}" alt="" srcset="">
+          </div>
+          <div class="list-user-name">
+            <div class="first-name">
+              <b>{{i.user_id.first_name}}</b>
+            </div>
+            <div class="user-name">
+                <i>@{{i.user_id}}</i>
+            </div>
+          </div>
+          <div class="list-user-mssg">
+            <a href="{% url 'user-chat' i.user_id %}"><button>Message</button></a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>    
+  </div>
+  <div class="following-list" style="display: none;">
+    <header>
+      <h2>Following List</h2>
+    </header>
+    <div class="list">
+      {% for i in user0.following.all %}
+        <div class="list-user">
+          <div class="list-user-profile">
+            <img src="{{i.following_user_id.profile.pic.url}}" alt="" srcset="">
+          </div>
+          <div class="list-user-name">
+            <div class="first-name">
+              <b>{{i.following_user_id.first_name}}</b>
+            </div>
+            <div class="user-name">
+                <i>@{{i.following_user_id}}</i>
+            </div>
+          </div>
+          <div class="list-user-mssg">
+            <a href="{% url 'user-chat' i.following_user_id %}"><button>Message</button></a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
   <div class="profile-container">
     <img src="{{user0.profile.pic.url}}" alt="" style="width: 100px;height:100px; border-radius:50%">
     <div class="profile-user-name">
@@ -18,8 +68,8 @@
       <a href="edit-profile"><button>Edit profile</button></a><br><br>
     {% endif %}
     <div class="user-profile-follows-details">
-      <div class="user-profile-followers-count"><b>{{user0.followers.count}}</b> Followers</div>
-      <div class="user-profile-following-count"><b>{{user0.following.count}}</b> Following</div>  
+      <div class="user-profile-followers-count" onclick="show_followers()"><b>{{user0.followers.count}}</b> Followers</div>
+      <div class="user-profile-following-count" onclick="show_following()"><b>{{user0.following.count}}</b> Following</div>  
     </div>
     <br>
     {% if user0 != user %}

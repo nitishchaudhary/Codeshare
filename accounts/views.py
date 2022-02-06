@@ -31,7 +31,8 @@ def sign_up(request):
         user.save()
         auth_login(request , user)
         username = request.user.username
-        return redirect('/user_{}'.format(username))
+        return redirect('/welcome')
+        # return redirect('/user_{}'.format(username))
     else:
         return HttpResponse("get done")
 

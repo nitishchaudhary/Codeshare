@@ -93,7 +93,7 @@
         </div>
       </div>
       <div id="sign-up-form">
-        <p>Sign Up</p>
+        <header><p>Sign Up</p><img src="{% static 'cancel.png' %}" onclick="close_signup()"></header>
         <form action="accounts/sign-up" method="post">
           {% csrf_token %}
           <input
@@ -122,16 +122,20 @@
           /><br />
           <button type="submit" id="sign-up">Sign Up</button>
         </form>
-        <hr id="sign-up-division" />
+        
         <div class="oauth-sign-up">
-          <a href="{% provider_login_url 'google' %}"><button>
-            <img src="{% static 'google-logo.png'  %}" alt="Google" />
-            <div class="sign-up-with-google">Sign up with google</div>
-          </button></a>
-          <button>
-            <img src="{% static 'github-logo.png'  %}" alt="Github" />
-            <div class="sign-up-with-github">Sign up with github</div>
-          </button>
+          <div class="goolge-signup">
+            <a href="{% provider_login_url 'google' %}"><button>
+              <img src="{% static 'google-logo.png'  %}" alt="Google" />
+              <div class="sign-up-with-google">Sign up with google</div>
+            </button></a>
+          </div>
+          <div class="github-signup">
+            <button>
+              <img src="{% static 'github-logo.png'  %}" alt="Github" />
+              <div class="sign-up-with-github">Sign up with github</div>
+            </button>
+          </div>
         </div>
       </div>  
     </section>
