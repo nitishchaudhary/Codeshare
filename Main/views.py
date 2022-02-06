@@ -1,6 +1,7 @@
 from ast import And, Or
 from datetime import date
 from itertools import count
+from pickle import TRUE
 import re
 from typing import Type
 from django import http
@@ -8,7 +9,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from .models import Profile , Post ,notification, Comment , Like , UserFollowing,Message,Project,collab
+from .models import Profile , Post, Project_tag, like_project ,notification, Comment , Like ,like_project,project_comment, UserFollowing,Message,Project,collab
 import json
 from django.db.models import Q,Count
 from django.core import serializers
@@ -17,8 +18,7 @@ from django.core import serializers
 def get_notifications(id):
     usr = User.objects.get(id=id)
     all_notificaions = notification.objects.filter(user_id = usr).order_by('-notification_time')
-    unread_notifications = all_notificaions.filter(read = False)
-    count = notification.objects.filter(read = False).count()
+    count = all_notificaions.filter(read = False).count()
     return all_notificaions,count
 
 def delete_notifications(request):
@@ -51,12 +51,25 @@ def home(request):
         post = Post.objects.filter(Q(user_name__in = users) | Q(user_name=user)).order_by('-date_posted')
         # post = Post.objects.all().order_by('-date_posted')
         for x in post:
+            user2 = User.objects.get(username=x.user_name)
             try:
-                like = Like.objects.get(user=user , post=x)
-                dc[x] = 'true'
-                    
+                like = Like.objects.get(user=user,post=x)
+                try:
+                    UserFollowing.objects.get(user_id=user,following_user_id=user2)
+                    a = {"liked":'true',"following":'true'}
+                    dc[x] = a
+                except:
+                    a = {"liked":'true',"folllowing":'false'}
+                    dc[x] = a
             except:
-                dc[x] = 'false'
+                try:
+                    UserFollowing.objects.get(user_id=user,following_user_id=user2)
+                    a = {"liked":'false',"following":'true'}
+                    dc[x] = a
+                except:
+                    a = {"liked":'false',"folllowing":'false'}
+                    dc[x] = a
+
 
         user_to_follow = User.objects.exclude(username__in = users).exclude(username = user)
         notifications,count= get_notifications(id)
@@ -79,29 +92,126 @@ def trending(request):
         posts = Post.objects.annotate(like_count=Count('likes')).order_by('-like_count')  
         dc ={}
         for x in posts:
+            user2 = User.objects.get(username=x.user_name)
             try:
                 like = Like.objects.get(user=user,post=x)
-                dc[x] = 'true'
+                try:
+                    UserFollowing.objects.get(user_id=user,following_user_id=user2)
+                    a = {"liked":'true',"following":'true'}
+                    dc[x] = a
+                except:
+                    a = {"liked":'true',"folllowing":'false'}
+                    dc[x] = a
             except:
-                dc[x] = 'false'
+                try:
+                    UserFollowing.objects.get(user_id=user,following_user_id=user2)
+                    a = {"liked":'false',"following":'true'}
+                    dc[x] = a
+                except:
+                    a = {"liked":'false',"folllowing":'false'}
+                    dc[x] = a
         user_to_follow = User.objects.exclude(username__in = users).exclude(username = user)
+        notifications,count= get_notifications(id)
 
-        return render(request,'trending.html',{'posts':dc,'user_to_follow':user_to_follow})
+        return render(request,'trending.html',{'posts':dc,'notifications':notifications,'count':count,'user_to_follow':user_to_follow})
 
 def projects(request):
+    id = request.user.id
+    user = User.objects.get(id=id)
+    user_following = UserFollowing.objects.filter(user_id=user)
+    users =[]
+    for x in user_following:
+        users.append(x.following_user_id)
+    user_to_follow = User.objects.exclude(username__in = users).exclude(username = user)
     projects = Project.objects.all().order_by('-project_date')
-    return render(request,'projects.html',{'projects':projects})
+    dc={}
+    for x in projects:
+        user2 = User.objects.get(username=x.author_id)
+        try:
+            like = like_project.objects.get(user_id=user,project=x)
+            try:
+                UserFollowing.objects.get(user_id=user,following_user_id=user2)
+                a = {"liked":'true',"following":'true'}
+                dc[x] = a
+            except:
+                a = {"liked":'true',"folllowing":'false'}
+                dc[x] = a
+        except:
+            try:
+                UserFollowing.objects.get(user_id=user,following_user_id=user2)
+                a = {"liked":'false',"following":'true'}
+                dc[x] = a
+            except:
+                a = {"liked":'false',"folllowing":'false'}
+                dc[x] = a
+    notifications,count = get_notifications(id)
+    
+    return render(request,'projects.html',{'projects':dc,'notifications':notifications,'count':count,'user_to_follow':user_to_follow})
+
+def project_like(request,pk):
+    id = request.user.id
+    usr = User.objects.get(id=id)
+    project = Project.objects.get(pk=pk)
+    liked = False
+    try:
+        like = like_project.objects.get(user_id=usr , project=project).delete()
+
+    except:
+        liked = True
+        like = like_project.objects.create(user_id=usr , project=project)
+        like.save()
+        # push notification
+        user = project.author_id
+        mssg = f"{usr.username} liked your project idea"
+        notify = notification.objects.create(user_id = user, notification_message = mssg)
+        notify.save()
+    res = {
+        'liked':liked
+    }
+    response = json.dumps(res)
+    return HttpResponse(response,content_type="application/json")
+
+def comment_project(request,pk):    
+    if request.method == "POST":
+        id = request.user.id
+        project = Project.objects.get(pk = pk)
+        user = User.objects.get(id = id)
+        comment_data = request.POST['comment']
+        comment = project_comment.objects.create(project = project , user_id = user , comment = comment_data)
+        comment.save()
+        
+        # push notification
+        usr = project.author_id
+        print(usr)
+        mssg = f"{user.username} commented on your project idea"
+        notify = notification.objects.create(user_id = usr ,notification_message = mssg )
+        notify.save()
+
+        return HttpResponse('done')
+
 
 def search(request):
+    id = request.user.id
+    usr = User.objects.get(id=id)
     if request.GET.get('search'):
         keyword = request.GET['search']
         user =User.objects.all()
-        found_users = []
+        tag_objects = Project_tag.objects.filter(tag = keyword)
+        projects=[]
+        for x in tag_objects:
+            projects.append(x.project)
+        found_users = {}
         for i in user:
             if keyword == i.username or i.first_name == keyword:
-                found_users.append(i)
-                print(found_users)
-        return render(request , "search_results.html" , {'users':found_users})
+                try:
+                    x = UserFollowing.objects.get(user_id=usr,following_user_id = i)
+                    found_users[i] = 'true'
+                except:
+                    found_users[i] = 'false'
+                    
+                
+        notifications,count= get_notifications(id)
+        return render(request , "search_results.html" , {'users':found_users,'projects':projects,'notifications':notifications,'count':count})
 
 def post(request):
     id = request.user.id
@@ -116,9 +226,33 @@ def post(request):
     return redirect('/')
         
 def post_detail(request,pk):
-    post = Post.objects.get(pk = pk)
-    user = post.user_name
-    return HttpResponse( user)
+    id = request.user.id
+    user = User.objects.get(id=id)
+    user_following = UserFollowing.objects.filter(user_id=user)
+    users =[]
+    for x in user_following:
+        users.append(x.following_user_id) 
+    post = Post.objects.get(pk=pk)
+    user2 = User.objects.get(username = post.user_name)
+    try:
+        check_following = UserFollowing.objects.get(user_id = user,following_user_id=user2)
+        following = 'true'
+    except:
+        following = 'false'
+
+    try:
+        like = Like.objects.get(user=user , post=post)
+        liked = 'true'
+                    
+    except:
+        liked = 'false'
+
+    user_to_follow = User.objects.exclude(username__in = users).exclude(username = user)
+    notifications,count= get_notifications(id)
+
+    return render(request, 'post.html',{'post':post,'liked':liked,'following':following,'user_to_follow':user_to_follow,'notifications':notifications,'count':count})
+
+    # return render(request,'post.html',{'post':post})
 
 def comment(request,pk):    
     if request.method == "POST":
@@ -200,20 +334,43 @@ def share_project(request):
         usr = User.objects.get(id=id)
         title = request.POST['project-title']
         desc = request.POST['project-description']
+
         if request.POST['project-link']:
             link = request.POST['project-link']
             project = Project.objects.create(author_id=usr,title=title,description=desc,link=link)
+
         else:
             project = Project.objects.create(author_id=usr,title=title,description=desc)
-        
+
         project.save()
+        if  request.POST.getlist('tag'):
+            tags = request.POST.getlist('tag')
+            for tag in tags:
+                t = Project_tag.objects.create(project=project,tag=tag)
+                t.save()
+
         return redirect('/')
 
 def show_project(request,pk):
     id = request.user.id
     usr = User.objects.get(id=id)
     project = Project.objects.get(pk=pk)
-    return render(request,'project.html',{'project':project})
+    usr2 = User.objects.get(username=project.author_id)
+    try:
+        check_following = UserFollowing.objects.get(user_id = usr,following_user_id=usr2)
+        following = 'true'
+    except:
+        following = 'false'
+
+    try:
+        like = like_project.objects.get(user_id=usr , project=project)
+        liked = 'true'
+                    
+    except:
+        liked = 'false'
+    
+    notifications,count = get_notifications(id)
+    return render(request,'project.html',{'project':project,'following':following,'liked':liked,'notifications':notifications,'count':count})
 
 
 def collab_request(request,pk):
@@ -260,5 +417,6 @@ def collabs(request):
         x = json.dumps(data)
         return HttpResponse(x)
     except:
+        notifications,count = get_notifications(id)
         col = collab.objects.filter(requested_user=usr)
-        return render(request,'collabs.html',{'collabs':col})
+        return render(request,'collabs.html',{'collabs':col,'notifications':notifications,'count':count})

@@ -2,19 +2,85 @@
 {% load static %}
 <title>{% block title %}Projects{% endblock title %}</title>
 {% block content %}
-
-<div class="container">
-    <div class="left-bar">
-      <div class="left-bar-nav">
-        <a href="/"><h3><img src="{% static 'home-icon.png' %}">Explore</h3></a>
-        <a href="{% url 'trending' %}"><h3 ><img src="{% static 'trending-icon.png' %}">Trending</h3></a>        
-        <a href="/"><h3 class='active'><img src="{% static 'home-icon.png' %}">Projects</h3></a>
+<div class="share-project-container" id="share-project-container">
+  <!-- <h3>This is the portal through which you can share your Project idea</h3> -->
+  <section class="user-info">
+    <div class="user-info-profile">
+      <a href="{% url 'user' user.username %}"><img src="{{user.profile.pic.url}}" alt="">
+    </div>
+    <div class="user-info-username">
+      <a href="{% url 'user' user.username %}"><h4>{{user.first_name}}</h4>
+      <i>@{{user.username}}</i></a>
+    </div>
+    <div class="cancel-icon">
+      <img src="{% static 'cancel.png' %}" alt="" onclick="close_window()">
+    </div>
+  </section>
+  <section class='project-info'>
+    <form action="{% url 'share-project' %}" method="POST">
+      {% csrf_token %}
+      <div class="title-div">
+        <label for="title">Title</label>
+        <input type="text" name="project-title" id="">
       </div>
-      <div class="left-bar-user-profile">
-        <img src="{{user.profile.pic.url}}" alt="" srcset="">
-        <h3>{{user.username}}</h3>
+      <div class="description-div">
+        <label for="description">Description</label>
+        <textarea name="project-description" id=""></textarea>
+      </div>
+      <div class="link-div">
+        <label for="link">Link </label>
+        <input type="text" name="project-link" id="">
+      </div>
+      <div class="tag-div">
+        <label for="tags">Add Tags</label>
+        <input type="text" id="add-tag">
+        <div class="added-tags"></div>
+      </div>
+      <!-- <div class="image-div">
+        <input type="file" src="" alt="">
+      </div> -->
+      <div class="submit-div">
+        <input type="submit" value="Share">
+      </div>
+    </form>
+  </section>
+</div>
+
+<div class="container" id="container">
+  <div class="left-bar">
+    <div class="left-bar-nav">
+      <a href="/"><h3><img src="{% static 'home-icon.png' %}">Explore</h3></a>
+      
+      <a href="{% url 'trending' %}"><h3><img src="{% static 'trending-icon.png' %}">Trending</h3></a>
+      
+      <a href="{% url 'projects' %}"><h3 class='active'><img src="{% static 'home-icon.png' %}">Projects</h3></a>
+    </div>
+    <div class="left-bar-section">
+      <div class="first-section">
+        <div class="left-bar-user-details">
+          <div class="left-bar-user-profile">
+            <img src="{{user.profile.pic.url}}" alt="" srcset="">
+          </div>
+          <div class="left-bar-user">
+            <h3>{{user.first_name}}</h3>
+            <i>@{{user.username}}</i>
+          </div>
+
+        </div>
+        <div class="left-bar-add-project">
+          <img src="{% static 'plus.png' %}" alt="" id='add-project-icon' onclick="share_project()">
+        </div>        
+      </div>
+      <div class="second-section">
+        <div class="followers-display">
+          {{user.followers.count}} Followers
+        </div>
+        <div class="following-display">
+          {{user.following.count}} Following
+        </div>
       </div>
     </div>
+  </div>
     <div class="main-container">
       <div class="share-post">
         <form action="{% url 'post' %}" method = "post" enctype="multipart/form-data">
@@ -32,7 +98,7 @@
       
       <br>
       <div class="explore-container">
-      {% for project in projects %}
+      {% for project,value in projects.items %}
         <div class="recent-posts">
           <div class="recent-post-usr">
             <div class="recent-post-usr-img">
@@ -56,11 +122,21 @@
                     </div>
                   {% endif %}
                   <div class="option">
-                    <a href="{% url 'follow' project.author_id %}">Unfollow</a>
+                    {% if user != project.author_id %}
+                      <a href="{% url 'follow' project.author_id %}">
+                        {% if value.following == 'true' %}
+                          Unfollow
+                        {% else %}
+                          Follow
+                        {% endif %}
+                      </a>
+                    {% endif %} 
                   </div>
-                  <div class="option">
-                    <a href="{% url 'message' project.author_id %}">Message</a>
-                  </div>                  
+                  {% if user != project.author_id %}
+                    <div class="option">
+                      <a href="{% url 'message' project.author_id %}">Message</a>
+                    </div>
+                  {% endif %}                  
                 </div>
             </div>  
             </div>            
@@ -85,24 +161,101 @@
                     <div class="project-media">
                         <img src="{{project.image.url}}" alt="" srcset="">
                     </div>
-                {% endif %}    
-          </div> 
-          <div class="recent-post-reactions">
-          
-            <div class="recent-post-likes" id="{{project.id}}" data-url="{% url 'like' project.id %}">
-                {% if value == 'true' %}
-                  <img src="{% static 'liked-icon.png' %}" id="like-dislike{{i.id}}" alt="">
-                {% else %}
-                  <img src="{% static 'like-icon.png' %}"  id="like-dislike{{i.id}}"alt="">
                 {% endif %}
-                  <p id="likes-count{{project.id}}">{{i.likes.count}}</p>
+                {% if project.tag.all %}
+                  <label for="project-tags">Related Tags</label>
+                  <div class="project-tags">
+                    {% for tag in project.tag.all %}
+                      <div class="tag">{{tag.tag}}</div>
+                    {% endfor %}
+                  </div>
+            {% endif %}    
+          </div> 
+          <div class="recent-post-reactions">        
+            <div class="recent-post-likes" id="{{project.id}}" onclick="like_project('{{project.id}}')" data-url="{% url 'like-project' project.id %}">
+                {% if value.liked == 'true' %}
+                  <img src="{% static 'liked-icon.png' %}" id="like-dislike{{project.id}}" alt="">
+                {% else %}
+                  <img src="{% static 'like-icon.png' %}"  id="like-dislike{{project.id}}"alt="">
+                {% endif %}
+                  <p id="likes-count{{project.id}}">{{project.likes.count}}</p>
   
             </div>
             
             <div class="recent-post-comments">
-              <img src="{% static 'comment-icon.png' %}" alt="" onclick="opencomments('{{i.id}}')">
+              <img src="{% static 'comment-icon.png' %}" alt="" onclick="opencomments('{{project.id}}')">
             </div>    
             
+          </div>
+          <div class="show-comment" id="post-comment{{project.id}}">
+            <div class="comments{{project.id}}">
+              {% if project.comments.all %}
+                {% for detail in project.comments.all %}  
+                <div class="comment-user-details">
+                  <div class="comment-user-profile">
+                    <img src="{{detail.user_id.profile.pic.url}}">
+                  </div>
+                  <div class="comment-username">
+                    {{detail.user_id}}
+                  </div>
+                  <div class="comment-time">
+                    {{detail.comment_date}}
+                  </div>
+                </div>
+                <div class="comment-details">
+                  {{detail.comment}}<br>
+                </div>
+                {% endfor %}
+              {% else %}
+                  
+              {% endif %}         
+            </div> 
+    
+            <form method="POST" id="comment-post{{project.id}}">
+              {% csrf_token %}
+              <div class="post-comment">
+                <!-- <img src="{{user.profile.pic.url}}" alt="/> -->
+                <img src="{{user.profile.pic.url}}">
+                <input type="text" name="comment" id="comment{{project.id}}" placeholder="Leave your comment here ...">
+                <input type="image" src="{% static 'comment-post.png' %}" id="submit-button">
+              </div>
+            </form>
+            <script>
+              $("#comment-post{{project.id}}").on("submit", function (e) {
+                e.preventDefault();
+                let form = $("#comment-post{{project.id}}");
+                let comment = $("#comment{{project.id}}").val();
+                $.ajax({
+                  type: "POST",
+                  url: "{% url 'project-comment' project.id %}",
+                  data: form.serialize(),
+                  success: function (data) {
+                    comment_element = `
+                      <div class="comment-user-details">
+                        <div class="comment-user-profile">
+                          <img src="{{user.profile.pic.url}}">
+                        </div>
+                        <div class="comment-username">
+                          {{user.username}}
+                        </div>
+                        <div class="comment-time">
+                          Now
+                        </div>
+                      </div>
+                      <div class="comment-details">
+                        ${comment}<br>
+                      </div>                  
+                    `
+                    
+                    $('.comments{{project.id}}').append(comment_element);
+                    form[0].reset();
+                   
+                  },
+                });
+                return false;
+              });
+            </script>
+    
           </div>
 
          </div>
@@ -112,7 +265,7 @@
     <div class="right-bar">
       <div class="right-bar-chats">
         <h3>You May Know</h3>
-        <!-- <div class="content">
+        <div class="content">
           {% for users in user_to_follow %}
             <div class="to-follow">
               <div class="to-follow-pic">
@@ -126,7 +279,7 @@
               </div>
               
             </div>
-          {% endfor %} -->
+          {% endfor %}
       </div>
     </div>  
   </div>  

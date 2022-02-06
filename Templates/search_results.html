@@ -3,22 +3,63 @@
     <title>{% block title %}Results{% endblock title %}</title>
 {% block content %}  
     <div class="search-results-container"style = "margin-top:6%;">
-        {% if users %}
-            {{users|length}} Users found <br><br> 
-            {% for i in users %}
-                <div class="users-found">
-                    <a href = "{% url 'user' i.username %}"><img src = "{{i.profile.pic.url}}">
-                    <div class="user-details">
-                        <b>{{i.username}}</b></a><br>
-                        <i>{{i.profile.about}}</i><br>
-                    </div>  
-                    <div class="ping">
-                        <a href="{% url 'user-chat' i.username %}"><button><p>Message</p> <img src="{% static 'chaticon.png'%}"></button>
+        <div class="user-section">
+            {% if users %}
+                {{users|length}} Users found <br><br> 
+                {% for i,value in users.items %}
+                    <div class="users-found">
+                        <a href = "{% url 'user' i.username %}"><img src = "{{i.profile.pic.url}}">
+                        <div class="user-details">
+                            <b>{{i.first_name}}</b></a><br>
+                            <!-- <i>@{{i.username}}</i><br> -->
+                            <b>{{i.profile.about}}</b><br>
+                        </div>  
+                        {% if user.username != i.username %}
+                            <div class="ping">
+                                <a href="{% url 'follow' i.username %}"><button class="follow"><p>
+                                    {% if value == 'true' %}
+                                        UnFollow
+                                    {% else %}
+                                        Follow
+                                    {% endif %}
+                                    </p></button></a>
+                                <a href="{% url 'user-chat' i.username %}"><button class="message"><p>Message</p></button></a>
+                            </div>
+                        {% endif %}
                     </div>
+                {% endfor %}
+            {% else %}
+                User not found
+            {% endif %}
+        </div>
+        <header>Projects</header>
+        <div class="project-section">
+            {% if projects %}
+                <div class="searched-projects">
+                    {% for project in projects %}
+                        <div class="project" onclick="location.href='/project/id:{{project.id}}';">
+                            <div class="user-detail">
+                                <a href="{% url 'user' project.author_id %}"><img src="{{project.author_id.profile.pic.url}}" alt=""></a>
+                                <div class="names">
+                                    <a href="{% url 'user' project.author_id %}"><h3>{{project.author_id.first_name}}</h3>
+                                    <i>@{{project.author_id}}</i></a>
+                                </div>
+                                
+                            </div>
+                            <div class="project-detail">    
+                                <h4>Project : <b>{{project.title}}</b></h4>
+                                <div class="related-tags">
+                                    <h4>Related Tags : </h4>
+                                    {% for i in project.tag.all %}
+                                         <i>{{i.tag}}</i>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <!-- <h4>{{project.description}}</h4> -->
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
-        {% else %}
-            User not found
-        {% endif %}
+            {% endif %}
+        </div>                
     </div>
 {% endblock content %}

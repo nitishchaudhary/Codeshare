@@ -33,6 +33,11 @@
         <label for="link">Link </label>
         <input type="text" name="project-link" id="">
       </div>
+      <div class="tag-div">
+        <label for="tags">Add Tags</label>
+        <input type="text" id="add-tag">
+        <div class="added-tags"></div>
+      </div>
       <!-- <div class="image-div">
         <input type="file" src="" alt="">
       </div> -->
@@ -107,7 +112,15 @@
             <h6>{{i.date_posted}}</h6>
           </div>
           <div class="recent-post-usr-follow">
-              <a href="{% url 'user-chat' i.user_name %}"><button>Message</button></a>
+            {% if user != i.user_name %}
+              <a href="{% url 'follow' i.user_name %}"><button>
+                {% if value.following == 'true' %}
+                  Unfollow
+                {% else %}
+                  Follow
+                {% endif %}
+              </button></a>
+            {% endif %}
             <div class="hamburger" onclick="hamburger('{{i.id}}')">
               <div class="bar1"></div>
               <div class="bar2"></div>
@@ -119,9 +132,11 @@
                   <a href="{% url 'delete' i.id %}">Delete post</a>
                 </div>
               {% endif %}
-              <div class="option">
-                <a href="{% url 'follow' i.user_name %}">Unfollow</a>
-              </div>
+              {% if user != i.user_name %}
+                <div class="option">
+                  <a href="{% url 'user-chat' i.user_name %}">Message</a>
+                </div>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -136,7 +151,7 @@
         <div class="recent-post-reactions">
         
           <div class="recent-post-likes" id="{{i.id}}" onclick="like('{{i.id}}')" data-url="{% url 'like' i.id %}">
-              {% if value == 'true' %}
+              {% if value.liked == 'true' %}
                 <img src="{% static 'liked-icon.png' %}" id="like-dislike{{i.id}}" alt="">
               {% else %}
                 <img src="{% static 'like-icon.png' %}"  id="like-dislike{{i.id}}"alt="">

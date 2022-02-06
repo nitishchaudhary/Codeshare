@@ -861,7 +861,7 @@ span:before,span:after{
     border: solid 1px rgb(77, 77, 77);
     border-radius: 10px;
     position: absolute;
-    margin:8% 50%;
+    margin:5% 50%;
     transform: translate(-50%);
     color: whitesmoke;
     font-family: 'lato';
@@ -869,7 +869,7 @@ span:before,span:after{
     padding: 10px;
     text-align: center;
     background-color:rgb(51, 61, 65) ;
-    height: 70%;
+    height: auto;
     opacity: 70%;
     /* box-shadow: turquoise; */
     width: 50%;
@@ -930,7 +930,7 @@ span:before,span:after{
     /* padding: 10px; */
 }
 .project-info div{
-    padding: 10px;
+    padding: 5px;
     /* border: solid 1px white; */
 }
 .project-info label{
@@ -1166,9 +1166,39 @@ span:before,span:after{
     /* border: solid 1px white; */
     color:rgb(200,200,200);
 }
-.profile-user-about{
-    /* border: solid 1px white; */
+.user-activity{
+    border-top: solid 1px rgb(65, 65, 65);
+    padding: 10 ;
+    margin-top: 10px;
+}
+.user-activity h3{
+    font-family: 'segoe UI';
+    font-size: 17px;
+    letter-spacing: 1px;
+    padding: 5px;
+    font-weight: 500;
+    color: #b9d1e6;
+}
+.activity{
+    border: solid 1px rgb(128, 128, 128);
+    padding: 5px;
+    border-radius: 10px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 10px; */
+}
+.activity i{
+    font-size: 13px;
+    font-family: 'segoe UI';
+    font-weight: 500;
     /* padding: 5px; */
+    margin: 5px;
+    /* text-align: left; */
+    /* border: solid 1px white; */
+}
+.activity i b{
+    font-size: 14px;
 }
 .profile-container button{
     height: 40px;
@@ -1183,6 +1213,7 @@ span:before,span:after{
     color: white;
     transition: 0.2s ease-in-out;
     font-family: 'lato',sans-serif;
+    margin-bottom: 10px;
     /* background: transparent; */
 }
 .profile-container button:hover{
@@ -1224,15 +1255,92 @@ span:before,span:after{
     margin-top: 10%;
 }
 
-.search-results-container{
+.searched-projects .project{
+    background-color: rgb(54, 54, 54);
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.searched-projects .project{
+    /* display: flex; */
+    padding: 10px;
+}
+.searched-projects .user-detail{
+    display: flex;
+}
+.user-detail .names{
+    /* border: solid 1px white; */
+    margin: 10px;
+}
+
+.names a{
+    text-decoration: none;
+    font-style: normal;
+    font-size: 13px;
+    color: grey;
+}
+.user-detail .names i{
+    font-style: normal;
+    font-size: 13px;
+}
+.searched-projects .user-detail h3{
+    /* margin: 10px; */
+    font-size: 15px;
+    color: #b3b3b3;
+}
+.searched-projects .project-detail h4{
+    font-size: 15px;
+    color: rgb(230, 230, 230);
+    width: 100%;
+    /* margin: 0 auto; */
+    /* letter-spacing: 1px; */
+}
+.searched-projects .project-detail h4{
+    font-size: 16px;
+    color: #c5d0da;
+    /* border: solid 1px white; */
+    width: fit-content;
+}
+.related-tags{
+    display: flex;
+    /* border:solid 1px white; */
+}
+.project-detail i{
+    background-color: rgb(27, 149, 153);
+    padding: 5 8;
+    border-radius: 10px;
+    margin: 5px;
+    width: fit-content;
+    color: rgb(216, 216, 216);
+}
+.project-detail{
+    display: flex;
+    flex-direction: column;
+}
+.searched-projects .project-detail h4 b{
+    font-style: normal;
+    font-family: 'lato';
+    font-weight: 600;
+}
+
+.search-results-container header{
+    font-family: 'segoe UI';
+    color: rgb(221, 221, 221);
+    font-size: 20px;
     margin: 0 auto;
+    border-bottom: solid 1px rgb(95, 95, 95);
+    width: 90%;
+    padding: 10 5;
+}
+.user-section,.project-section{
+    margin: 15 auto;
     /* border: 1px solid grey; */
     border: none;
     width: 90%;
     color: grey;
     font-family: 'lato';
     font-weight: 400;
-    margin-top: 10%;
+    /* margin-top: 10%; */
     padding: 15px;
     border-radius: 15px;
     background-color: rgb(28, 30, 34);
@@ -1258,36 +1366,67 @@ span:before,span:after{
     font-size: 12px;
     font-style: normal;
 }
+.user-details b{
+    font-size: 15px;
+    margin-top: 5px;
+    /* border: solid 1px white; */
+}
 .users-found a{
     text-decoration: none;
-    color: #2c4f6e;
+    color: #4f7596;
 }
 .ping {
     margin:auto;
     position: relative;
     margin-right: 1px;
 }
-.ping button{
+.follow{
     /* background-color:rgb(123, 206, 206);    */
-    border: 1px solid rgb(53, 53, 53);
-    background: transparent;
-    border-radius: 5px;
+    /* border: 1px solid rgb(53, 53, 53); */
+    /* background: transparent; */
+    border: none;
+    background-color: #26949c;
+    border-radius: 20px;
     font-size: 17px;
     transition: 0.2s;   
     cursor: pointer;
+    height: 40px;
     width: 100px;
-    padding: 2px;
+    padding: 5px;
     letter-spacing: 1px;
-    font-size: 14px;
-    font-family: "roboto";
-    font-weight: 100;
-    color: rgb(189, 189, 189);
+    font-size: 15px;
+    font-family: "lato";
+    font-weight: 600;
+    color: rgb(218, 218, 218);
 }
-.ping button:hover{
-    background-color: rgb(1, 55, 70);
-    border: none;
+.message {
+    background: transparent;
+        /* background-color:rgb(123, 206, 206);    */
+        border: 1px solid rgb(53, 53, 53);
+        /* background: transparent; */
+        /* background-color: #4f7596; */
+        border-radius: 20px;
+        font-size: 17px;
+        transition: 0.2s;   
+        cursor: pointer;
+        height: 40px;
+        width: 100px;
+        padding: 5px;
+        letter-spacing: 1px;
+        font-size: 15px;
+        font-family: "lato";
+        font-weight: 600;
+        color: rgb(189, 189, 189);
+}
+.message:hover{
+    /* background-color: rgb(1, 55, 70); */
+    border: solid 1px rgb(201, 201, 201);
     color: white;
     
+}
+.follow:hover{
+    background-color: #2ca8b1;
+        
 }
 .ping button img{
     height: 20px;
@@ -1514,7 +1653,7 @@ span:before,span:after{
     padding:10px;
     text-align: left;
 }
-.project-title,.project-description, .project-link{
+.project-title,.project-description,.project-tags, .project-link{
     padding: 10 15;
     border-radius: 5px;
     background-color: rgb(43, 43, 43);
@@ -1524,7 +1663,36 @@ span:before,span:after{
     color: rgb(220, 234, 235);
     font-family: 'segoe UI';
     font-size: 15px;
+    display: flex;
     /* border: solid 1px white; */
+}
+.tag{
+    background-color: rgb(54, 54, 54);
+    width: fit-content;
+    margin: 5px;
+    padding: 5 10 10 10;
+    border-radius: 10px;
+}
+.added-tags{
+    display: flex;
+    /* border: solid 1px white; */
+
+}
+
+.added-tags input[name="tag"]{
+    background-color: rgb(104, 104, 104);
+    width: fit-content;
+    border-radius: 10px;
+    padding: 5px;
+    /* margin-bottom: 5px; */
+    text-align: left;
+}
+.added-tags img{
+    height: 23px;
+    width: 23px;
+    margin-left: -30px;
+    margin-bottom: -6px;
+    
 }
 .project-link a{
     text-decoration: none;

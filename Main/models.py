@@ -45,7 +45,7 @@ class Comment(models.Model):
 class Like(models.Model):
     user = models.ForeignKey(User , related_name = 'likes' ,on_delete=CASCADE )
     post  = models.ForeignKey(Post , related_name = 'likes' , on_delete=CASCADE)
-
+    
 class UserFollowing(models.Model):
     user_id = models.ForeignKey(User , related_name="following", on_delete=models.CASCADE)
     following_user_id = models.ForeignKey(User , related_name="followers",on_delete=models.CASCADE)
@@ -58,7 +58,7 @@ class Message(models.Model):
     image = models.ImageField(upload_to = 'message_media',blank=True)
 
 class Project(models.Model):
-    author_id = models.ForeignKey(User,related_name="author",on_delete=models.CASCADE)
+    author_id = models.ForeignKey(User,related_name="project",on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=500)
     link = models.CharField(max_length=255 , blank=True)
@@ -70,6 +70,11 @@ class Project(models.Model):
     def get_absolute_url(self):
         return reverse('project-detail' , kwargs={'pk':self.pk})
 
+class Project_tag(models.Model):
+    project = models.ForeignKey(Project,related_name='tag',on_delete=models.CASCADE)
+    tag = models.CharField(max_length=50)
+    
+
 class collab(models.Model):
     project_id = models.ForeignKey(Project,related_name='collab_request',on_delete=models.CASCADE)
     requesting_user = models.ForeignKey(User,related_name="requesting_user",on_delete=models.CASCADE)
@@ -80,3 +85,13 @@ class notification(models.Model):
     notification_message = models.TextField(default=None)
     read = models.BooleanField(default=False)
     notification_time = models.DateTimeField(default=timezone.now())
+
+class like_project(models.Model):
+    user_id = models.ForeignKey(User,related_name='project_likes',on_delete=models.CASCADE)
+    project = models.ForeignKey(Project,related_name='likes',on_delete=models.CASCADE)
+
+class project_comment(models.Model):
+    user_id = models.ForeignKey(User,related_name='project_comments',on_delete=models.CASCADE)
+    project = models.ForeignKey(Project,related_name="comments",on_delete=models.CASCADE)
+    comment = models.TextField()
+    comment_date = models.DateTimeField(default=timezone.now())

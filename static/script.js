@@ -1,4 +1,25 @@
 
+$('#add-tag').keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+        // alert('You pressed a "enter" key in textbox');  
+        event.preventDefault();
+        let tag = $('#add-tag').val();
+        tag = `
+            <div class="tag-detail" id="${tag}">
+                <input type="text" name="tag" size="${tag.length}"value="${tag}"><img src="/static/cancel.png" onclick="cancel_tag('${tag}')"></img></input>
+            </div>
+        `
+        $('.added-tags').append(tag);
+        $('#add-tag').val('');
+        return false;
+    }
+});
+
+const cancel_tag = (value) =>{
+    $("#"+value).remove();
+}
+
 const sent_requests =() =>{
     $.ajax(
         {
@@ -158,6 +179,30 @@ const like =(id) => {
         }
     );
 }
+
+const like_project =(id) => {
+    $.ajax(
+        {
+            type:"GET",
+            url:"/like-project/id:"+id,
+            success:function(data){
+                let likescount = document.getElementById("likes-count"+id);
+                let icon = document.getElementById("like-dislike"+id);
+                if(data.liked == true){
+                    likescount.innerText = Number(likescount.innerText)+1;
+                    icon.src ="/static/liked-icon.png";
+                    console.log("liked");
+                }
+                else{
+                    likescount.innerText = Number(likescount.innerText)-1;
+                    icon.src ="/static/like-icon.png";
+                    console.log("disliked");
+                }
+            }
+        }
+    );
+}
+
 
 const hamburger=(id)=>{
     let options = document.getElementById('options'+id);
