@@ -1,1 +1,1 @@
-web: gunicorn Codeshare.asgi --log-file=-
+web: daphne Codeshare.asgi:application --port $PORT --bind 0.0.0.0

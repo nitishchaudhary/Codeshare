@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from datetime import date
 from email.policy import default
 from django.db import models

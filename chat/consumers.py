@@ -4,7 +4,7 @@ from channels.consumer import AsyncConsumer
 import json
 from Main.models import Message
 User = get_user_model()
-
+import asyncio
 class ChatConsumer(AsyncConsumer):
      
      async def websocket_connect(self,event):
