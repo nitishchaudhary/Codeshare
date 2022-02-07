@@ -1,6 +1,6 @@
 asgiref==3.5.0
 astroid==2.4.2
-asyncio==3.4.3
+# asyncio==3.4.3
 attrs==21.4.0
 autobahn==21.11.1
 Automat==20.2.0
