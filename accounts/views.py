@@ -41,8 +41,8 @@ def update(request):
         user = User.objects.get(pk=id)
         username = request.POST['username']
         bio = request.POST['About']
-        firstname = reqeust.POST['firstname']
-        firstname = reqeust.POST['lastname']
+        firstname = request.POST['firstname']
+        firstname = request.POST['lastname']
         if 'image' in request.FILES:
             image = request.FILES['image']
             user.profile.pic = image
