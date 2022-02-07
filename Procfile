@@ -1,1 +1,1 @@
-web: daphne Codeshare.asgi --log-file=-
+web: gunicorn Codeshare.asgi --log-file=-
