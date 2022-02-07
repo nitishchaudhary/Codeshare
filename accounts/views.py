@@ -42,7 +42,7 @@ def update(request):
         username = request.POST['username']
         bio = request.POST['About']
         firstname = request.POST['firstname']
-        firstname = request.POST['lastname']
+        lastname = request.POST['lastname']
         if 'image' in request.FILES:
             image = request.FILES['image']
             user.profile.pic = image
