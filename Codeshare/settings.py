@@ -10,8 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import django_heroku
 from pathlib import Path
 import os
+
+# fromd decouple im
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,11 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'n&@t3_(te+%ct#timl#oingcijh(2k6wc2miy!#ns-acq2c)%-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+# DJANGO_SETTINGS_MODULE = config.settings.production
 
 ALLOWED_HOSTS = [
     '326e-2405-204-30af-a836-79ff-e0e3-b06b-2c5d.ngrok.io',
-    '127.0.0.1'
+    '127.0.0.1',
+    'codescape006.herokuapp.com'
 ]
 
 
@@ -41,7 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
     'Main.apps.MainConfig',
     'django.contrib.sites',
     'accounts.apps.AccountsConfig',
@@ -55,6 +59,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -89,12 +94,20 @@ ASGI_APPLICATION = 'chat.asgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'Codeshare',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'nitish',
+    #     'HOST': 'localhost'
+    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Codeshare',
-        'USER': 'postgres',
-        'PASSWORD': 'nitish',
-        'HOST': 'localhost'
+        'NAME': 'd5gd69qgj9meb1',
+        'USER': 'jlbztgzfojgidw',
+        'PASSWORD': '1e03cd5e50fd95f518f8c9e9578311a61ceedb40ed251ac07969e893e655e0e6',
+        'HOST': 'ec2-54-235-98-1.compute-1.amazonaws.com',
+        'PORT':'5432'
     }
 }
 
@@ -142,6 +155,7 @@ STATICFILES_DIRS =[
 STATIC_ROOT = os.path.join(BASE_DIR,'assests')
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
+django_heroku.settings('locals()')
 AUTHENTICATION_BACKEND = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
