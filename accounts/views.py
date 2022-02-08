@@ -41,11 +41,18 @@ def update(request):
         user = User.objects.get(pk=id)
         username = request.POST['username']
         bio = request.POST['About']
+<<<<<<< HEAD
         
+=======
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+>>>>>>> c99821889bf6495c135be1a85d306d0ba7af011b
         if 'image' in request.FILES:
             image = request.FILES['image']
             user.profile.pic = image
         user.username = username
+        user.first_name = firstname
+        user.last_name = lastname
         user.profile.about = bio
         user.save()
         return redirect('/')

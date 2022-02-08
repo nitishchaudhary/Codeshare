@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'n&@t3_(te+%ct#timl#oingcijh(2k6wc2miy!#ns-acq2c)%-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 # DJANGO_SETTINGS_MODULE = config.settings.production
 
 ALLOWED_HOSTS = [
@@ -59,7 +59,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+#     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CSRF_TRUSTED_ORIGINS = ["https://codescape006.herokuapp.com"]
 
 ROOT_URLCONF = 'Codeshare.urls'
 
@@ -149,10 +150,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATICFILES_DIRS =[
-#     os.path.join(BASE_DIR,'static')
-# ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS =[
+    os.path.join(BASE_DIR,'static')
+]
+# WHITENOISE_MANIFEST_STRICT = False
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
@@ -174,7 +176,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }   
 
-SITE_ID = 4
+SITE_ID = 5
 LOGIN_REDIRECT_URL = '/'
 # SIGNUP_REDIRECT_URL = '/welcome'
 LOGOUT_DIRECT_URL = '/'
