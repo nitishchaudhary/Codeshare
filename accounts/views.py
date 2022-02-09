@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
 from Main.models import Profile
+from django.contrib import messages
 
 # Create your views here.
 def login(request):
@@ -15,8 +16,10 @@ def login(request):
             auth_login(request , user)
             return redirect('/')
         else:
-            return HttpResponse("wrong credentials")
+            messages.error(request,'Invalid Credentials')
+            return redirect('/')
     else:
+        
         return render(request, 'login.html')
 def sign_up(request):
     if request.method == "POST":

@@ -409,6 +409,16 @@ li a:hover {
   border-radius: 10px;
   /* background: transparent; */
 }
+.login-form b{
+  color: rgb(214, 6, 6);
+  /* border: solid 1px whitesmoke; */
+  width: 100px;
+  padding: 5px;
+  font-family: 'segoe UI';
+  font-weight: 400;
+  margin-top: 10px;
+
+}
 .login-form p {
   color: rgb(220, 220, 220);
   font-family: "segoe UI";

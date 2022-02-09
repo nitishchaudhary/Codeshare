@@ -19,17 +19,6 @@
         <div class="logo">
           <a href="/">codespace</a>
         </div>
-        <!-- <div class="search">
-          <input
-            type="search"
-            placeholder="Enter text to search"
-            name="search"
-            id="search-box"
-          />
-          <button type="submit" id="searchBtn">
-            <i class="fa fa-search"></i>
-          </button>
-        </div> -->
         <ul>
           <li><a href="#about">About</a></li>
           <li><a href="about">Connect</a></li>
@@ -53,15 +42,16 @@
               JOIN THE COMMUNITY
             </button>
           </div>
-          <!-- <div class="explore">
-            <h1>OR</h1>
-            <br />
-            <a href="explore"><button>Know about us first</button></a>
-          </div> -->
+
         </div>
         <div class="right-container">
           <div class="login-form">
             <p>Login</p>
+            {% if messages %}
+              {% for mssg in messages %}
+                <b>{{mssg}}</b>
+              {% endfor %}
+            {% endif %}
             <form action="accounts/login" autocomplete="off" method="post">
               {% csrf_token %}
               <input
