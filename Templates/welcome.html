@@ -15,7 +15,7 @@
         </header>
         <section class="content">
             <header><h2>Personal Information</h2></header>
-            <form action="{% url 'welcome-user' %}" method="POST" id="set-up-form">
+            <form action="{% url 'welcome-user' %}" autocomplete="off" method="POST" id="set-up-form">
                 {% csrf_token %}
                 <div class="name">
                     <div class="first-name">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="about">
                     <label for="about">About</label>
-                    <textarea name="about" id="" cols="30" rows="8"></textarea>
+                    <textarea name="about" id="" cols="30" rows="5"></textarea>
                 </div>
                 <div class="submit-section">
                     <div class="profile-image">

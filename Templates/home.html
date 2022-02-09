@@ -62,7 +62,7 @@
         <div class="right-container">
           <div class="login-form">
             <p>Login</p>
-            <form action="accounts/login" method="post">
+            <form action="accounts/login" autocomplete="off" method="post">
               {% csrf_token %}
               <input
                 type="text"
@@ -94,7 +94,7 @@
       </div>
       <div id="sign-up-form">
         <header><p>Sign Up</p><img src="{% static 'cancel.png' %}" onclick="close_signup()"></header>
-        <form action="accounts/sign-up" method="post">
+        <form action="accounts/sign-up" autocomplete="off" method="post">
           {% csrf_token %}
           <input
             type="text"

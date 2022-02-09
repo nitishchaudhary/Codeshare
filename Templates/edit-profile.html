@@ -8,25 +8,81 @@
 {% block content %}  
 
   <div class="main-container-profile">
+    <div class="followers-list" style="display: none;">
+      <header>
+        <h2>Followers List</h2>
+      </header>
+      <div class="list">
+        {% for i in user.followers.all %}
+          <div class="list-user">
+            <div class="list-user-profile">
+              <img src="{{i.user_id.profile.pic.url}}" alt="" srcset="">
+            </div>
+            <div class="list-user-name">
+              <div class="first-name">
+                <b>{{i.user_id.first_name}}</b>
+              </div>
+              <div class="user-name">
+                  <i>@{{i.user_id}}</i>
+              </div>
+            </div>
+            <div class="list-user-mssg">
+              <a href="{% url 'user-chat' i.user_id %}"><button>Message</button></a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>    
+    </div>
+    <div class="following-list" style="display: none;">
+      <header>
+        <h2>Following List</h2>
+      </header>
+      <div class="list">
+        {% for i in user.following.all %}
+          <div class="list-user">
+            <div class="list-user-profile">
+              <img src="{{i.following_user_id.profile.pic.url}}" alt="" srcset="">
+            </div>
+            <div class="list-user-name">
+              <div class="first-name">
+                <b>{{i.following_user_id.first_name}}</b>
+              </div>
+              <div class="user-name">
+                  <i>@{{i.following_user_id}}</i>
+              </div>
+            </div>
+            <div class="list-user-mssg">
+              <a href="{% url 'user-chat' i.following_user_id %}"><button>Message</button></a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
     <div class="profile-container">
       <img src="{{user.profile.pic.url}}" alt="" style="width: 100px;height:100px; border-radius:50%">
       <div class="profile-user-name">
-        <h2>{{user.username}}</h2>
+        <h2>{{user.first_name}}</h2>
         <i>@{{user.username}}</i>
       </div>
       <div class="profile-user-about">
         <h5>{{user.profile.about}}</h5><br>
       </div>
-      <!-- {%if user.username == user.username %}
-        <a href="edit-profile"><button>Edit profile</button></a><br><br>
-      {% endif %} -->
+
       <div class="user-profile-follows-details">
-        <div class="user-profile-followers-count"><b>{{user.followers.count}}</b> Followers</div>
-        <div class="user-profile-following-count"><b>{{user.following.count}}</b> Following</div>  
+        <div class="user-profile-followers-count" onclick="show_followers()"><b>{{user.followers.count}}</b> Followers</div>
+        <div class="user-profile-following-count" onclick="show_following()"><b>{{user.following.count}}</b> Following</div>  
       </div>
       <br>
       <br>
-    </div>
+      <div class="user-activity">
+        <header><h3>Activity</h3></header>
+        <div class="activity">
+          <i>Total posts shared : <b>{{user.post.count}}</b></i>
+          <i>Total project ideas shared : <b>{{user.project.count}}</b></i>
+        </div>
+      </div>
+    </div>    
     <div class="user-posts">
       <div class="collab-container">
         <header class="edit-profile-header">
@@ -70,6 +126,6 @@
       </div>  
         
     </div>
-  </div>
-  
+  </div>  
 {% endblock content %}
+{% block script %}<script src="{% static 'script.js' %}"></script>{% endblock script %}

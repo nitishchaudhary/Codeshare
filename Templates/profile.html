@@ -6,7 +6,7 @@
 <div class="main-container-profile">
   <div class="followers-list" style="display: none;">
     <header>
-      <h2>Followers List</h2>
+      <h2>Followers</h2>
     </header>
     <div class="list">
       {% for i in user0.followers.all %}
@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="list-user-mssg">
-            <a href="{% url 'user-chat' i.user_id %}"><button>Message</button></a>
+            <a href="{% url 'user-chat' i.user_id %}"><button><i class="fa-solid fa-paper-plane"></i></button></a>
           </div>
         </div>
       {% endfor %}
@@ -31,7 +31,7 @@
   </div>
   <div class="following-list" style="display: none;">
     <header>
-      <h2>Following List</h2>
+      <h2>Followings</h2>
     </header>
     <div class="list">
       {% for i in user0.following.all %}
@@ -48,7 +48,8 @@
             </div>
           </div>
           <div class="list-user-mssg">
-            <a href="{% url 'user-chat' i.following_user_id %}"><button>Message</button></a>
+            <a href="{% url 'follow' i.following_user_id %}"><button><i class="fa-solid fa-user-minus"></i></button></a>
+            <a href="{% url 'user-chat' i.following_user_id %}"><button><i class="fa-solid fa-paper-plane"></i></button></a>
           </div>
         </div>
       {% endfor %}
@@ -57,8 +58,8 @@
   <div class="profile-container">
     <img src="{{user0.profile.pic.url}}" alt="" style="width: 100px;height:100px; border-radius:50%">
     <div class="profile-user-name">
-      <h2>{{user0.username}}</h2>
-      <i>@{{user.username}}</i>
+      <h2>{{user0.first_name}}</h2>
+      <i>@{{user0.username}}</i>
     </div>
     <div class="profile-user-about">
       <h5>{{user0.profile.about}}</h5><br>

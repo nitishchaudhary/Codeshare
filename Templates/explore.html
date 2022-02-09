@@ -86,15 +86,16 @@
 
   <div class="main-container">
     <div class="share-post">
-      <form action="{% url 'post' %}" method = "post" enctype="multipart/form-data">
+      <form action="{% url 'post' %}" autocomplete="off" method = "post" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- <label for="share-heading">Whats on your mind</label><br> -->
         <br>
         <input type="text" name="des" id="post" placeholder="Whats on your mind ...">
         <img src="{% static 'image-icon.png' %}" alt="" onclick="selectImage()">
         <button type="submit">Post</button><br><br>
-        <input type="file" alt="" name="post_image" class = "selectimage">
+        <input type="file" alt="" name="post_image" onchange="loadfile(event)" class = "selectimage">
       </form>
+      <div class="selected-image-name"></div>
     </div>
 
     <!-- <h1>Recent posts </h1> -->
@@ -248,11 +249,16 @@
             <div class="to-follow-pic">
               <a href="{% url 'user' users.username %}"><img src="{{users.profile.pic.url}}" alt="" srcset=""></a>
             </div>
-            <div class="to-follow-username">
-              <a href="{% url 'user' users.username %}">{{users.username}}</a>
+            <div class="to-follow-name">
+              <div class="to-follow-first-name">
+                <a href="{% url 'user' users.username %}"><b>{{users.first_name}}</b></a>
+              </div>
+              <div class="to-follow-user-name">
+                <a href="{% url 'user' users.username %}"><i>@{{users.username}}</i></a>
+              </div>
             </div>
             <div class="to-follow-icon">
-              <a href = "{% url 'follow' users.username %}"><img src="{% static 'follow-user.png' %}" alt="" srcset="">
+              <a href = "{% url 'follow' users.username %}"><i class="fa-solid fa-user-plus fa-2x"></i></a>
             </div>
             
           </div>

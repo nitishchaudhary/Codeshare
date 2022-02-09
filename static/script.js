@@ -1,4 +1,16 @@
-
+const loadfile =(event) =>{
+    var name = event.target.files[0].name;
+    // console.log(name);
+    var img_url = URL.createObjectURL(event.target.files[0]);
+    txt = `
+        <i>Selected Image : </i>    
+        <a href="${img_url}" target="_blank">
+            <b>${name}</b>
+        </a>
+    `
+    $(".selected-image-name").html(txt);
+    
+}
 
 const show_followers =()=>{
     let x = document.querySelector(".followers-list");
