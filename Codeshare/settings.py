@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'n&@t3_(te+%ct#timl#oingcijh(2k6wc2miy!#ns-acq2c)%-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 # DJANGO_SETTINGS_MODULE = config.settings.production
 
 ALLOWED_HOSTS = [
