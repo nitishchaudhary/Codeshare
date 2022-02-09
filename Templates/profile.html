@@ -76,7 +76,13 @@
     {% if user0 != user %}
       <h4 class="user-profile-connect">Connect</h4>
       <br>
-      <a href="{% url 'follow' user0.username %}"><button onclick="follow('user0.username')">Follow</button></a>
+      <a href="{% url 'follow' user0.username %}"><button onclick="follow('user0.username')">
+        {% if following == 'true' %}
+          Unfollow
+        {% else %}
+          Follow
+        {% endif %}
+      </button></a>
       <a href="{% url 'user-chat' user0.username %}"><button>Message</button></a>
     {% endif %}
     <div class="user-activity">
@@ -103,7 +109,7 @@
             <div class="recent-post-usr-follow">
                 {% if i.user_name != user %}             
                   <a href="{% url 'follow' i.user_name %}"><button>
-                    {% if value.following == 'true' %}
+                    {% if following == 'true' %}
                       Unfollow
                     {% else %}
                       Follow
@@ -139,7 +145,7 @@
           <div class="recent-post-reactions">
           
             <div class="recent-post-likes" id="{{i.id}}" onclick="like('{{i.id}}')" data-url="{% url 'like' i.id %}">
-                {% if value.liked == 'true' %}
+                {% if value == 'liked' %}
                   <img src="{% static 'liked-icon.png' %}" id="like-dislike{{i.id}}" alt="">
                 {% else %}
                   <img src="{% static 'like-icon.png' %}"  id="like-dislike{{i.id}}"alt="">
