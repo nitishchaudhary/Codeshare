@@ -84,7 +84,7 @@ class notification(models.Model):
     notification_message = models.TextField(default=None)
     read = models.BooleanField(default=False)
     notification_time = models.DateTimeField(default=timezone.now())
-    notification_from = models.ForeignKey(User,default=None,related_name="activity",on_delete=models.CASCADE)
+#     notification_from = models.ForeignKey(User,default=None,related_name="activity",on_delete=models.CASCADE)
 
 class like_project(models.Model):
     user_id = models.ForeignKey(User,related_name='project_likes',on_delete=models.CASCADE)
