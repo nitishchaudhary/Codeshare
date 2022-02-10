@@ -225,7 +225,7 @@ const close_window = () =>{
 const like =(id) => {
     let icon = document.getElementById("like-dislike"+id);
     let likescount = document.getElementById("likes-count"+id);
-    if (icon.src == "/static/like-icon.png"){
+    if (icon.src == "codescape006.herokuapp.com/static/like-icon.png"){
         icon.src = "/static/liked-icon.png";
         likescount.innerText = Number(likescount.innerText)+1;
     }
