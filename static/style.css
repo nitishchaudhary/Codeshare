@@ -143,10 +143,10 @@ input[type="search"] {
 }
 .read {
   padding: 10;
-  /* background-color: rgb(54, 54, 54); */
   border-radius: 10px;
   border: solid 1px rgb(61, 61, 61);
   margin: 10px;
+  display: flex;
   text-align: left;
 }
 .unread {
