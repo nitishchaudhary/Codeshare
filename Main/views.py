@@ -189,9 +189,10 @@ def project_like(request,pk):
         like.save()
         # push notification
         user = project.author_id
-        mssg = f"{usr.username} liked your project idea"
-        notify = notification.objects.create(user_id = user, notification_message = mssg)
-        notify.save()
+        if user !=  usr:
+            mssg = f"{usr.username} liked your project idea"
+            notify = notification.objects.create(user_id = user,notification_from=usr, notification_message = mssg)
+            notify.save()
     res = {
         'liked':liked
     }
@@ -211,7 +212,7 @@ def comment_project(request,pk):
         usr = project.author_id
         print(usr)
         mssg = f"{user.username} commented on your project idea"
-        notify = notification.objects.create(user_id = usr ,notification_message = mssg )
+        notify = notification.objects.create(user_id = usr ,notification_from=user,notification_message = mssg )
         notify.save()
 
         return HttpResponse('done')
@@ -294,7 +295,7 @@ def comment(request,pk):
         usr = post.user_name
         print(usr)
         mssg = f"{user.username} commented on your post"
-        notify = notification.objects.create(user_id = usr ,notification_message = mssg )
+        notify = notification.objects.create(user_id = usr ,notification_from=user,notification_message = mssg )
         notify.save()
 
         return HttpResponse('done')
@@ -313,9 +314,10 @@ def like(request,pk):
         like.save()
         # push notification
         user = post.user_name
-        mssg = f"{usr.username} liked your post"
-        notify = notification.objects.create(user_id = user, notification_message = mssg)
-        notify.save()
+        if user != usr:
+            mssg = f"{usr.username} liked your post"
+            notify = notification.objects.create(user_id = user, notification_message = mssg,notification_from = usr)
+            notify.save()
     res = {
         'liked':liked
     }
@@ -350,7 +352,7 @@ def follow_user(request,username):
         
         # push notification
         mssg = f"{usr.username} just followed you"
-        notify = notification.objects.create(user_id = usr2, notification_message = mssg)
+        notify = notification.objects.create(user_id = usr2,notification_from=usr,notification_message = mssg)
         notify.save()
     if 'welcome' in request.GET:
         return HttpResponse('done')
@@ -412,7 +414,7 @@ def collab_request(request,pk):
     
     # push notification
     mssg = f"{usr.username} just sent you a collab request"
-    notify = notification.objects.create(user_id = user, notification_message = mssg)
+    notify = notification.objects.create(user_id = user,notification_from=usr, notification_message = mssg)
     notify.save()   
 
     return HttpResponse("done")

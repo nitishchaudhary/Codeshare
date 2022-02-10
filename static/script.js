@@ -223,6 +223,16 @@ const close_window = () =>{
 
 
 const like =(id) => {
+    let icon = document.getElementById("like-dislike"+id);
+    let likescount = document.getElementById("likes-count"+id);
+    if (icon.src == "/static/like-icon.png"){
+        icon.src = "/static/liked-icon.png";
+        likescount.innerText = Number(likescount.innerText)+1;
+    }
+    else{
+        icon.src = "/static/like-icon.png";
+        likescount.innerText = Number(likescount.innerText)-1;
+    }
     $.ajax(
         {
             type:"GET",
@@ -231,13 +241,9 @@ const like =(id) => {
                 let likescount = document.getElementById("likes-count"+id);
                 let icon = document.getElementById("like-dislike"+id);
                 if(data.liked == true){
-                    likescount.innerText = Number(likescount.innerText)+1;
-                    icon.src ="/static/liked-icon.png";
                     console.log("liked");
                 }
                 else{
-                    likescount.innerText = Number(likescount.innerText)-1;
-                    icon.src ="/static/like-icon.png";
                     console.log("disliked");
                 }
             }
