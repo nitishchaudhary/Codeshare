@@ -33,12 +33,11 @@ socket.onmessage = async function(e){
     let data = JSON.parse(e.data)
     let message = data['message']
     let sent_by_user = data['sent_by']
-    console.log(message)
-    console.log(sent_by_user)
     if(sent_by_user == other_user_name){
         message_element = `
             <div class="show-received-message">
                 <h4>${message}</h4>
+                <i><h4>Now</h4></i>
             </div>
         `
     }
@@ -46,6 +45,7 @@ socket.onmessage = async function(e){
         message_element = `
             <div class="show-sent-message">
                 <h4>${message}</h4>
+                <i><h4>Now</h4></i>
             </div>            
         `
     }
@@ -53,6 +53,7 @@ socket.onmessage = async function(e){
         message_element = `
             <div class="show-received-message">
                 <h4>${message}</h4>
+                <i><h4>Now</h4></i>
             </div>
         `       
     }

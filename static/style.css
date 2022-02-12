@@ -12,6 +12,47 @@ body {
   overflow: hidden;
   background-color: rgb(20, 20, 20);
 }
+@media only screen and (max-width:800px) {
+  #left-bar{
+    display: none;
+  }
+  .right-bar{
+    display: none;
+  }
+  .main-container{
+    width: 100%;
+    /* border: solid 1px white; */
+  }
+  #search-box{
+    display: none;
+  }
+  .search{
+    display: none;
+  }
+  .user-profile h5{
+    display: none;
+  }
+  #down-arrow{
+    display: none;
+  }
+  #notification-icon{
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-left: -30px;
+  }
+  .logo a{
+    /* display: none; */
+    font-size: 20px;
+    /* border: solid 1px white; */
+    margin-left: -10px;
+  }
+  .logo{
+    margin-top: 10px;
+    margin-left: -30px;
+  }
+}
 
 .first-container {
   background-image: url("code.png");
@@ -110,7 +151,11 @@ input[type="search"] {
   /* filter: blur(8px); */
   opacity: 99%;
   display: none;
+  overflow-y: scroll;
   animation: 0.5s ease-in-out;
+}
+.notifications-content::-webkit-scrollbar{
+  display: none;
 }
 .notifications-content-nav {
   font-family: "lato";
@@ -147,6 +192,7 @@ input[type="search"] {
   border-radius: 10px;
   border: solid 1px rgb(61, 61, 61);
   margin: 10px;
+  display: flex;
   text-align: left;
 }
 .unread {
@@ -731,6 +777,9 @@ span:after {
   letter-spacing: 1px;
   width: 100%;
 }
+.left-bar-nav i{
+  color: rgb(13, 114, 117);;
+}
 .left-bar-nav a {
   text-decoration: none;
   color: #aaaaaa;
@@ -792,13 +841,21 @@ span:after {
 .left-bar-user h3 {
   /* margin: 50% 20%; */
   font-size: 15px;
+  color: rgb(197,197,197);
   /* border: solid 1px blue; */
+}
+.left-bar-user a{
+  text-decoration: none;
 }
 .left-bar-user i {
   font-size: 12px;
-  font-style: normal;
-  color: rgb(230, 236, 236);
-  font-weight: 200;
+  /* font-style: normal; */
+  /* color: rgb(230, 236, 236); */
+  font-weight: 500;
+  /* letter-spacing: 1px; */
+  font-size: 12px;
+  font-family: 'segoe UI';
+  color: grey;
 }
 .left-bar-add-project {
   /* border: solid 1px white; */
@@ -820,8 +877,8 @@ span:after {
 }
 .second-section {
   /* border: solid 1px white; */
-  width: 60%;
-  color: white;
+  width: 70%;
+  color: rgb(224, 224, 224);
   display: flex;
   justify-content: space-between;
 }
@@ -2060,8 +2117,11 @@ span:after {
 .messages-wrapper {
   overflow-y: scroll;
   scroll-behavior: smooth;
+  position: sticky;
   /* border: solid 1px white; */
   padding: 10px;
+  height: 100%;
+  /* height: 100%; */
 }
 .messages-wrapper::-webkit-scrollbar {
   width: 10px;
@@ -2070,15 +2130,15 @@ span:after {
   /* border: solid 1px white; */
   /* width:min-content; */
   margin: 10px;
-  /* width: 30%; */
+  width: auto;
   align-self: right;
 }
 .show-received-message {
   /* width:fit-content; */
   align-self: left;
   margin: 10px;
+  /* border: solid 1px white; */
 }
-
 .show-sent-message h4 {
   margin-left: auto;
   position: relative;
@@ -2090,6 +2150,20 @@ span:after {
   /* border: solid 1px blue; */
   background-color: rgb(122, 180, 174);
   color: black;
+}
+.show-sent-message i h4{
+  margin-left:auto;
+  position: relative;
+  width: fit-content;
+  font-size: 10px;
+  font-family: 'segoe UI';
+  font-weight: 500;
+  font-style: normal;
+  padding: 0;
+  padding-top: 5px;
+  background: transparent;
+  text-align: center;
+  color: rgb(200,200,200);
 }
 .show-received-message h4 {
   margin-right: auto;
@@ -2103,12 +2177,30 @@ span:after {
   background-color: turquoise;
   color: black;
 }
+.show-received-message i h4{
+  /* margin-left: 10px; */
+  position: relative;
+  width: fit-content;
+  font-size: 10px;
+  font-family: 'segoe UI';
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  border-radius: 20px;
+  padding: 0;
+  padding-top: 5px;
+  /* border: solid 1px blue; */
+  background-color: transparent;
+  color: rgb(200,200,200);
+  
+}
 #sent-message,
 #recieved-message {
   background-color: green;
   width: auto;
   padding: 10px;
 }
+
 #message-form {
   width: 100%;
   /* height:100px; */
@@ -2117,11 +2209,15 @@ span:after {
   /* height:50px; */
 }
 #message-form input[name="message"] {
-  width: 80%;
+  width: 85%;
   min-width: auto;
   height: 40px;
   border-radius: 20px;
   border: none;
+  font-family: 'segoe UI';
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(25,25,25);
   text-indent: 15px;
   background-color: rgb(139, 222, 224);
   outline: none;
@@ -2137,12 +2233,14 @@ span:after {
 }
 #message-form input[type="image"] {
   /* margin-top: 30px; */
-  height: 45px;
-  width: 45px;
+  height: 35px;
+  width: 35px;
+  position: relative;
   background-color: rgb(12, 129, 120);
   border-radius: 50%;
-  padding: 5px;
-  margin-bottom: -15px;
+  /* padding: 5px; */
+  margin-bottom: -10px;
+  margin-left: -40px;
   /* margin-top:20px; */
 }
 #sender-img {

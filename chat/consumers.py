@@ -2,7 +2,7 @@ from channels.db import DatabaseSyncToAsync
 from django.contrib.auth  import get_user_model
 from channels.consumer import AsyncConsumer
 import json
-from Main.models import Message
+from Main.models import Message , notification
 User = get_user_model()
 import asyncio
 class ChatConsumer(AsyncConsumer):
@@ -54,6 +54,8 @@ class ChatConsumer(AsyncConsumer):
                     'text':json.dumps(response)
                }
           )
+          await self.notify(send_to_user,sent_by_user)
+
           await self.save_message(msg,sent_by_user,send_to_user)
           # await self.send({
           #      'type':'websocket.send',
@@ -83,5 +85,8 @@ class ChatConsumer(AsyncConsumer):
      def save_message(self,message, from_user, to_user):
                message1 = Message.objects.create(sender_id=from_user,reciever_id=to_user,message=message)
                message1.save()
-
+     @DatabaseSyncToAsync
+     def notify(self,for_user,from_user):
+          mssg = f"You have a got a message from {from_user}"
+          noti = notification.objects.create(user_id = for_user , notification_message = mssg , notification_from = from_user)
                

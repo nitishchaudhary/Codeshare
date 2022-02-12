@@ -35,30 +35,31 @@
           </div>
 
           <div class="messages-wrapper">
-            {% for chat in chats %}
-              {% for key,value in chat.items %}
-                {% if key == 'recieved' %}  
+            {% for chat,value in chats.items %}
+                {% if value == 'received' %}  
                   <div class="show-received-message">
-                    <h4>{{value}}</h4>
+                    <h4>{{chat.message}}</h4>
+                    <i><h4>{{chat.mesage_date}}</h4></i>
                   </div>
                 {% else %}
                   <div class="show-sent-message">
-                    <h4>{{value}}</h4>
+                    <h4>{{chat.message}}</h4>
+                    <i><h4>{{chat.mesage_date}}</h4></i>
                   </div>
                 {% endif %}
-              {% endfor %}
             {% empty %}
               <h3></h3>
             {% endfor %}
           </div>
-
-          <form method="POST" id="message-form">
-            {% csrf_token %}
-            <img src="{{user.profile.pic.url}}" id="sender-img" />
-            <input type="text" name="message" id="message" placeholder="Type you message here"/>
-            <input type="image" src="{% static 'send-icon.png' %}" alt="" />
-          </form>
-
+          <div class="message-sending-form">
+            <form method="POST" autocomplete="off" id="message-form">
+              {% csrf_token %}
+              <img src="{{user.profile.pic.url}}" id="sender-img" />
+              <input type="text" name="message" id="message" placeholder="Type you message here"/>
+              <input type="image" src="{% static 'send-icon.png' %}" alt="" />
+            </form>  
+          </div>
+          
           <!-- {% if user0 %}
             <script>
               $("#message-form").on("submit", function (e) {

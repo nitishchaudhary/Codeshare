@@ -1,3 +1,4 @@
+let loc = window.location
 const loadfile =(event) =>{
     var name = event.target.files[0].name;
     // console.log(name);
@@ -132,30 +133,48 @@ const received_requests =() =>{
             },
             success:function(e){
                 data = JSON.parse(e);
-                // console.log(data);
-                message = `
-                <nav class=collab-title>
-                    <h4 onclick="received_requests()" class="active">Received</h4>
-                    <h4 onclick="sent_requests()">Sent</h4>
-                </nav>
-                    <section class="requests">
-                        <div class="received">
-                            <div class="requesting-user-details">
-                            <img src="${data['profile-url']}" alt="">
-                                <div class="requested-user-name">
-                                    <h5>${data['requesting_user']}</h5>
-                                    <i>@${data['requesting_user']}</i>
+                console.log(data);
+                if(e.length === 0){
+                    message = `
+                        <nav class=collab-title>
+                            <h4 onclick="received_requests()" class="active">Received</h4>
+                            <h4 onclick="sent_requests()">Sent</h4>
+                        </nav>
+                            <section class="requests">
+                                <div class="received">
+                                    <div class="requesting-user-details">
+                                    <img src="${data['profile-url']}" alt="">
+                                        <div class="requested-user-name">
+                                            <h5>${data['requesting_user']}</h5>
+                                            <i>@${data['requesting_user']}</i>
+                                        </div>
+                                    </div>
+                                    <div class="project-detail">
+                                        <h3>Project :</h3>
+                                        <h4>${data['project_title']}</h4>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="project-detail">
-                                <h3>Project :</h3>
-                                <h4>${data['project_title']}</h4>
-                            </div>
-                        </div>
-                    </section>
-                `
-                $(".collab-container").html(message);
-            
+                            </section>
+                    `
+                    $(".collab-container").html(message);
+                }
+                else{
+                    message = `
+                        <nav class=collab-title>
+                            <h4 onclick="received_requests()" class="active">Received</h4>
+                            <h4 onclick="sent_requests()">Sent</h4>
+                        </nav>
+                            <section class="requests">
+                                <div class="received">
+                                    <div class="requesting-user-details">
+                                    <h5>No received collab requests</h5>
+                                    </div>
+                                </div>
+                            </section>
+                    `
+                    $(".collab-container").html(message);
+                }
+                
             }
         }
     )
@@ -221,11 +240,11 @@ const close_window = () =>{
     section.style.zIndex = "-1";
 }
 
-
 const like =(id) => {
     let icon = document.getElementById("like-dislike"+id);
     let likescount = document.getElementById("likes-count"+id);
-    if (icon.src == "/static/like-icon.png"){
+    console.log(loc+"static/like-icon.png")
+    if (icon.src == loc+"static/like-icon.png"){
         icon.src = "/static/liked-icon.png";
         likescount.innerText = Number(likescount.innerText)+1;
     }

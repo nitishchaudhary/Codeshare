@@ -18,15 +18,13 @@ def chats(request,username=None):
             user_list.append(chat.reciever_id)
     if username:
         user0 = User.objects.get(username=username)
-        sent_messages = Message.objects.all().filter(sender_id = user , reciever_id = user0)
-        recieved_messages = Message.objects.all().filter(sender_id = user0 , reciever_id = user)
-        chats = []
-        for i in sent_messages:
-            x = {'sent':i.message}
-            chats.append(x)
-        for i in recieved_messages:
-            x = {'recieved':i.message}
-            chats.append(x)
+        messages = Message.objects.filter(Q(sender_id = user,reciever_id = user0) | Q(sender_id = user0 , reciever_id = user)).order_by('mesage_date')
+        chats = {}
+        for i in messages:
+            if i.sender_id == user:
+                chats[i] = 'sent'
+            else:
+                chats[i] = 'received'
         return render(request,'message.html',{'user0':user0,'user_list':user_list,'chats':chats,'notifications':notifications,'count':count})
     else:
         return render(request,'message.html',{'user_list':user_list,'notifications':notifications,'count':count})

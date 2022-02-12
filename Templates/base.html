@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Base{% endblock title %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.png' %}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,8 +66,16 @@
                             </div>
                         {% else %}
                             <div class="notification read">
-                                <h3>{{notification.notification_message}}</h3>
-                                <i>{{notification.notification_time}}</i>
+                                <div class="user-info-notification">
+                                    <img src = "{{notification.notification_from.profile.pic.url}}">
+                                </div>
+                                <div class="middle-section">
+                                    <h3>{{notification.notification_message}}</h3>
+                                    <i>{{notification.notification_time}}</i>
+                                </div>
+                                <div class="last-section">
+                                    <i></i>
+                                </div>
                             </div>
                         {% endif %}
                     {% empty %}
