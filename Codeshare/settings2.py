@@ -27,8 +27,10 @@ SECRET_KEY = 'n&@t3_(te+%ct#timl#oingcijh(2k6wc2miy!#ns-acq2c)%-'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '326e-2405-204-30af-a836-79ff-e0e3-b06b-2c5d.ngrok.io',
-    '00f0-2405-204-32aa-a9a6-dc77-6b2-9336-e9f8.ngrok.io',
+    'b680-2405-204-1080-efb8-1f-9d78-2214-d93a.ngrok.io',
+    '8df6-2405-204-1080-efb8-1f-9d78-2214-d93a.ngrok.io',
+    'a5a1-2405-204-1080-efb8-1f-9d78-2214-d93a.ngrok.io',
+    '3a8e-2405-204-1080-efb8-1f-9d78-2214-d93a.ngrok.io',
     '127.0.0.1',
     'localhost'
 ]

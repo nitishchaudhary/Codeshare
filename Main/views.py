@@ -341,13 +341,14 @@ def follow_user(request,username):
     usr2 = User.objects.get(username = username)
     try:
         obj = UserFollowing.objects.get(user_id = usr , following_user_id = usr2).delete()
-        
+        print("unfollowed")
         # push notification
         mssg = f"{usr.username} just unfollowed you"
-        notify = notification.objects.create(user_id = usr2, notification_message = mssg)
-        notify.save()
+        notify = notification.objects.create(user_id = usr2,notification_from=usr, notification_message = mssg)
+
     except:
         obj = UserFollowing.objects.create(user_id = usr , following_user_id = usr2)
+        print("followed")
         obj.save()
         
         # push notification

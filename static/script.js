@@ -1,4 +1,4 @@
-let loc = window.location
+let lo = window.location
 const loadfile =(event) =>{
     var name = event.target.files[0].name;
     // console.log(name);
@@ -243,7 +243,7 @@ const close_window = () =>{
 const like =(id) => {
     let icon = document.getElementById("like-dislike"+id);
     let likescount = document.getElementById("likes-count"+id);
-    if (icon.src == loc+"static/like-icon.png"){
+    if (icon.src == lo+"static/like-icon.png"){
         icon.src = "/static/liked-icon.png";
         likescount.innerText = Number(likescount.innerText)+1;
     }
